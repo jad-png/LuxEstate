@@ -5,10 +5,11 @@ namespace App\Services;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Services\ServiceInterface\IAuthService;
 use Illuminate\Support\Facades\Hash;
 use Kyojin\JWT\Facades\JWT;
 
-class AuthService 
+class AuthService implements IAuthService
 {
     public function Register (RegisterRequest $request)
     {
