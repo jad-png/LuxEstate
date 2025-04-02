@@ -20,8 +20,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -47,10 +49,15 @@ class User extends Authenticatable
         ];
     }
 
-    // public function payload(): array 
-    // {
-    //     $payload = Parent::payload();
-    //     $payload['role'] = $this->role;
-    //     return $payload;
-    // }
+    public function payload(): array 
+    {
+        $payload = Parent::payload();
+        $payload['role'] = $this->role;
+        return $payload;
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
