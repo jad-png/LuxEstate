@@ -2,64 +2,151 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePropertyRequest;
+use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
+use App\Services\PropertyService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $propertyService;
+
+    public function __construct(PropertyService $propertyService)
     {
-        //
+        $this->propertyService = $propertyService;
+    }
+
+
+    /**
+     * Get all properties.
+     * 
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        $properties = $this->propertyService->all();
+        return response()->json([
+            'properties' => $properties,
+        ], 200);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Get a single property by ID.
+     * 
+     * @parma int $id
+     * @return JsonResponse
      */
-    public function create()
+    public function show(int $id): JsonResponse
     {
-        //
+        $property = $this->propertyService->find($id);
+        return response()->json([
+            'property' => $property,
+        ], 200);
+    }
+    /**
+     * Create a new property.
+     *
+     * @param CreatePropertyRequest $request
+     * @return JsonResponse
+     */
+    public function store(CreatePropertyRequest $request): JsonResponse
+    {
+        $property = $this->propertyService->create($request);
+        return response()->json([
+            'message' => 'Property created successfully',
+            'property' => $property,
+        ], 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update an existing property.
+     *
+     * @param int $id
+     * @param UpdatePropertyRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function update(UpdatePropertyRequest $request, int $id): JsonResponse
     {
-        //
+        $property = $this->propertyService->update($id, $request);
+
+        return response()->json([
+            'message' => 'Property updated successfully',
+            'property' => $property,
+        ], 200);
     }
 
     /**
-     * Display the specified resource.
+     * Delete a property.
+     *
+     * @param int $id
+     * @return JsonResponse
      */
-    public function show(Property $property)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        $result = $this->propertyService->delete($id);
+        return response()->json([
+            'message' => 'Property deleted successfully',
+        ], $result ? 200 : 404);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Add an image to a property.
+     *
+     * @param int $id
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function edit(Property $property)
+
+    public function addImage(int $id, Request $request): JsonResponse
     {
-        //
+        // TODO: create a request class to validate the images and assign it to $result
+        // $result = $request->validate();
+
+        $imagePath = $request->file('image')->store('property_images', 'public');
+        $image = $this->propertyService->addImage($id, $imagePath);
+        return response()->json([
+            'data' => $image,
+            'message' => 'Image added successfully',
+        ], 201);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Add a video to a property.
+     *
+     * @param int $id
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function update(Request $request, Property $property)
+
+    public function addVideo(int $id, Request $request): JsonResponse
     {
-        //
+        // TODO: create a request class to validate the video and assign it to $result
+        // $result = $request->validate();
+        $videoPath = $request->file('video')->store('property_videos', 'public');
+        $video = $this->propertyService->addVideo($id, $videoPath);
+        return response()->json([
+            'data' => $video,
+            'message' => 'Video added successfully',
+        ], 201);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Attach features to a property.
+     *
+     * @param int $id
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function destroy(Property $property)
+    public function attachFeatures(int $id, Request $request): JsonResponse
     {
-        //
+        // TODO: create a request class to validate the features
+        // $result = $request->validate([]);
+        $features = $this->propertyService->attachFeatures($id, $request->input('features'));
+        return response()->json([
+            'message' => 'Features attached successfully',
+            'features' => $features, // for visualization purpose of the attached features
+        ], 200);
     }
 }
