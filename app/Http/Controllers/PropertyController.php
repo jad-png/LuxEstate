@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
+use App\Services\Interfaces\IPropertyService;
 use App\Services\PropertyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class PropertyController extends Controller
 {
     protected $propertyService;
 
-    public function __construct(PropertyService $propertyService)
+    public function __construct(IPropertyService $propertyService)
     {
         $this->propertyService = $propertyService;
     }

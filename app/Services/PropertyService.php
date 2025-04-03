@@ -7,7 +7,7 @@ use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use App\Models\PropertyVideos;
-use App\Services\ServiceInterface\IPropertyService;
+use App\Services\Interfaces\IPropertyService;
 
 class PropertyService implements IPropertyService
 {
@@ -39,7 +39,7 @@ class PropertyService implements IPropertyService
      * @param CreatePropertyRequest $request
      * @return Property
      */
-    public function create(CreatePropertyRequest $request): Property
+    public function create($request): Property
     {
         $property = Property::create($request);
         return $property;
@@ -52,7 +52,7 @@ class PropertyService implements IPropertyService
      * @param UpdatePropertyRequest $request
      * @return Property
      */
-    public function update(int $id, UpdatePropertyRequest $request): Property
+    public function update(int $id, $request): Property
     {
         $property = Property::findOrFail($id);
 
