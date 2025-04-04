@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class UpdatePropertyRequest extends FormRequest
+class AddImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +23,20 @@ class UpdatePropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // "id" => 'required|exists:properties,id',
-            "title" => 'required|string|max:255',
-            "description" => 'required|string|max:1000',
-            "price" => 'required|numeric|min:0',
-            "location" => 'required|string|max:255',
-            "bedrooms" => 'required|integer|min:0',
-            "area" => 'required|numeric|min:0',
-            "status" => 'required|in:available,sold,pending',
-            "admin_id" => 'required|exists:users,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'image.required' => 'An image file is required.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The image must be a JPEG, PNG, JPG, or GIF.',
+            'image.max' => 'The image size must not exceed 2MB.',
+        ];
+    }
+
 
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
@@ -44,4 +47,5 @@ class UpdatePropertyRequest extends FormRequest
 
         throw new ValidationException($validator, $response);
     }
+
 }

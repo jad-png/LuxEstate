@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Services\ServiceInterface\IAuthService;
+use App\Services\Interfaces\IAuthService;
 
 class AuthController extends Controller
 {
     protected $authService;
     /**
      * Create a new controller instance.
-     *
+     * @param IAuthService $authService
      * @return void
      */
     public function __construct(IAuthService $authService)
@@ -26,6 +26,7 @@ class AuthController extends Controller
         
         return response()->json([
             'message' => 'User registered successfully',
+            'user' => $user['user'],
             'token' => $user['token'],
         ]);
     }

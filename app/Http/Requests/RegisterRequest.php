@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             "phone"=> "required|string|digits_between:10,15",
             "email"=> "required|email",
             "password"=> "required|string|min:8|confirmed",
-            // "role" => "required|exists:role, id",
+            "role_id" => "required|exists:roles,id",
         ];
     }
 }

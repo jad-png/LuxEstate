@@ -51,12 +51,13 @@ class User extends Authenticatable
 
     public function payload(): array 
     {
-        $payload = Parent::payload();
-        $payload['role'] = $this->role;
-        return $payload;
+        // $payload = Parent::payload();\
+        return [
+            'sub' => $this->role_id,
+        ];
     }
 
-    public function role()
+    public function roles()
     {
         return $this->belongsTo(Role::class);
     }

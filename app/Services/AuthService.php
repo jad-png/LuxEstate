@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use App\Services\ServiceInterface\IAuthService;
+use App\Services\Interfaces\IAuthService;
 use Illuminate\Support\Facades\Hash;
 use Kyojin\JWT\Facades\JWT;
 
@@ -19,9 +19,9 @@ class AuthService implements IAuthService
             "phone"=> $request->phone,
             "email"=> $request->email,
             "password"=> Hash::make($request->password),
-            // "role_id"=> $request->role,
+            "role_id"=> $request->role_id,
         ]);
-
+// dd($user);
         $token = $user->createToken();
 
         return [

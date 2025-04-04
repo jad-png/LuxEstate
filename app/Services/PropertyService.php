@@ -41,7 +41,7 @@ class PropertyService implements IPropertyService
      */
     public function create($request): Property
     {
-        $property = Property::create($request);
+        $property = Property::create($request->validated());
         return $property;
     }
 
@@ -54,13 +54,16 @@ class PropertyService implements IPropertyService
      */
     public function update(int $id, $request): Property
     {
+        // dd('hello');
         $property = Property::findOrFail($id);
 
         if (!$property) {
-            return false;
+            // return false;
+            throw new \Exception('Property not found');
         }
+        $property->update($request->validated());
 
-        return $property->update($request);
+        return $property;
     }
 
     /**
@@ -89,11 +92,13 @@ class PropertyService implements IPropertyService
      */
     public function addImage(int $propertyId, string $imagePath): PropertyImage
     {
+        // dd(0);
         $property = Property::findOrFail($propertyId);
 
-        if (!$property) {
-            return false;
-        }
+        // if (!$property) {
+        //     // return false;
+        //     throw new \Exception('Property not found');
+        // }
 
         return PropertyImage::create([
             'property_id' => $property->id,

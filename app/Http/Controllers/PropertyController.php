@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddImageRequest;
 use App\Http\Requests\CreatePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
@@ -70,6 +71,8 @@ class PropertyController extends Controller
      */
     public function update(UpdatePropertyRequest $request, int $id): JsonResponse
     {
+
+        // dd('hello');
         $property = $this->propertyService->update($id, $request);
 
         return response()->json([
@@ -100,12 +103,18 @@ class PropertyController extends Controller
      * @return JsonResponse
      */
 
-    public function addImage(int $id, Request $request): JsonResponse
+    public function addImage(int $id, AddImageRequest $request): JsonResponse
     {
         // TODO: create a request class to validate the images and assign it to $result
         // $result = $request->validate();
-
+        // dd(1);
+        // dd(
+        //     $request->all(),           // All input data
+        //     $request->file('image')    // The uploaded file (or null)
+        // );
         $imagePath = $request->file('image')->store('property_images', 'public');
+        
+        // dd($imagePath);
         $image = $this->propertyService->addImage($id, $imagePath);
         return response()->json([
             'data' => $image,
