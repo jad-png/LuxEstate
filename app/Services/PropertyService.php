@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\CreatePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
+use App\Models\PropertyFeature;
 use App\Models\PropertyImage;
 use App\Models\PropertyVideos;
 use App\Services\Interfaces\IPropertyService;
@@ -30,7 +31,7 @@ class PropertyService implements IPropertyService
      */
     public function find(int $id): ?Property
     {
-        return Property::findOrFail($id);
+        return Property::with(['images', 'videos', 'features'])->findOrFail($id);
     }
 
     /**
@@ -92,13 +93,7 @@ class PropertyService implements IPropertyService
      */
     public function addImage(int $propertyId, string $imagePath): PropertyImage
     {
-        // dd(0);
         $property = Property::findOrFail($propertyId);
-
-        // if (!$property) {
-        //     // return false;
-        //     throw new \Exception('Property not found');
-        // }
 
         return PropertyImage::create([
             'property_id' => $property->id,
@@ -115,12 +110,8 @@ class PropertyService implements IPropertyService
      */
     public function addVideo(int $propertyId, string $videoPath): PropertyVideos
     {
+        // dd(2);
         $property = Property::findOrFail($propertyId);
-
-        if (!$property) {
-            return false;
-        }
-
         return PropertyVideos::create([
             'property_id' => $property->id,
             'video_path' => $videoPath
@@ -137,5 +128,12 @@ class PropertyService implements IPropertyService
     {
         $property = Property::findOrFail($propertyId);
         $property->features()->sync($featuresIds);
+    }
+
+    public function createFeature(string $name): PropertyFeature
+    {
+        return PropertyFeature::create([
+            'name' => $name
+        ]);
     }
 }

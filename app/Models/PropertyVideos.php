@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyVideos extends Model
 {
-    protected $fillable = ['propety_id', 'video_path'];
+    protected $fillable = ['property_id', 'video_path'];
 
     public function property()
     {

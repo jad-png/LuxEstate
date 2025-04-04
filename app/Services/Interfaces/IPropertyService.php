@@ -5,6 +5,7 @@ namespace App\Services\Interfaces;
 use App\Http\Requests\CreatePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
+use App\Models\PropertyFeature;
 use App\Models\PropertyImage;
 use App\Models\PropertyVideos;
 use App\Services\Interfaces\CrudInterface;
@@ -29,4 +30,6 @@ interface IPropertyService extends CrudInterface
     public function addVideo(int $PropertyId, string $videoPath): PropertyVideos;
 
     public function attachFeatures(int $propertyId, array $featuresIds);
+
+    public function createFeature(string $name): PropertyFeature;
 }

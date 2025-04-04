@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddImageRequest;
+use App\Http\Requests\AddVideoRequest;
 use App\Http\Requests\CreatePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
@@ -105,17 +106,10 @@ class PropertyController extends Controller
 
     public function addImage(int $id, AddImageRequest $request): JsonResponse
     {
-        // TODO: create a request class to validate the images and assign it to $result
-        // $result = $request->validate();
-        // dd(1);
-        // dd(
-        //     $request->all(),           // All input data
-        //     $request->file('image')    // The uploaded file (or null)
-        // );
         $imagePath = $request->file('image')->store('property_images', 'public');
         
-        // dd($imagePath);
         $image = $this->propertyService->addImage($id, $imagePath);
+
         return response()->json([
             'data' => $image,
             'message' => 'Image added successfully',
@@ -130,12 +124,13 @@ class PropertyController extends Controller
      * @return JsonResponse
      */
 
-    public function addVideo(int $id, Request $request): JsonResponse
+    public function addVideo(int $id, AddVideoRequest $request): JsonResponse
     {
-        // TODO: create a request class to validate the video and assign it to $result
-        // $result = $request->validate();
+        // dd($request->all);
         $videoPath = $request->file('video')->store('property_videos', 'public');
+
         $video = $this->propertyService->addVideo($id, $videoPath);
+
         return response()->json([
             'data' => $video,
             'message' => 'Video added successfully',
@@ -158,5 +153,11 @@ class PropertyController extends Controller
             'message' => 'Features attached successfully',
             'features' => $features, // for visualization purpose of the attached features
         ], 200);
+    }
+
+    public function storeFeature(Request $request): JsonResponse 
+    {
+
+        return response()->json();
     }
 }
