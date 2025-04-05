@@ -3,30 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feature;
+use App\Services\Interfaces\IFeaturesService;
 use Illuminate\Http\Request;
 
 class FeatureController extends Controller
 {
+
+    protected $featureService;
+
+    public function __construct (IFeaturesService $featuresService) 
+    {
+        $this->featureService = $featuresService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
     {
         //
     }
@@ -40,12 +32,13 @@ class FeatureController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Store a newly created resource in storage.
      */
-    public function edit(Feature $feature)
+    public function store(Request $request)
     {
         //
     }
+
 
     /**
      * Update the specified resource in storage.
