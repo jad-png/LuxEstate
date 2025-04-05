@@ -9,6 +9,7 @@ use App\Models\PropertyFeature;
 use App\Models\PropertyImage;
 use App\Models\PropertyVideos;
 use App\Services\Interfaces\CrudInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 interface IPropertyService extends CrudInterface
 {
@@ -32,4 +33,6 @@ interface IPropertyService extends CrudInterface
     public function attachFeatures(int $propertyId, array $featuresIds);
 
     public function createFeature(string $name): PropertyFeature;
+
+    public function getAllFeatures(): Collection;
 }

@@ -9,6 +9,7 @@ use App\Models\PropertyFeature;
 use App\Models\PropertyImage;
 use App\Models\PropertyVideos;
 use App\Services\Interfaces\IPropertyService;
+use Illuminate\Database\Eloquent\Collection;
 
 class PropertyService implements IPropertyService
 {
@@ -31,6 +32,8 @@ class PropertyService implements IPropertyService
      */
     public function find(int $id): ?Property
     {
+        // dd('hello');
+
         return Property::with(['images', 'videos', 'features'])->findOrFail($id);
     }
 
@@ -136,4 +139,11 @@ class PropertyService implements IPropertyService
             'name' => $name
         ]);
     }
+
+    public function getAllFeatures(): Collection
+    {
+        return PropertyFeature::all();
+    }
+
+
 }

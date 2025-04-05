@@ -5516,16 +5516,16 @@
         },
         {
             "name": "tahajaiti/jwt",
-            "version": "1.1.23",
+            "version": "1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tahajaiti/jwt.git",
-                "reference": "5abaa32280ed35b64dfb6e7f83720f013ad6f85a"
+                "reference": "da0aea876c89a1ee2109bbd56cfea111d9d5c64e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tahajaiti/jwt/zipball/5abaa32280ed35b64dfb6e7f83720f013ad6f85a",
-                "reference": "5abaa32280ed35b64dfb6e7f83720f013ad6f85a",
+                "url": "https://api.github.com/repos/tahajaiti/jwt/zipball/da0aea876c89a1ee2109bbd56cfea111d9d5c64e",
+                "reference": "da0aea876c89a1ee2109bbd56cfea111d9d5c64e",
                 "shasum": ""
             },
             "require": {
@@ -5573,9 +5573,9 @@
             "description": "A laravel package for JWT Authentication",
             "support": {
                 "issues": "https://github.com/tahajaiti/jwt/issues",
-                "source": "https://github.com/tahajaiti/jwt/tree/1.1.23"
+                "source": "https://github.com/tahajaiti/jwt/tree/1.2"
             },
-            "time": "2025-04-02T15:24:34+00:00"
+            "time": "2025-04-04T17:23:31+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

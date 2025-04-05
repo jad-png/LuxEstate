@@ -43,6 +43,7 @@ class PropertyController extends Controller
      */
     public function show(int $id): JsonResponse
     {
+        // dd('hello');
         $property = $this->propertyService->find($id);
         return response()->json([
             'property' => $property,
@@ -153,11 +154,20 @@ class PropertyController extends Controller
             'message' => 'Features attached successfully',
             'features' => $features, // for visualization purpose of the attached features
         ], 200);
-    }
+    }   
 
     public function storeFeature(Request $request): JsonResponse 
     {
 
         return response()->json();
+    }
+
+    public function indexFeatures(): JsonResponse
+    {
+        $features = $this->propertyService->getAllFeatures();
+
+        return response()->json([
+            'features' => $features
+        ], 201);
     }
 }

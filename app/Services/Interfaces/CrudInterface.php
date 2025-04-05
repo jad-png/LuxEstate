@@ -18,7 +18,7 @@ interface CrudInterface
 
     /**
      * @param int $id
-     * @param UpdatePropertyRequest $request
+     * @param FormRequest $request
      * @return void
      */
     public function update(int $id, $request);

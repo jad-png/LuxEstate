@@ -53,7 +53,7 @@ class User extends Authenticatable
     {
         // $payload = Parent::payload();\
         return [
-            'sub' => $this->role_id,
+            'role' => $this->role_id,
         ];
     }
 
