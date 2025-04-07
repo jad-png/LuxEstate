@@ -19,17 +19,18 @@ class Property extends Model
 
     public function images()
     {
-        // return $this->hasMany(::class);
+        return $this->hasMany(PropertyImage::class);
     }
 
     public function videos()
     {
-        // return $this->hasMany(::class);
+        return $this->hasMany(PropertyVideos::class);
     }
 
     public function features()
     {
         // relation with property feature model
+        return $this->belongsToMany(PropertyFeature::class, 'property_feature_property', 'property_id', 'property_feature_id');
     } 
 
 

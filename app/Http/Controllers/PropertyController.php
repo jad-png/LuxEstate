@@ -59,15 +59,15 @@ class PropertyController extends Controller
     {
         $property = $this->propertyService->create($request);
 
-        if ($request->has('image_path')) {
-            foreach ($request->file('image') as $image) {
+        if ($request->hasFile('image_path')) {
+            foreach ($request->file('image_path') as $image) {
                 $imagePath = $image->store('property_images', 'public');
                 $this->propertyService->addImage($property->id, $imagePath);
             }
         };
 
-        if ($request->has('video_path')) {
-            foreach ($request->file('video') as $video) {
+        if ($request->hasFile('video_path')) {
+            foreach ($request->file('video_path') as $video) {
                 $videoPath = $video->store('property_videos', 'public');
                 $this->propertyService->addVideo($property->id, $videoPath);
             }

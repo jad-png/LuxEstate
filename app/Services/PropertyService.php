@@ -129,14 +129,8 @@ class PropertyService implements IPropertyService
      */
     public function attachFeatures(int $propertyId, array $featuresIds)
     {
+        // dd($featuresIds);
         $property = Property::findOrFail($propertyId);
         $property->features()->sync($featuresIds);
-    }
-
-    public function createFeature(string $name): PropertyFeature
-    {
-        return PropertyFeature::create([
-            'name' => $name
-        ]);
     }
 }
