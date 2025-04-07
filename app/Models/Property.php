@@ -38,4 +38,10 @@ class Property extends Model
     {
         return $this->belongsTo(User::class, 'admin_id', 'id');
     }
+
+    public function favoritebByClients()
+    {
+        return $this->belongsToMany(related: User::class, 'client_favorites', 'property_id', 'user_id')
+            ->withTimestamps();
+    }
 }

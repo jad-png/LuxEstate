@@ -61,4 +61,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function favoriteProperties()
+    {
+        return $this->belongsToMany(Property::class, 'client_favorites', 'user_id', 'property_id')
+            ->withTimestamps();
+    }
 }
