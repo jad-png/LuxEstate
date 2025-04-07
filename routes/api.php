@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,12 @@ Route::prefix('properties')->group(function () {
     Route::post('/{id}/images', [PropertyController::class, 'addImage']);
     Route::post('/{id}/videos', [PropertyController::class, 'addVideo']);
     Route::post('/{id}/features', [PropertyController::class, 'attachFeatures']); 
+});
+
+// Feature routes
+Route::prefix('features')->group(function () {
+    Route::get('/', [FeatureController::class, 'index']);
+    Route::post('/', [FeatureController::class, 'store']);
+    Route::put('/{id}', [FeatureController::class, 'update']);
+    Route::delete('/{id}', [FeatureController::class, 'destroy']);
 });
