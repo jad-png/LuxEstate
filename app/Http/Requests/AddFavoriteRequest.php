@@ -22,7 +22,7 @@ class AddFavoriteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'property_id' => 'required|exists:properties, id'
+            'property_id' => 'required|exists:properties,id'
         ];
     }
 }

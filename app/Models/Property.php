@@ -41,7 +41,7 @@ class Property extends Model
 
     public function favoritebByClients()
     {
-        return $this->belongsToMany(related: User::class, 'client_favorites', 'property_id', 'user_id')
+        return $this->belongsToMany( User::class, 'client_favorites', 'property_id', 'user_id')
             ->withTimestamps();
     }
 }

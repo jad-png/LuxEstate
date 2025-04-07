@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 class ClientFavoriteService implements IClientFavoriteService
 {
     /**
-     * @param int $clientId
      * @param int $userId
      * @return User
      */

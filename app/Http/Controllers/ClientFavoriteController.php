@@ -7,6 +7,7 @@ use App\Http\Requests\RemoveFavoriteRequest;
 use App\Services\ClientFavoriteService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientFavoriteController extends Controller
 {
@@ -22,14 +23,16 @@ class ClientFavoriteController extends Controller
      * @param AddFavoriteRequest $request
      * @return JsonResponse
      */
-    public function addFavorite($id, $request)
+    public function addFavorite(AddFavoriteRequest $request)
     {
-        $user = $this->favoriteService->addFavorite($id, $request->validated());
+        $user = Auth::user();
+        $userFavorite = $this->favoriteService->addFavorite($user->id, $request->property_id);
+        // dd($userFavorite);
 
         return response()->json([
             'message' => 'Property added to favorites successfully',
             'user' => $user,
-        ], 200);
+        ], 201);
     }
 
     /**
@@ -37,9 +40,11 @@ class ClientFavoriteController extends Controller
      * @param RemoveFavoriteRequest $request
      * @return JsonResponse
      */
-    public function removeFavorite($id, $request) 
+    public function removeFavorite($request) 
     {
-        $success = $this->favoriteService->removeFavorite($id, $request->validated());
+        $user = Auth::user();
+
+        $success = $this->favoriteService->removeFavorite($user->id, $request->property_id);
 
         return response()->json([
             'message' => 'Property removed from favorites successfully',
@@ -51,9 +56,11 @@ class ClientFavoriteController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function getFavorites($id)
+    public function getFavorites()
     {
-        $favorites = $this->favoriteService->getFavorites($id);
+        $user = Auth::user();
+
+        $favorites = $this->favoriteService->getFavorites($user->id);
 
         return response()->json([
             'message' => 'Favorites retrieved successfully',

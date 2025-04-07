@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientFavoriteController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,11 @@ Route::prefix('features')->group(function () {
     Route::post('/', [FeatureController::class, 'store']);
     Route::put('/{id}', [FeatureController::class, 'update']);
     Route::delete('/{id}', [FeatureController::class, 'destroy']);
+});
+
+// Client routes
+Route::middleware('jwt')->group(function () {
+    Route::post('/favorites', action: [ClientFavoriteController::class, 'addFavorite']);
+    Route::delete('/favorites', [ClientFavoriteController::class, 'removeFavorite']);
+    Route::get('/favorites', [ClientFavoriteController::class, 'getFavorites']);
 });
