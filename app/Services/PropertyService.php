@@ -19,9 +19,9 @@ class PropertyService implements IPropertyService
      *
      * @return Property[]
      */
-    public function all(): array
+    public function all(): Collection
     {
-        return Property::all()->toArray();
+        return Property::with(['images', 'videos', 'features'])->get();
     }
 
     /**
@@ -61,13 +61,36 @@ class PropertyService implements IPropertyService
         // dd('hello');
         $property = Property::findOrFail($id);
 
-        if (!$property) {
-            // return false;
-            throw new \Exception('Property not found');
-        }
-        $property->update($request->validated());
+        $data = $request->validated();
+        // dd($request->all(), $data); 
+        $property->update($data);
+        
+        // $original = $property->toArray();
+        // $result = $property->update($data);
+        // $updated = $property->fresh()->toArray();
 
-        return $property;
+        // dd($data, $result, $original, $updated);
+
+        if ($request->hasFile('image_path')) {
+            foreach ($request->file('image_path') as $image) {
+                $imagePath = $image->store('property_images', 'public');
+                $this->addImage($property->id, $imagePath);
+            }
+        }
+
+        if ($request->hasFile('video_path')) {
+            foreach ($request->file('video_path') as $video) {
+                $videoPath = $video->store('property_videos', 'public');
+                $this->addVideo($property->id, $videoPath);
+            }
+        }
+        
+        if ($request->has('feature_ids') && !empty($request->input('feature_ids'))) {
+            $this->attachFeatures($property->id, $request->input('feature_ids'));
+        }
+        
+
+        return $property->fresh();
     }
 
     /**

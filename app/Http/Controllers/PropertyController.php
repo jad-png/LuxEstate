@@ -92,13 +92,12 @@ class PropertyController extends Controller
      */
     public function update(UpdatePropertyRequest $request, int $id): JsonResponse
     {
-
-        // dd('hello');
         $property = $this->propertyService->update($id, $request);
+        // dd($request-);   
 
         return response()->json([
             'message' => 'Property updated successfully',
-            'property' => $property,
+            'property' => $property->load(['images', 'videos', 'features']),
         ], 200);
     }
 

@@ -23,15 +23,20 @@ class UpdatePropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // "id" => 'required|exists:properties,id',
-            "title" => 'required|string|max:255',
-            "description" => 'required|string|max:1000',
-            "price" => 'required|numeric|min:0',
-            "location" => 'required|string|max:255',
-            "bedrooms" => 'required|integer|min:0',
-            "area" => 'required|numeric|min:0',
-            "status" => 'required|in:available,sold,pending',
-            "admin_id" => 'required|exists:users,id',
+            'title' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string|max:1000',
+            'price' => 'sometimes|numeric|min:0',
+            'location' => 'sometimes|string|max:255',
+            'bedrooms' => 'sometimes|integer|min:0',
+            'area' => 'sometimes|numeric|min:0',
+            'status' => 'sometimes|in:available,sold,pending',
+            'admin_id' => 'sometimes|exists:users,id',
+            'image_path' => 'sometimes|array',
+            'image_path.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'video_path' => 'sometimes|array',
+            'video_path.*' => 'sometimes|mimes:mp4,mov,avi,wmv|max:20480',
+            'feature_ids' => 'sometimes|array',
+            'feature_ids.*' => 'sometimes|exists:property_features,id',
         ];
     }
 
