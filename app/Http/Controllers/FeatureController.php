@@ -58,10 +58,11 @@ class FeatureController extends Controller
     /**
      * Update the specified resource in storage.
      * @param UpdateFeatureRequest $request
+     * @param int $id
      */
     public function update(UpdateFeatureRequest $request, int $id)
     {
-        $feature = $this->featureService->update( $id, $request);
+        $feature = $this->featureService->update( $id, $request->validated());
 
         return response()->json([
             'feature' => $feature,
