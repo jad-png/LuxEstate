@@ -139,11 +139,4 @@ class PropertyService implements IPropertyService
             'name' => $name
         ]);
     }
-
-    public function getAllFeatures(): Collection
-    {
-        return PropertyFeature::all();
-    }
-
-
 }

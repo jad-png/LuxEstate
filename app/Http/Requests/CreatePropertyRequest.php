@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class CreatePropertyRequest extends FormRequest
 {
@@ -30,6 +31,22 @@ class CreatePropertyRequest extends FormRequest
             "area" => 'required|numeric|min:0',
             "status" => 'required|in:available,sold,pending',
             "admin_id" => 'required|exists:users,id',
+            "image_path" => 'nullable|array',
+            "image_path.*" => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            "video_path" => 'nullable|array',
+            "video_path.*" => 'nullable|mimes:mp4,mov,avi,wmv|max:20480',
+            "feature_ids" => 'nullable|array',
+            "feature_ids.*" => 'nullable|exists:property_features,id',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new ValidationException($validator, $response);
     }
 }

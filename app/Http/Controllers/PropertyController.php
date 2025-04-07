@@ -58,9 +58,28 @@ class PropertyController extends Controller
     public function store(CreatePropertyRequest $request): JsonResponse
     {
         $property = $this->propertyService->create($request);
+
+        if ($request->has('image_path')) {
+            foreach ($request->file('image') as $image) {
+                $imagePath = $image->store('property_images', 'public');
+                $this->propertyService->addImage($property->id, $imagePath);
+            }
+        };
+
+        if ($request->has('video_path')) {
+            foreach ($request->file('video') as $video) {
+                $videoPath = $video->store('property_videos', 'public');
+                $this->propertyService->addVideo($property->id, $videoPath);
+            }
+        };
+
+        if ($request->has('feature_ids')) {
+            $this->propertyService->attachFeatures($property->id, $request->feature_ids);
+        }
+
         return response()->json([
             'message' => 'Property created successfully',
-            'property' => $property,
+            'property' => $property->load(['images', 'videos', 'features']),
         ], 201);
     }
 
@@ -155,19 +174,4 @@ class PropertyController extends Controller
             'features' => $features, // for visualization purpose of the attached features
         ], 200);
     }   
-
-    public function storeFeature(Request $request): JsonResponse 
-    {
-
-        return response()->json();
-    }
-
-    public function indexFeatures(): JsonResponse
-    {
-        $features = $this->propertyService->getAllFeatures();
-
-        return response()->json([
-            'features' => $features
-        ], 201);
-    }
 }

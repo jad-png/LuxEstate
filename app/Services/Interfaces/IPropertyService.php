@@ -33,6 +33,4 @@ interface IPropertyService extends CrudInterface
     public function attachFeatures(int $propertyId, array $featuresIds);
 
     public function createFeature(string $name): PropertyFeature;
-
-    public function getAllFeatures(): Collection;
 }
