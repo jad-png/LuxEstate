@@ -67,4 +67,24 @@ class User extends Authenticatable
         return $this->belongsToMany(Property::class, 'client_favorites', 'user_id', 'property_id')
             ->withTimestamps();
     }
+
+    public function sentContactRequests()
+    {
+        return $this->hasMany(ContactRequest::class, 'client_id');
+    }
+
+    public function receivedContactRequests()
+    {
+        return $this->hasMany(ContactRequest::class, 'agent_id');
+    }
+
+    public function isAgent()
+    {
+        return $this->role_id === 2; // role id 2 represents agent in role table
+    }
+
+    public function isClient()
+    {
+        return $this->role_id === 3; // role id 3 represents client in role table
+    }
 }

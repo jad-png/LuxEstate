@@ -40,7 +40,7 @@ class ClientFavoriteController extends Controller
      * @param RemoveFavoriteRequest $request
      * @return JsonResponse
      */
-    public function removeFavorite($request) 
+    public function removeFavorite(RemoveFavoriteRequest $request) 
     {
         $user = Auth::user();
 
