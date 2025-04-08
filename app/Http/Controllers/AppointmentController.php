@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAppointmentRequest;
 use App\Models\Appointment;
+use App\Services\Interfaces\IAppointmentsService;
 use AppointmentsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class AppointmentController extends Controller
 {
    protected $appointmentService;
 
-   public function __construct(AppointmentsService $appointmentService)
+   public function __construct(IAppointmentsService $appointmentService)
    {
         $this->appointmentService = $appointmentService;
    }
