@@ -7,7 +7,6 @@ use App\Http\Requests\ResolveContactRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Console\Descriptor\ReStructuredTextDescriptor;
 
 class ContactRequestController extends Controller
 {
@@ -53,9 +52,20 @@ class ContactRequestController extends Controller
             'contact_request' => $contactRequest,
         ], 200);
     }
-
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function getMyRequests()
     {
+        $user = Auth::user();
+        $contactRequests = $user->isClient()
+            ? $this->contactService->getClientRequests($user->id)
+            : $this->contactService->getAgentRequests($user->id);
 
+            return response()->json([
+                    'message'=> 'Contact requests retrieved successfully',
+                    'contact_requests' => $contactRequests,
+                ], 200);
     }
 }
