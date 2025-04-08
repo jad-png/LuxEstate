@@ -78,6 +78,21 @@ class User extends Authenticatable
         return $this->hasMany(ContactRequest::class, 'agent_id');
     }
 
+    public function appointmentsAsClient()
+    {
+        return $this->hasMany(Appointment::class, 'client_id');
+    }
+
+    public function appointmentsAsAgent()
+    {
+        return $this->hasMany(Appointment::class, 'agent_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id === 1; // role id 1 represents admin in role table
+    }
+
     public function isAgent()
     {
         return $this->role_id === 2; // role id 2 represents agent in role table
