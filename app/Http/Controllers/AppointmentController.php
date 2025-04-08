@@ -46,7 +46,14 @@ class AppointmentController extends Controller
     */
    public function getAppointments()
    {
+        $client = Auth::user();
 
+        $appointments = $this->appointmentService->getClientAppointments($client->id);
+
+        return response()->json([
+            'message' => 'all appointments',
+            'appointments' => $appointments
+        ]);
    }
 
 }
