@@ -2,64 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAppointmentRequest;
 use App\Models\Appointment;
+use AppointmentsService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+   protected $appointmentService;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   public function __construct(AppointmentsService $appointmentService)
+   {
+        $this->appointmentService = $appointmentService;
+   }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   /**
+    * Summary of create
+    * @param CreateAppointmentRequest $request
+    * @return JsonResponse
+    */
+   public function create($request)
+   {
+        $client = Auth::user();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Appointment $appointment)
-    {
-        //
-    }
+        $appointment = $this->appointmentService->createAppointment(
+            $client->id,
+            $request->agent_id,
+            $request->date,
+            $request->time
+        );
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Appointment $appointment)
-    {
-        //
-    }
+        return response()->json([
+            'message' => 'Appointment scheduled successfully',
+            'appointment' => $appointment
+        ]);
+   }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Appointment $appointment)
-    {
-        //
-    }
+   /**
+    * Summary of getAppointments
+    * @return void
+    */
+   public function getAppointments()
+   {
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Appointment $appointment)
-    {
-        //
-    }
+   }
+
 }
