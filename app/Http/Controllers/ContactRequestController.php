@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateContactRequest;
 use App\Http\Requests\ResolveContactRequest;
+use App\Services\Interfaces\IContactRequestService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class ContactRequestController extends Controller
     // create, resolve, getMyRequests
     protected $contactService;
 
-    public function __construct($contactService)
+    public function __construct(IContactRequestService $contactService)
     {
         $this->contactService = $contactService;
     }
@@ -27,7 +28,7 @@ class ContactRequestController extends Controller
     {
         $client = Auth::user();
 
-        $contactRequest = $this->contactService->CreateContactRequest(
+        $contactRequest = $this->contactService->createRequest(
             $client->id,
             $request->agent_id,
             $request->message
