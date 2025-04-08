@@ -38,7 +38,7 @@ class ContactRequestService implements IContactRequestService
     public function resolveRequest($requestId)
     {
         $request = ContactRequest::findOrFail($requestId);
-        $request->(['status' => 'resolved']);
+        $request->update(['status' => 'resolved']);
         return $request->fresh();
     }
 
@@ -49,7 +49,7 @@ class ContactRequestService implements IContactRequestService
      */
     public function getClientRequests($clientId)
     {
-        // Logic to get all requests for a client
+        return ContactRequest::where('client_id', $clientId)->with('agent')->get();
     }
 
     /**
@@ -59,6 +59,6 @@ class ContactRequestService implements IContactRequestService
      */
     public function getAgentRequests($agentId)
     {
-        // Logic to get all requests for an agent
+        return ContactRequest::where('agent_id', $agentId)->with('client')->get();
     }
 }
