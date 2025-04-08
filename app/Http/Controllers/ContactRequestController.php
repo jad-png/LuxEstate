@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateContactRequest;
+use App\Http\Requests\ResolveContactRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,18 @@ class ContactRequestController extends Controller
         ], 201);
     }
 
-    public function resolve()
+    /**
+     * @param ResolveContactRequest $request
+     * @return JsonResponse
+     */
+    public function resolve(ResolveContactRequest $request)
     {
+        $contactRequest = $this->contactService->resolveRequest($request->id);
 
+        return response()->json([
+            'message' => 'Contact request resolved successfully',
+            'contact_request' => $contactRequest,
+        ], 200);
     }
 
     public function getMyRequests()
