@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientFavoriteController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactRequestController;
 
 // auth routes
 Route::prefix('auth')->group(function () {
@@ -39,4 +40,11 @@ Route::middleware('jwt')->group(function () {
     Route::post('/favorites', action: [ClientFavoriteController::class, 'addFavorite']);
     Route::delete('/favorites', [ClientFavoriteController::class, 'removeFavorite']);
     Route::get('/favorites', [ClientFavoriteController::class, 'getFavorites']);
+});
+
+// Contact Request routes
+Route::middleware('jwt')->group(function () {
+    Route::post('/contact-requests', action: [ContactRequestController::class, 'create']);
+    Route::put('/contact-requests/resolve', [ContactRequestController::class, 'resolve']);
+    Route::get('/contact-requests', [ContactRequestController::class, 'getMyRequests']);
 });
