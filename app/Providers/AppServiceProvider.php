@@ -11,7 +11,7 @@ use App\Services\Interfaces\IAuthService;
 use App\Services\Interfaces\IContactRequestService;
 use App\Services\Interfaces\IFeaturesService;
 use App\Services\Interfaces\IPropertyService;
-use AppointmentsService;
+use App\Services\AppointmentsService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

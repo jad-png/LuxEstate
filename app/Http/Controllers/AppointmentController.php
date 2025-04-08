@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAppointmentRequest;
+use App\Http\Requests\GetAppointmentRequest;
 use App\Models\Appointment;
 use App\Services\Interfaces\IAppointmentsService;
 use AppointmentsService;
@@ -24,7 +25,7 @@ class AppointmentController extends Controller
     * @param CreateAppointmentRequest $request
     * @return JsonResponse
     */
-   public function create($request)
+   public function create(CreateAppointmentRequest $request)
    {
         $client = Auth::user();
 
@@ -43,9 +44,10 @@ class AppointmentController extends Controller
 
    /**
     * Summary of getAppointments
-    * @return void
+    * @param GetAppointmentRequest $request
+    * @return JsonResponse
     */
-   public function getAppointments()
+   public function getAppointments(GetAppointmentRequest $request)
    {
         $client = Auth::user();
 
