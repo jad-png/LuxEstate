@@ -34,6 +34,7 @@ class ContactRequestController extends Controller
             $request->message
         );
 
+
         return response()->json([
             'message' => 'Contact request created successfully',
             'contact_request' => $contactRequest,
@@ -46,7 +47,7 @@ class ContactRequestController extends Controller
      */
     public function resolve(ResolveContactRequest $request)
     {
-        $contactRequest = $this->contactService->resolveRequest($request->id);
+        $contactRequest = $this->contactService->resolveRequest($request->request_id);
 
         return response()->json([
             'message' => 'Contact request resolved successfully',

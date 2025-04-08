@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class CreateContactRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class CreateContactRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()->isClient();
     }
 
     /**
@@ -25,5 +27,15 @@ class CreateContactRequest extends FormRequest
             'agent_id' => 'required|exists:users,id',
             'message' => 'required|string|max:255',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new ValidationException($validator, $response);
     }
 }
