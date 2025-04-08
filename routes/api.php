@@ -6,6 +6,7 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\AppointmentController;
 
 // auth routes
 Route::prefix('auth')->group(function () {
@@ -47,4 +48,11 @@ Route::middleware('jwt')->group(function () {
     Route::post('/contact-requests', action: [ContactRequestController::class, 'create']);
     Route::put('/contact-requests/resolve', [ContactRequestController::class, 'resolve']);
     Route::get('/contact-requests', [ContactRequestController::class, 'getMyRequests']);
+});
+
+// Appointment routes
+
+Route::middleware('jwt')->prefix('appointments')->group(function () {
+    Route::post('/', [AppointmentController::class, 'create']);
+    Route::get('/mine', [AppointmentController::class, 'getAppointments']);
 });
