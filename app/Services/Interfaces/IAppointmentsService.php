@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services\Interfaces;
+
 use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Collection;
 
