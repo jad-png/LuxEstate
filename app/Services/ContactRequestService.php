@@ -37,7 +37,9 @@ class ContactRequestService implements IContactRequestService
      */
     public function resolveRequest($requestId)
     {
-        // Logic to resolve a contact request
+        $request = ContactRequest::findOrFail($requestId);
+        $request->(['status' => 'resolved']);
+        return $request->fresh();
     }
 
     /**
