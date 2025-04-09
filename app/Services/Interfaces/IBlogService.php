@@ -25,5 +25,26 @@ interface IBlogService extends CrudInterface
      */
     public function update(int $id, $request);
 
-    
+    /**
+     * Summary of addComment
+     * @param int $userId
+     * @param mixed $request
+     * @return BlogComments
+     */
+    public function addComment($userId, $request);
+
+    /**
+     * Summary of removeComment
+     * @param mixed $request
+     * @return bool
+     */
+    public function removeComment($request);
+
+    /**
+     * Summary of reactToPost
+     * @param int $userId
+     * @param mixed $request
+     * @return BlogReactions
+     */
+    public function reactToPost($userId, $request);
 }
