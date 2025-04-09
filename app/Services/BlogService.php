@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 
 class BlogService implements IBlogService
 {
-
     /**
      * Summary of all
      * @return BlogPost[]
@@ -67,5 +66,5 @@ class BlogService implements IBlogService
         return $blogpost->delete();
     }
 
-    
+
 }
