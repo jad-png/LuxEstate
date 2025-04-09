@@ -78,6 +78,21 @@ class User extends Authenticatable
         return $this->hasMany(ContactRequest::class, 'agent_id');
     }
 
+    public function BlogPosts()
+    {
+        return $this->hasMany(BlogPost::class, 'author_id');
+    }
+
+    public function BlogComments()
+    {
+        return $this->hasMany(BlogComments::class);
+    }
+
+    public function BlogReactions()
+    {
+        return $this->hasMany(BlogReactions::class);
+    }
+    
     public function appointmentsAsClient()
     {
         return $this->hasMany(Appointment::class, 'client_id');
