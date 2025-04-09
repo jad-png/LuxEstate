@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Http\Requests\AddBlogPostRequest;
+use App\Http\Requests\AddCommentRequest;
+use App\Http\Requests\ReactToPostRequest;
+use App\Http\Requests\RemoveCommentRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogPost;
 use App\Services\Interfaces\IBlogService;
@@ -66,5 +69,36 @@ class BlogService implements IBlogService
         return $blogpost->delete();
     }
 
+    /**
+     * Summary of addComment
+     *
+     * @param int $userId
+     * @param AddCommentRequest $request
+     * @return void
+     */
+    public function addComment($userId, $request)
+    {
+        // Implementation for adding a comment
+    }
 
+    /**
+     * Summary of removeComment
+     * @param RemoveCommentRequest $request
+     * @return void
+     */
+    public function removeComment($request)
+    {
+        // Implementation for removing a comment
+    }
+
+    /**
+     * Summary of reactToPost
+     * @param int $userId
+     * @param ReactToPostRequest $request
+     * @return void
+     */
+    public function reactToPost($userId, $request)
+    {
+        // Implementation for reacting to a post
+    }
 }

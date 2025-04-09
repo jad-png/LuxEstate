@@ -3,6 +3,9 @@
 namespace App\Services\Interfaces;
 
 use App\Http\Requests\AddBlogPostRequest;
+use App\Http\Requests\AddCommentRequest;
+use App\Http\Requests\ReactToPostRequest;
+use App\Http\Requests\RemoveCommentRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Http\Requests\UpdateFeatureRequest;
 use App\Models\BlogComments;
@@ -28,14 +31,14 @@ interface IBlogService extends CrudInterface
     /**
      * Summary of addComment
      * @param int $userId
-     * @param mixed $request
+     * @param AddCommentRequest $request
      * @return BlogComments
      */
     public function addComment($userId, $request);
 
     /**
      * Summary of removeComment
-     * @param mixed $request
+     * @param RemoveCommentRequest $request
      * @return bool
      */
     public function removeComment($request);
@@ -43,7 +46,7 @@ interface IBlogService extends CrudInterface
     /**
      * Summary of reactToPost
      * @param int $userId
-     * @param mixed $request
+     * @param ReactToPostRequest $request
      * @return BlogReactions
      */
     public function reactToPost($userId, $request);
