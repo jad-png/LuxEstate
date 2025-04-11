@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RemoveCommentRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class RemoveCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,9 @@ class RemoveCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'comment_id' => 'required|exists:blog_comments,id',
+            'post_id' => 'required|exists:blog_posts,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }

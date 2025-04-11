@@ -80,7 +80,7 @@ class BlogService implements IBlogService
      */
     public function addComment($userId, $request)
     {
-        $post = BlogPost::where('id', $request->post_id)->where('status', 'pblished')->findOrFail();
+        $post = BlogPost::where('id', $request->post_id)->where('status', 'published')->findOrFail();
 
         return BlogComments::create([
             'user_id' => $userId,
@@ -112,7 +112,6 @@ class BlogService implements IBlogService
         $post = BlogPost::where('id', $request->post_id)->where('status', 'published')->firstOrFail();
 
         // delete existing reaction if it exists
-        
         BlogReactions::where('user_id', $userId)->where('blog_post_id', $request->post_id)->delete();
         
         return BlogReactions::create([

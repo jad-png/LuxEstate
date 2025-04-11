@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ReactToPostRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class ReactToPostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,8 @@ class ReactToPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'post_id' => 'required|exists:blog_posts,id',
+            'reaction' => 'required|in:like,dislike',
         ];
     }
 }
