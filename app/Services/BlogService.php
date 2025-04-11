@@ -7,6 +7,7 @@ use App\Http\Requests\AddCommentRequest;
 use App\Http\Requests\ReactToPostRequest;
 use App\Http\Requests\RemoveCommentRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
+use App\Models\BlogComments;
 use App\Models\BlogPost;
 use App\Services\Interfaces\IBlogService;
 use Illuminate\Support\Collection;
@@ -74,11 +75,17 @@ class BlogService implements IBlogService
      *
      * @param int $userId
      * @param AddCommentRequest $request
-     * @return void
+     * @return BlogComments
      */
     public function addComment($userId, $request)
     {
-        // Implementation for adding a comment
+        $post = BlogPost::where('id', $request->post_id)->where('status', 'pblished')->findOrFail();
+
+        return BlogComments::create([
+            'user_id' => $userId,
+            'post_id' => $request->post_id,
+            'comment' => $request->comment
+        ]);
     }
 
     /**
