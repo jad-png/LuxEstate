@@ -9,6 +9,7 @@ use App\Http\Requests\RemoveCommentRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogComments;
 use App\Models\BlogPost;
+use App\Models\BlogReactions;
 use App\Services\Interfaces\IBlogService;
 use Illuminate\Support\Collection;
 
@@ -104,10 +105,20 @@ class BlogService implements IBlogService
      * Summary of reactToPost
      * @param int $userId
      * @param ReactToPostRequest $request
-     * @return void
+     * @return BlogReactions
      */
     public function reactToPost($userId, $request)
     {
-        // Implementation for reacting to a post
+        $post = BlogPost::where('id', $request->post_id)->where('status', 'published')->firstOrFail();
+
+        // delete existing reaction if it exists
+        
+        BlogReactions::where('user_id', $userId)->where('blog_post_id', $request->post_id)->delete();
+        
+        return BlogReactions::create([
+            'user_id' => $userId,
+            'blog_post_id' => $request->post_id,
+            'reaction' => $request->reaction
+        ]);
     }
 }
