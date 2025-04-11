@@ -91,11 +91,13 @@ class BlogService implements IBlogService
     /**
      * Summary of removeComment
      * @param RemoveCommentRequest $request
-     * @return void
+     * @return bool
      */
     public function removeComment($request)
     {
-        // Implementation for removing a comment
+        $comment = BlogComments::where('id', $request->comment_id)->where('post_id', $request->post_id)->where('user_id', $request->user_id)->firstOrFail();
+
+        return $comment->delete();
     }
 
     /**
