@@ -182,12 +182,11 @@ class BlogService implements IBlogService
 
         BlogShare::create([
             'blog_post_id' => $post->id,
-            'user_id' => $userId,
+            'user_id' => $user->id,
             'platform' => $request->platform,
         ]);
 
         return [
-            'message' => 'Post shared successfully',
             'share_url' => $sharedUrls[$request->platform],
             'post' => $post,
         ];
