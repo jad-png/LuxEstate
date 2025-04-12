@@ -60,7 +60,7 @@ Route::middleware('jwt')->prefix('appointments')->group(function () {
 // Blog post routes
 Route::middleware('jwt')->prefix('blog')->group(function () {
     Route::get('posts', [BlogPostController::class, 'index']);
-    Route::get('posts/{id}', [BlogPostController::class, 'show']);
+    Route::get('posts/{id}', [BlogPostController::class, 'show'])->name('blog.show');;
     Route::post('posts', [BlogPostController::class, 'store']);
     Route::put('posts/{id}', [BlogPostController::class, 'update']);
     
@@ -72,4 +72,7 @@ Route::middleware('jwt')->prefix('blog')->group(function () {
     
     // React routes
     Route::post('posts/react', [BlogPostController::class, 'react']);
+    
+    // Share routes
+    Route::post('posts/share', [BlogPostController::class, 'sharePost']);
 });
