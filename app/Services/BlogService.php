@@ -10,8 +10,10 @@ use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogComments;
 use App\Models\BlogPost;
 use App\Models\BlogReactions;
+use App\Models\User;
 use App\Services\Interfaces\IBlogService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class BlogService implements IBlogService
 {
@@ -37,12 +39,26 @@ class BlogService implements IBlogService
 
     /**
      * Summary of create
+     * @param mixed $request
+     * @return void
+     */
+    public function create($request){}
+    /**
+     * Summary of create
+     * @param int $userId
      * @param AddBlogPostRequest $request
      * @return BlogPost
      */
-    public function create($request)
+    public function createBlogPost($userId, $request)
     {
-        $blogpost = BlogPost::create($request->validated());
+        $user = User::findOrFail($userId);
+
+        $blogpost = BlogPost::create([
+            'user_id'=> $user->id,
+            'title' => $request['title'],
+            'content' => $request['content'],
+        ]);
+
         return $blogpost;
     }
 

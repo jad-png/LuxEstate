@@ -39,7 +39,13 @@ class BlogPostController extends Controller
 
     public function store(AddBlogPostRequest $request)
     {
-        $post = $this->blogPostService->create($request);
+        $user = Auth::user();
+        $userId = $user->id;
+        // $mergedAtt = $request->merge(['user_id' => $user->id]);
+        // dd($request->all());
+        // dd($request->validated(), $userId);
+
+        $post = $this->blogPostService->createBlogPost($userId, $request->validated());
 
         return response()->json([
             'message' => 'Post created successfully',

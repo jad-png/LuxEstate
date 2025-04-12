@@ -16,10 +16,11 @@ interface IBlogService extends CrudInterface
 {
     /**
      * Summary of createBlogPost
+     * @param int $userId
      * @param AddBlogPostRequest $request
      * @return BlogPost
      */
-    public function create($request);
+    public function createBlogPost($userId, $request);
     
     /**
      * Summary of getBlogPost

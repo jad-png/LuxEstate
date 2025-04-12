@@ -7,6 +7,7 @@ use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BlogPostController;
 
 // auth routes
 Route::prefix('auth')->group(function () {
@@ -51,8 +52,23 @@ Route::middleware('jwt')->group(function () {
 });
 
 // Appointment routes
-
 Route::middleware('jwt')->prefix('appointments')->group(function () {
     Route::post('/', [AppointmentController::class, 'create']);
     Route::get('/mine', [AppointmentController::class, 'getAppointments']);
+});
+
+// Blog post routes
+Route::middleware('jwt')->prefix('blog')->group(function () {
+    Route::get('posts', [BlogPostController::class, 'index']);
+    Route::get('posts/{id}', [BlogPostController::class, 'show']);
+    Route::post('posts', [BlogPostController::class, 'store']);
+    Route::put('posts/{id}', [BlogPostController::class, 'update']);
+    Route::delete('posts/{id}', [BlogPostController::class, 'destroy']);
+    
+    // Comment routes
+    Route::post('posts/comment', [BlogPostController::class, 'comment']);
+    Route::delete('posts/comment', [BlogPostController::class, 'removeComment']);
+    
+    // React routes
+    Route::post('posts/react', [BlogPostController::class, 'react']);
 });
