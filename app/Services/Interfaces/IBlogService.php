@@ -59,7 +59,7 @@ interface IBlogService extends CrudInterface
      * Summary of sharePost
      * @param int $userId
      * @param SharePostRequest $request
-     * @return void
+     * @return array
      */
     public function sharePost($userId, $request);
 }

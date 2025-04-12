@@ -6,6 +6,7 @@ use App\Http\Requests\AddBlogPostRequest;
 use App\Http\Requests\AddCommentRequest;
 use App\Http\Requests\ReactToPostRequest;
 use App\Http\Requests\RemoveCommentRequest;
+use App\Http\Requests\SharePostRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Services\Interfaces\IBlogService;
 use Illuminate\Http\Request;
@@ -104,6 +105,19 @@ class BlogPostController extends Controller
         return response()->json([
             'message' => 'Reaction added successfully',
             'reaction' => $reaction,
+        ]);
+    }
+
+    public function sharePost(SharePostRequest $request)
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        $result = $this->blogPostService->sharePost($userId, $request);
+
+        return response()->json([
+            'message' => 'Post shared successfully',
+            'result' => $result,
         ]);
     }
 }
