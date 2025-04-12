@@ -63,11 +63,12 @@ Route::middleware('jwt')->prefix('blog')->group(function () {
     Route::get('posts/{id}', [BlogPostController::class, 'show']);
     Route::post('posts', [BlogPostController::class, 'store']);
     Route::put('posts/{id}', [BlogPostController::class, 'update']);
-    Route::delete('posts/{id}', [BlogPostController::class, 'destroy']);
     
     // Comment routes
     Route::post('posts/comment', [BlogPostController::class, 'comment']);
     Route::delete('posts/comment', [BlogPostController::class, 'removeComment']);
+    
+    Route::delete('posts/{id}', [BlogPostController::class, 'destroy']);
     
     // React routes
     Route::post('posts/react', [BlogPostController::class, 'react']);

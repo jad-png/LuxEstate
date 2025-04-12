@@ -7,11 +7,12 @@ use App\Http\Requests\AddCommentRequest;
 use App\Http\Requests\ReactToPostRequest;
 use App\Http\Requests\RemoveCommentRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
-use App\Models\BlogComments;
+use App\Models\BlogComment;
 use App\Models\BlogPost;
 use App\Models\BlogReactions;
 use App\Models\User;
 use App\Services\Interfaces\IBlogService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,28 +93,39 @@ class BlogService implements IBlogService
      *
      * @param int $userId
      * @param AddCommentRequest $request
-     * @return BlogComments
+     * @return BlogComment
      */
     public function addComment($userId, $request)
     {
-        $post = BlogPost::where('id', $request->post_id)->where('status', 'published')->findOrFail();
-
-        return BlogComments::create([
-            'user_id' => $userId,
-            'post_id' => $request->post_id,
+        $user = User::findOrFail($userId);
+        $post = BlogPost::where('status', 'Published')->findOrFail($request->blog_post_id);
+        // dd($post, $request->blog_post_id);
+        return BlogComment::create([
+            'user_id' => $user->id,
+            'blog_post_id' => $post->id,
             'comment' => $request->comment
         ]);
     }
 
     /**
      * Summary of removeComment
+     * @param int $userId
      * @param RemoveCommentRequest $request
      * @return bool
      */
-    public function removeComment($request)
+    public function removeComment($userId, $request)
     {
-        $comment = BlogComments::where('id', $request->comment_id)->where('post_id', $request->post_id)->where('user_id', $request->user_id)->firstOrFail();
+        $user = User::findOrFail($userId);
 
+        $comment = BlogComment::where('id', $request->comment_id)
+            ->where('blog_post_id', $request->blog_post_id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        if ($user->id !== $comment->user_id && !$user->hasRole('admin')) {
+            throw new AuthorizationException('You are not authorized to delete this comment.');
+        }
+        
         return $comment->delete();
     }
 

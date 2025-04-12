@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BlogComments extends Model
+class BlogComment extends Model
 {
     protected $table = 'blog_comments';
 

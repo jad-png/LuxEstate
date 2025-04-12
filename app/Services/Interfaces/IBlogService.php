@@ -33,16 +33,17 @@ interface IBlogService extends CrudInterface
      * Summary of addComment
      * @param int $userId
      * @param AddCommentRequest $request
-     * @return BlogComments
+     * @return BlogComment
      */
     public function addComment($userId, $request);
 
     /**
      * Summary of removeComment
+     * @param int $userId
      * @param RemoveCommentRequest $request
      * @return bool
      */
-    public function removeComment($request);
+    public function removeComment($userId, $request);
 
     /**
      * Summary of reactToPost

@@ -23,8 +23,19 @@ class AddCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'post_id' => 'required|exists:blog_posts,id',
+            'blog_post_id' => 'required|exists:blog_posts,id',
             'comment' => 'required|string|max:1000',
         ];
+    }
+
+    
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }

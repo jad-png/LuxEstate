@@ -55,6 +55,7 @@ class BlogPostController extends Controller
 
     public function update(int $id, UpdateBlogPostRequest $request)
     {
+        // dd('hello');
         $post = $this->blogPostService->update($id, $request);
 
         return response()->json([
@@ -85,7 +86,10 @@ class BlogPostController extends Controller
 
     public function removeComment(RemoveCommentRequest $request)
     {
-        $this->blogPostService->removeComment($request);
+        $user = Auth::user();
+        $userId = $user->id;
+
+        $this->blogPostService->removeComment($userId, $request);
 
         return response()->json([
             'message' => 'Comment removed successfully',

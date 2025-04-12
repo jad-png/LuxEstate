@@ -24,8 +24,8 @@ class RemoveCommentRequest extends FormRequest
     {
         return [
             'comment_id' => 'required|exists:blog_comments,id',
-            'post_id' => 'required|exists:blog_posts,id',
-            'user_id' => 'required|exists:users,id',
+            'blog_post_id' => 'required|exists:blog_posts,id',
+            // 'user_id' => 'required|exists:users,id',
         ];
     }
 }
