@@ -53,4 +53,6 @@ interface IBlogService extends CrudInterface
      * @return BlogReactions
      */
     public function reactToPost($userId, $request);
+
+    public function sharePost();
 }
