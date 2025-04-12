@@ -6,6 +6,7 @@ use App\Http\Requests\AddBlogPostRequest;
 use App\Http\Requests\AddCommentRequest;
 use App\Http\Requests\ReactToPostRequest;
 use App\Http\Requests\RemoveCommentRequest;
+use App\Http\Requests\SharePostRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Http\Requests\UpdateFeatureRequest;
 use App\Models\BlogComment;
@@ -54,5 +55,11 @@ interface IBlogService extends CrudInterface
      */
     public function reactToPost($userId, $request);
 
-    public function sharePost();
+    /**
+     * Summary of sharePost
+     * @param int $userId
+     * @param SharePostRequest $request
+     * @return void
+     */
+    public function sharePost($userId, $request);
 }

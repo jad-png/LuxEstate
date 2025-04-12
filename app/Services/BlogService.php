@@ -6,15 +6,18 @@ use App\Http\Requests\AddBlogPostRequest;
 use App\Http\Requests\AddCommentRequest;
 use App\Http\Requests\ReactToPostRequest;
 use App\Http\Requests\RemoveCommentRequest;
+use App\Http\Requests\SharePostRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogComment;
 use App\Models\BlogPost;
 use App\Models\BlogReactions;
+use App\Models\BlogShare;
 use App\Models\User;
 use App\Services\Interfaces\IBlogService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use InvalidArgumentException;
 
 class BlogService implements IBlogService
 {
@@ -150,5 +153,43 @@ class BlogService implements IBlogService
             'blog_post_id' => $post->id,
             'reaction_type' => $request->reaction
         ]);
+    }
+
+    /**
+     * Summary of sharePost
+     * @param int $userId
+     * @param SharePostRequest $request
+     * @return array
+     */
+    public function sharePost($userId, $request)
+    {
+        $user = User::findOrFail($userId);
+        $post = BlogPost::where('status', 'Published')->findOrFail($request->blog_post_id);
+
+        $postUrl = route('blog.show', $post->id);
+        $title = $post->title;
+
+        $sharedUrls = [
+            'twitter' => "https://twitter.com/intent/tweet?url=" . urlencode($postUrl) . "&text=" . urlencode($title),
+            'facebook' => "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($postUrl),
+            'linkedin' => "https://www.linkedin.com/sharing/share-offsite/?url=" . urlencode($postUrl),
+            'whatsapp' => "https://api.whatsapp.com/send?text=" . urlencode($title . ' ' . $postUrl), 
+        ];
+
+        if (!array_key_exists($request->platform, $sharedUrls)) {
+            throw new InvalidArgumentException("Share platform not supported : $request->platform");
+        }
+
+        BlogShare::create([
+            'blog_post_id' => $post->id,
+            'user_id' => $userId,
+            'platform' => $request->platform,
+        ]);
+
+        return [
+            'message' => 'Post shared successfully',
+            'share_url' => $sharedUrls[$request->platform],
+            'post' => $post,
+        ];
     }
 }
