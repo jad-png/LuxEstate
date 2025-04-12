@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SharePostRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class SharePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,25 @@ class SharePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'blog_post_id' => 'required|exists:blog_posts,id',
+            'platform' => 'required|in:facebook,twitter,linkedIn,whatsApp',
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'platform.in' => 'The platform must be one of: facebook, twitter, linkedin, whatsapp.',
+        ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }
