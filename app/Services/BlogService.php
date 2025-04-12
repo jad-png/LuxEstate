@@ -99,7 +99,7 @@ class BlogService implements IBlogService
     {
         $user = User::findOrFail($userId);
         $post = BlogPost::where('status', 'Published')->findOrFail($request->blog_post_id);
-        // dd($post, $request->blog_post_id);
+
         return BlogComment::create([
             'user_id' => $user->id,
             'blog_post_id' => $post->id,
@@ -137,15 +137,18 @@ class BlogService implements IBlogService
      */
     public function reactToPost($userId, $request)
     {
-        $post = BlogPost::where('id', $request->post_id)->where('status', 'published')->firstOrFail();
+        $post = BlogPost::where('status', 'Published')
+        ->findOrFail($request->blog_post_id);
+        // dd('hello');
 
         // delete existing reaction if it exists
-        BlogReactions::where('user_id', $userId)->where('blog_post_id', $request->post_id)->delete();
-        
+        BlogReactions::where('user_id', $userId)
+        ->where('blog_post_id', $request->blog_post_id)
+        ->delete();
         return BlogReactions::create([
             'user_id' => $userId,
-            'blog_post_id' => $request->post_id,
-            'reaction' => $request->reaction
+            'blog_post_id' => $post->id,
+            'reaction_type' => $request->reaction
         ]);
     }
 }

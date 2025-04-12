@@ -8,6 +8,7 @@ use App\Http\Requests\ReactToPostRequest;
 use App\Http\Requests\RemoveCommentRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Http\Requests\UpdateFeatureRequest;
+use App\Models\BlogComment;
 use App\Models\BlogComments;
 use App\Models\BlogPost;
 use App\Models\BlogReactions;

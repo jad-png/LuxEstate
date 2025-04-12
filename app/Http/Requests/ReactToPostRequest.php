@@ -23,8 +23,18 @@ class ReactToPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'post_id' => 'required|exists:blog_posts,id',
-            'reaction' => 'required|in:like,dislike',
+            'blog_post_id' => 'required|exists:blog_posts,id',
+            'reaction' => 'required|in:Like,Dislike',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }
