@@ -36,17 +36,14 @@ class NotificationService implements INotificationService
 
         $message = $this->generateMessage($request->type, $request->data);
 
-        return FacadesDB::transaction(function ($senderId, $recipient, $request, $message) {
-            return Notification::create([
-                'user_id' => $recipient->id,
-                'sender_id' => $senderId,
-                'type' => $request->type,
-                'message' => $message,
-                'status' => 'Unread',
-                'data' => $request->data,
-            ]);
-        });
-
+        return Notification::create([
+            'user_id' => $recipient->id,
+            'sender_id' => $senderId,
+            'type' => $request->type,
+            'message' => $message,
+            'status' => 'Unread',
+            'data' => $request->data,
+        ]);
     }
     
     /**
@@ -56,7 +53,13 @@ class NotificationService implements INotificationService
      */
     public function getUserNotifications($userId)
     {
-        // Logic to get user notifications
+        $user = User::findOrFail($userId);
+
+        if (!$user->isClient()) {
+            throw new InvalidArgumentException('Only clients can view notifications');
+        }
+
+        return $user->notifications()->latest()->get();
     }
 
     
