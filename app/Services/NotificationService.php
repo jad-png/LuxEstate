@@ -7,11 +7,9 @@ use App\Http\Requests\StoreNotificationRequest;
 use App\Models\Notification;
 use App\Models\User;
 use App\Services\Interfaces\INotificationService;
-use Illuminate\Container\Attributes\DB;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\DB ;
 use InvalidArgumentException;
-use Symfony\Component\CssSelector\Parser\Handler\StringHandler;
 
 class NotificationService implements INotificationService
 {
@@ -72,7 +70,13 @@ class NotificationService implements INotificationService
      */
     public function markAsRead($userId, $notificationId)
     {
-        // Logic to mark a notification as read
+        $notification = Notification::where('user_id', $userId)
+            ->where('id', $notificationId)
+            ->firstOrFail();
+
+        $notification->update(['status' => 'Seen']);
+        
+        return $notification;
     }
 
     /**
@@ -83,7 +87,30 @@ class NotificationService implements INotificationService
      */
     public function sendBulkPropertyNotification($senderId, $request)
     {
-        // Logic to send bulk property notifications
+        $sender = User::findOrFail($senderId);
+
+        if (!$sender->isAdmin() && !$sender->isAgent()) {
+            throw new InvalidArgumentException('Only admins or agents can send notifications');
+        }
+
+        $clientRole = User::where('role_name', 'client')->value('id');
+        
+        $clients = User::where('role_id', $clientRole)->get();
+        
+        DB::transaction(function () use ($senderId, $propertyId, $message, $clients)  {
+            foreach ($clients as $client) {
+                Notification::create([
+                    'user_id' => $client->id,
+                    'sender_id' => $senderId,
+                    'type' => 'NewPropertyPosted',
+                    'message' => $message,
+                    'status' => 'Unseen',
+                    'data' => [
+                        'property_id' => $propertyId,
+                    ],
+                ]);
+            }
+        });
     }
 
     public function generateMessage(string $type, ?array $data = null): string
