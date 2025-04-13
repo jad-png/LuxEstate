@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MarkAsReadRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class MarkAsReadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::isClient();
     }
 
     /**
@@ -22,7 +23,7 @@ class MarkAsReadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'notification_id' => 'required|exists:notifications,id'
         ];
     }
 }
