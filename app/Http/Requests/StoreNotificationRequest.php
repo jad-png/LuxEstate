@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreNotificationRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreNotificationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::isAdmin() || Auth::isAgent();
     }
 
     /**
@@ -22,7 +23,9 @@ class StoreNotificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|exists:users,id',
+            'type' => 'required|string|in:ContactAccepted,AppointmentScheduled,NewPropertyPosted',
+            'data' => 'nullable|array',
         ];
     }
 }
