@@ -14,6 +14,8 @@ use App\Services\Interfaces\IPropertyService;
 use App\Services\AppointmentsService;
 use App\Services\BlogService;
 use App\Services\Interfaces\IBlogService;
+use App\Services\Interfaces\INotificationService;
+use App\Services\NotificationService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IContactRequestService::class, ContactRequestService::class);
         $this->app->bind(IAppointmentsService::class, AppointmentsService::class);
         $this->app->bind(IBlogService::class, BlogService::class);
+        $this->app->bind(INotificationService::class, NotificationService::class);
     }
 
     /**
