@@ -62,6 +62,21 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
+    public function isAdmin()
+    {
+        return $this->role_id === 1; // role id 1 represents admin in role table
+    }
+
+    public function isAgent()
+    {
+        return $this->role_id === 2; // role id 2 represents agent in role table
+    }
+
+    public function isClient()
+    {
+        return $this->role_id === 3; // role id 3 represents client in role table
+    }
+
     public function favoriteProperties()
     {
         return $this->belongsToMany(Property::class, 'client_favorites', 'user_id', 'property_id')
@@ -78,21 +93,6 @@ class User extends Authenticatable
         return $this->hasMany(ContactRequest::class, 'agent_id');
     }
 
-    public function BlogPosts()
-    {
-        return $this->hasMany(BlogPost::class, 'author_id');
-    }
-
-    public function BlogComments()
-    {
-        return $this->hasMany(BlogComments::class);
-    }
-
-    public function BlogReactions()
-    {
-        return $this->hasMany(BlogReactions::class);
-    }
-    
     public function appointmentsAsClient()
     {
         return $this->hasMany(Appointment::class, 'client_id');
@@ -103,18 +103,29 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class, 'agent_id');
     }
 
-    public function isAdmin()
+
+    public function BlogPosts()
     {
-        return $this->role_id === 1; // role id 1 represents admin in role table
+        return $this->hasMany(BlogPost::class, 'author_id');
     }
 
-    public function isAgent()
+    public function BlogComments()
     {
-        return $this->role_id === 2; // role id 2 represents agent in role table
+        return $this->hasMany(BlogComment::class);
     }
 
-    public function isClient()
+    public function BlogReactions()
     {
-        return $this->role_id === 3; // role id 3 represents client in role table
+        return $this->hasMany(BlogReactions::class);
+    }
+    
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id');
+    }
+
+    public function sentNotifications()
+    {
+        return $this->hasMany(Notification::class, 'sender_id');
     }
 }

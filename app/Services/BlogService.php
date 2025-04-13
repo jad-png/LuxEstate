@@ -173,7 +173,8 @@ class BlogService implements IBlogService
             'twitter' => "https://twitter.com/intent/tweet?url=" . urlencode($postUrl) . "&text=" . urlencode($title),
             'facebook' => "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($postUrl),
             'linkedin' => "https://www.linkedin.com/sharing/share-offsite/?url=" . urlencode($postUrl),
-            'whatsapp' => "https://api.whatsapp.com/send?text=" . urlencode($title . ' ' . $postUrl), 
+            'whatsapp' => "https://web.whatsapp.com/send?text=" . urlencode($title . ' ' . $postUrl), 
+            'instagram' => urlencode($postUrl)
         ];
 
         if (!array_key_exists($request->platform, $sharedUrls)) {

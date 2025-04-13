@@ -24,7 +24,7 @@ class SharePostRequest extends FormRequest
     {
         return [
             'blog_post_id' => 'required|exists:blog_posts,id',
-            'platform' => 'required|in:facebook,twitter,linkedIn,whatsApp',
+            'platform' => 'required|in:facebook,twitter,linkedin,whatsapp,instagram',
         ];
     }
 
