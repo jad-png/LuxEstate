@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\NotificationController;
 
 // auth routes
 Route::prefix('auth')->group(function () {
@@ -75,4 +76,11 @@ Route::middleware('jwt')->prefix('blog')->group(function () {
     
     // Share routes
     Route::post('posts/share', [BlogPostController::class, 'sharePost']);
+});
+
+
+Route::middleware('jwt')->prefix('notifications')->group(function () {
+    Route::post('/', [NotificationController::class, 'store']);
+    Route::get('/', [NotificationController::class, 'index']);
+    Route::patch('/{notification_id}/read', [NotificationController::class, 'markAsRead']);
 });

@@ -15,7 +15,7 @@ interface INotificationService
      * @param StoreNotificationRequest $request
      * @return Notification
      */
-    public function createNotification($senderId, $request);
+    public function createNotification($senderId,StoreNotificationRequest $request);
 
     /**
      * Summary of getUserNotifications

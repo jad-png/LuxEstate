@@ -19,10 +19,11 @@ class NotificationController extends Controller
 
     public function store(StoreNotificationRequest $request)
     {
+        // dd('hello');
         $user = Auth::user();
         $userId = $user->id;
-
-        $notification = $this->notificationService->createNotification($userId, $request->validated());
+// dd($request->user_id);
+        $notification = $this->notificationService->createNotification($userId, $request);
 
         return response()->json([
             'message' => 'Notification created successfully',
@@ -48,7 +49,7 @@ class NotificationController extends Controller
         $userId = $user->id;
 
         $notification = $this->notificationService->markAsRead($userId, $request->notification_id);
-        
+        // dd($request->all());
         return response()->json([
             'message' => 'Notification marked as read',
             'notification' => $notification,

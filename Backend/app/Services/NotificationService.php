@@ -19,11 +19,12 @@ class NotificationService implements INotificationService
      * @param StoreNotificationRequest $request
      * @return Notification
      */
-    public function createNotification($senderId, $request)
+    public function createNotification($senderId, StoreNotificationRequest $request)
     {
+        // dd('hello');
         $sender = User::findOrFail($senderId);
         $recipient = User::findOrFail($request->user_id);
-
+// dd($sender);
         if (!$sender->isAdmin() && !$sender->isAgent()) {
             throw new InvalidArgumentException('Only admins or agents can send notifications');
         }
@@ -31,15 +32,15 @@ class NotificationService implements INotificationService
         if (!$recipient->isClient()) {
             throw new InvalidArgumentException('Notifications can only be sent to clients');
         }
-
         $message = $this->generateMessage($request->type, $request->data);
 
         return Notification::create([
+            // 'user_id' => 6,
             'user_id' => $recipient->id,
             'sender_id' => $senderId,
             'type' => $request->type,
             'message' => $message,
-            'status' => 'Unread',
+            'status' => 'Unseen',
             'data' => $request->data,
         ]);
     }
@@ -97,18 +98,20 @@ class NotificationService implements INotificationService
         
         $clients = User::where('role_id', $clientRole)->get();
         
-        DB::transaction(function () use ($senderId, $propertyId, $message, $clients)  {
+        DB::transaction(function () use ($senderId, $request, $clients)  {
             foreach ($clients as $client) {
                 Notification::create([
                     'user_id' => $client->id,
                     'sender_id' => $senderId,
                     'type' => 'NewPropertyPosted',
-                    'message' => $message,
+                    'message' => $request->message,
                     'status' => 'Unseen',
                     'data' => [
-                        'property_id' => $propertyId,
+                        'property_id' => $request->property_id,
                     ],
                 ]);
+
+                dd($request->all());
             }
         });
     }
