@@ -12,7 +12,7 @@ class AddFavoriteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::isClient();
+        return Auth::user()->isClient();
     }
 
     /**
