@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router'
+import { BrowserRouter,Routes } from 'react-router'
 import routes from './routes'
 import render from './routes/render'
 

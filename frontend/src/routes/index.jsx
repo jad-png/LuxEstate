@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
 
 const routes = [
-    { path: "/", Component: Home, layout: MainLayout},
+    { path: "/", component: Home, layout: MainLayout},
 ];
 
 export default routes;
