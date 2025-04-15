@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Route } from "react-router";
 import PropTypes from "prop-types";
 import ProtectedRoute from "../components/ProtectedRoute";
 
