@@ -1,6 +1,6 @@
 import React from 'react'
 import { Facebook, Twitter, Instagram } from "lucide-react"
-import Link from "next/link"
+import { Link } from "react-router"
 
 export function Footer() {
   return (
