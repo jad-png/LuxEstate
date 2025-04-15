@@ -4,7 +4,8 @@ import { ResidenceKitchenSection } from '../components/HomePage/ResidenceKitchen
 import { AmenitiesSection } from '../components/HomePage/AmenitiesSection.jsx';
 import { ApartmentsShowcase } from '../components/HomePage/ApartmentsShowcase.jsx';
 import { MoveInReadyHomes } from '../components/HomePage/MoveInReadyHomes.jsx';
-// MoveInReadyHomes
+import { SalesGalleryAppointment } from '../components/HomePage/SalesGalleryAppointment.jsx';
+// SalesGalleryAppointment
 const Home = () => {
     return (
         <div>
@@ -17,6 +18,8 @@ const Home = () => {
             <ApartmentsShowcase />
 
             <MoveInReadyHomes />
+            
+            <SalesGalleryAppointment />
         </div>
     );
 };
