@@ -28,7 +28,7 @@ export function AvailabilityHeader() {
               <a href="/" className="hover:text-white transition-colors">Home</a>
             </li>
             <li className="mx-2">›</li>
-            <li className="text-white">Building</li>
+            <li className="text-white">Availability</li>
           </ol>
         </nav>
       </div>
