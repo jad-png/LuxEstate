@@ -1,4 +1,4 @@
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 export function AmenitiesSection() {
   return (
     <div className="flex flex-col md:flex-row bg-[#FAF6F3]">
