@@ -3,7 +3,7 @@ import React from "react";
 export function BlogPost() 
 {
     return (
-        <div className="w-full md:w-2/3 pr-0 md:pr-8 border-b pb-10 px-10">
+        <div className="w-full md:w-full pr-0 md:pr-8 border-b pb-10 px-10">
           <div className="relative">
             <img
               src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
