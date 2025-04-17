@@ -18,18 +18,24 @@ export function SinglePost() {
             </div>
           </div>
           <div className="mt-6">
-            <p className="text-sm text-[#666666] manrope">
-              December 28, 2021 • By Admin
-            </p>
-            <h2 className="text-3xl font-semibold mt-2 dm-serif text-[#262626] hover:text-[#a27d56] transition-colors">
+            <div className="flex gap-2 items-center">
+              <div className="w-[6.5rem] bg-[#a27d56] text-white text-xs uppercase tracking-wider px-3 py-1 manrope">
+                MEDITATION
+              </div>
+              <p className="text-sm text-[#666666] manrope">
+                December 28, 2021 • By Admin
+              </p>
+            </div>
+            <h1 className="text-5xl font-semibold my-5 dm-serif text-[#262626] hover:text-[#a27d56] transition-colors">
               Introducing: ShelfBrackets
-            </h2>
+            </h1>
             <p className="text-[#666666] mt-3 manrope leading-relaxed">
               Kevin had a lot going on in his life and was trying to find the
               right educational environment to fit into his needs and schedule.
               There weren’t many opportunities around him outside of the local
               community college and he was stuck trying to find a way to learn.
-              Dive into his Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Dive into his Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit.
             </p>
 
             <div>
@@ -43,7 +49,6 @@ export function SinglePost() {
                   dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim id est laborum. Sed ut perspiciatis unde omnis
-
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -62,7 +67,7 @@ export function SinglePost() {
               </div>
             </div>
           </div>
-            <Comments />
+          <Comments />
         </div>
       </div>
       <BlogSideBar />
