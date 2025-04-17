@@ -28,6 +28,8 @@ export function PostHeader () {
               <a href="/" className="hover:text-white transition-colors">Home</a>
             </li>
             <li className="mx-2">›</li>
+            <li className="text-white">Blog</li>
+            <li className="mx-2">›</li>
             <li className="text-white">Blog Post</li>
           </ol>
         </nav>
