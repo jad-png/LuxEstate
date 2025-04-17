@@ -1,11 +1,10 @@
 import React from "react";
-import { Sidebar } from "../components/Admin/Sidebar";
-import { Header } from "../components/Admin/Header";
+import { DataTable } from "../components/Admin/DataTable";
 
 const Admin = () => {
     return (
-        <div>
-            
+        <div className="Border-2 border-red-600">
+            <DataTable />
         </div>
     );
 }
