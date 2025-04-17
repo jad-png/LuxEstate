@@ -1,5 +1,6 @@
 import { Component } from "react";
 import MainLayout from "../layouts/MainLayout";
+import AdminLayout from "../layouts/AdminLayout";
 import Building from "../pages/Building";
 import Home from "../pages/Home";
 import Availability from "../pages/Availability";
@@ -17,7 +18,7 @@ const routes = [
   { path: "/Blog", component: Blog, layout: MainLayout },
   { path: "/BlogPost", component: Post, layout: MainLayout },
   { path: "/contact-request", component: ContactRequest, layout: MainLayout },
-  { path: "/Admin", component: Admin, layout: MainLayout },
+  { path: "/Admin", component: Admin, layout: AdminLayout },
 ];
 
 export default routes;
