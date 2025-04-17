@@ -1,5 +1,6 @@
 import React from "react";
 import { BlogSideBar } from "../Global/BlogSideBar";
+import Comments from "../Global/Comments";
 
 export function SinglePost() {
   return (
@@ -31,7 +32,7 @@ export function SinglePost() {
               Dive into his Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
 
-            <div className="border-2 border-red-600">
+            <div>
               <div className="flex flex-col items-center justify-center">
                 <p className="text-[#666666] mt-3 manrope leading-relaxed">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -61,6 +62,7 @@ export function SinglePost() {
               </div>
             </div>
           </div>
+            <Comments />
         </div>
       </div>
       <BlogSideBar />
