@@ -72,7 +72,7 @@ export function Header() {
             Pages
           </Link>
           <Link
-            to="/contact"
+            to="/contact-request"
             className="text-sm font-medium hover:text-[#e9c496]"
           >
             Contact
