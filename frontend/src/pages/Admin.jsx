@@ -1,6 +1,7 @@
 import React from "react";
 import { DataTable } from "../components/Admin/DataTable";
 import { StatsCard } from "../components/Admin/StatsCard";
+import { PropertyModel } from "../components/Admin/PropertyModal";
 
 const Admin = () => {
   return (
@@ -13,6 +14,7 @@ const Admin = () => {
         </div>
       </div>
       <DataTable />
+      <PropertyModel />
     </div>
   );
 };

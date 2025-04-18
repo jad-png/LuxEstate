@@ -3,8 +3,8 @@ import React from "react";
 export function PropertyModel() 
 {
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+        <div className="">
+          <div className="bg-white p-8 shadow-lg w-full mt-4">
             <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-6">
               Create New Property
             </h2>
@@ -16,7 +16,7 @@ export function PropertyModel()
                 <input
                   type="text"
                   placeholder="e.g., Manhattan Loft"
-                  className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
+                  className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
                 />
               </div>
               <div>
@@ -26,7 +26,7 @@ export function PropertyModel()
                 <input
                   type="text"
                   placeholder="e.g., 401 Broadway, NY"
-                  className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
+                  className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
                 />
               </div>
               <div>
@@ -34,7 +34,7 @@ export function PropertyModel()
                   Status
                 </label>
                 <select
-                  className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
+                  className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
                 >
                   <option value="Available">Available</option>
                   <option value="Occupied">Occupied</option>
@@ -48,7 +48,7 @@ export function PropertyModel()
                 <input
                   type="number"
                   placeholder="e.g., 500000"
-                  className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
+                  className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
                 />
               </div>
               <div>
@@ -58,7 +58,7 @@ export function PropertyModel()
                 <textarea
                   placeholder="Describe the property..."
                   rows="4"
-                  className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56] resize-none"
+                  className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56] resize-none"
                 />
               </div>
             </div>
@@ -66,7 +66,7 @@ export function PropertyModel()
               
               <button
                 // onClick={}
-                className="px-4 py-2 bg-[#a27d56] text-white manrope rounded-lg hover:bg-[#8b6a47]"
+                className="px-4 py-2 bg-[#a27d56] text-white manrope hover:bg-[#8b6a47]"
               >
                 Create Property
               </button>
