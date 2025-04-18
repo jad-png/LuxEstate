@@ -2,7 +2,7 @@ import React from "react";
 
 export function DataTable() {
   return (
-    <div>
+    <div className="">
       <div className="bg-white p-6 shadow-sm border border-[#e5e5e5]">
         <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
           Property Management
