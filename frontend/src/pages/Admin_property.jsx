@@ -1,5 +1,5 @@
 import React from "react";
-import { DataTable } from "../components/Admin/DataTable";
+import { PropertyTable } from "../components/Admin/PropertyTable";
 import { StatsCard } from "../components/Admin/StatsCard";
 import { PropertyModel } from "../components/Admin/PropertyModal";
 
@@ -13,7 +13,7 @@ const Admin_property = () => {
           <StatsCard />
         </div>
       </div>
-      <DataTable />
+      <PropertyTable />
       <PropertyModel />
     </div>
   );
