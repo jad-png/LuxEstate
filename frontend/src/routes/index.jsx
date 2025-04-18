@@ -10,6 +10,7 @@ import Post from "../pages/Post";
 import ContactRequest from "../pages/ContactRequest";
 import Admin_property from "../pages/Admin_property";
 import Admin_features from "../pages/Admin_features";
+import AdminBlog from '../pages/Admin_blog';
 
 const routes = [
   { path: "/", component: Home, layout: MainLayout },
@@ -21,6 +22,7 @@ const routes = [
   { path: "/contact-request", component: ContactRequest, layout: MainLayout },
   { path: "/Admin/properties", component: Admin_property, layout: AdminLayout },
   { path: "/Admin/features", component: Admin_features, layout: AdminLayout },
+  { path: "/Admin/blog", component: AdminBlog, layout: AdminLayout },
 ];
 
 export default routes;
