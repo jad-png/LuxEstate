@@ -15,29 +15,37 @@ export function Sidebar() {
         <ul className="space-y-2">
           <li>
             <a
-              href="#"
+              to="#"
               className="flex items-center p-2 bg-[#a27d56] text-white rounded-lg manrope"
             >
-              <span className="mr-3">🏠</span> Dashboard
+              <span className="mr-3"></span> Properties
             </a>
           </li>
           <li>
             <a
-              href="#"
+              to="#"
               className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
             >
-              <span className="mr-3">📊</span> Analytics
+              <span className="mr-3"></span> Features
             </a>
           </li>
           <li>
             <a
-              href="#"
+              to="#"
               className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
             >
-              <span className="mr-3">🏢</span> Properties
+              <span className="mr-3"></span> Blog Posts
             </a>
           </li>
           <li>
+            <a
+              to="#"
+              className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
+            >
+              <span className="mr-3"></span> Send Notifications
+            </a>
+          </li>
+          {/* <li>
             <a
               href="#"
               className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
@@ -52,7 +60,7 @@ export function Sidebar() {
             >
               <span className="mr-3">⚙️</span> Settings
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </aside>

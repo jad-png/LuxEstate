@@ -3,7 +3,7 @@ import { DataTable } from "../components/Admin/DataTable";
 import { StatsCard } from "../components/Admin/StatsCard";
 import { PropertyModel } from "../components/Admin/PropertyModal";
 
-const Admin = () => {
+const Admin_property = () => {
   return (
     <div className="">
       <div className="md:flex md:justify-center md:py-2">
@@ -19,4 +19,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Admin_property;

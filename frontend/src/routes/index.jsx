@@ -8,7 +8,8 @@ import Apartment from "../pages/Apartment";
 import Blog from "../pages/Blog";
 import Post from "../pages/Post";
 import ContactRequest from "../pages/ContactRequest";
-import Admin from "../pages/Admin";
+import Admin_property from "../pages/Admin_property";
+import Admin_features from "../pages/Admin_features";
 
 const routes = [
   { path: "/", component: Home, layout: MainLayout },
@@ -18,7 +19,8 @@ const routes = [
   { path: "/Blog", component: Blog, layout: MainLayout },
   { path: "/BlogPost", component: Post, layout: MainLayout },
   { path: "/contact-request", component: ContactRequest, layout: MainLayout },
-  { path: "/Admin", component: Admin, layout: AdminLayout },
+  { path: "/Admin/properties", component: Admin_property, layout: AdminLayout },
+  { path: "/Admin/features", component: Admin_features, layout: AdminLayout },
 ];
 
 export default routes;

@@ -17,7 +17,7 @@ Route::prefix('auth')->group(function () {
 });
 
 // Property CRUD Routes
-Route::prefix('properties')->group(function () {
+Route::middleware('jwt')->prefix('properties')->group(function () {
     Route::get('/', [PropertyController::class, 'index']);          
     Route::get('/{id}', [PropertyController::class, 'show']);
     Route::post('/', [PropertyController::class, 'store']);
@@ -31,7 +31,7 @@ Route::prefix('properties')->group(function () {
 });
 
 // Feature routes
-Route::prefix('features')->group(function () {
+Route::middleware('jwt')->prefix('features')->group(function () {
     Route::get('/', [FeatureController::class, 'index']);
     Route::post('/', [FeatureController::class, 'store']);
     Route::put('/{id}', [FeatureController::class, 'update']);
