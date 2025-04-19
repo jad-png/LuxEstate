@@ -1,65 +1,55 @@
 import React from "react";
+import { Link } from "react-router";
 
 export function Sidebar() {
   return (
-    <aside className="w-64 bg-white h-screen fixed top-0 left-0 border-r border-[#e5e5e5] p-6">
+    <aside className="w-64 bg-white h-screen fixed top-0 left-0 border-r border-[#e5e5e5] pt-6">
       <div className="flex items-center mb-8">
-        <div className="h-10 w-10 rounded-full bg-[#f8f3e9] flex items-center justify-center mr-2">
-          <div className="h-6 w-6 rounded-full bg-[#a27d56]"></div>
-        </div>
-        <span className="text-xl font-bold dm-serif text-[#262626]">
+        <span className="text-xl p-[22px] font-bold dm-serif text-center text-[#262626] w-full relative bottom-6">
           LUXTOWER
         </span>
       </div>
       <nav>
         <ul className="space-y-2">
           <li>
-            <a
-              to="#"
-              className="flex items-center p-2 bg-[#a27d56] text-white rounded-lg manrope"
+            <Link
+              to="/Admin/properties"
+              className="flex items-center py-2 px-4 bg-[#a27d56] text-white"
             >
-              <span className="mr-3"></span> Properties
-            </a>
+              Properties
+            </Link>
           </li>
           <li>
-            <a
-              to="#"
-              className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
+            <Link
+              to="/Admin/features"
+              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9]"
             >
-              <span className="mr-3"></span> Features
-            </a>
+              Features
+            </Link>
           </li>
           <li>
-            <a
-              to="#"
-              className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
+            <Link
+              to="/Admin/blog"
+              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9]"
             >
-              <span className="mr-3"></span> Blog Posts
-            </a>
+              Blog Posts
+            </Link>
           </li>
           <li>
-            <a
-              to="#"
-              className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
+            <Link
+              to="/Admin/notification"
+              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9]"
             >
-              <span className="mr-3"></span> Send Notifications
-            </a>
+              Send Notifications
+            </Link>
           </li>
           {/* <li>
-            <a
+            <Link
               href="#"
-              className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
+              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9"
             >
-              <span className="mr-3">👥</span> Users
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center p-2 text-[#666666] hover:bg-[#f8f3e9] rounded-lg manrope"
-            >
-              <span className="mr-3">⚙️</span> Settings
-            </a>
+            Users
+            </Link>
           </li> */}
         </ul>
       </nav>
