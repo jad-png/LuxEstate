@@ -1,6 +1,15 @@
 import React from "react";
 import { Link } from "react-router";
-import { MapPin, Phone, Facebook, Twitter, Instagram } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Facebook,
+  Twitter,
+  Instagram,
+  User,
+} from "lucide-react";
+import { SearchBar } from "./Searchbar";
+import { UserDropDown } from "./UserDropdown";
 
 export function Header() {
   return (
@@ -78,11 +87,19 @@ export function Header() {
             Contact
           </Link>
         </nav>
-
         {/* CTA Button */}
         <button className="bg-[#e9a87c] hover:bg-[#d99b70] text-white px-4 py-2 text-sm font-medium transition-colors">
           SCHEDULE A VISIT
         </button>
+        <UserDropDown />
+      </div>
+
+      <div className="w-full bg-[#eae8e522] text-black px-4 py-2">
+        <div className="container flex justify-center items-center">
+          <div className="flex flex-grow justify-end ">
+            <SearchBar />
+          </div>
+        </div>
       </div>
     </header>
   );

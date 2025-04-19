@@ -12,10 +12,14 @@ import Admin_property from "../pages/Admin_property";
 import Admin_features from "../pages/Admin_features";
 import AdminBlog from '../pages/Admin_blog';
 import AdminNotifcation from '../pages/Admin_notification';
+import Favorites from "../pages/Favorites";
+import Profile from "../pages/Profile"
+import ProfileLayout from "../layouts/ProfileLayout";
 
 const routes = [
   { path: "/", component: Home, layout: MainLayout },
   { path: "/building", component: Building, layout: MainLayout },
+  { path: "/favorites", component: Favorites, layout: MainLayout },
   { path: "/availability", component: Availability, layout: MainLayout },
   { path: "/apartment", component: Apartment, layout: MainLayout },
   { path: "/Blog", component: Blog, layout: MainLayout },
@@ -25,6 +29,7 @@ const routes = [
   { path: "/Admin/features", component: Admin_features, layout: AdminLayout },
   { path: "/Admin/blog", component: AdminBlog, layout: AdminLayout },
   { path: "/Admin/notification", component: AdminNotifcation, layout: AdminLayout },
+  { path: "/my-profile", component: Profile, layout: ProfileLayout}
 ];
 
 export default routes;

@@ -49,8 +49,8 @@ function ContactRequest() {
                 </a>
               </div>
             </div>
-            <div className="mt-8 p-6 bg-[#f8f3e9] rounded-lg flex items-center">
-              <div className="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center text-[#666666] manrope text-xl">
+            <div className="mt-8 p-6 bg-[#f8f3e9] flex items-center">
+              <div className="w-12 h-12 bg-pink-200 flex items-center justify-center text-[#666666] manrope text-xl">
                 A
               </div>
               <div className="ml-4">
@@ -82,20 +82,20 @@ function ContactRequest() {
               <input
                 type="text"
                 placeholder="Name *"
-                className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
+                className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
               />
               <input
                 type="email"
                 placeholder="E-mail *"
-                className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
+                className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
               />
               <textarea
                 placeholder="Message"
                 rows="5"
-                className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56] resize-none"
+                className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56] resize-none"
               />
               <button
-                className="px-6 py-2 bg-[#a27d56] text-white manrope rounded-lg hover:bg-[#8b6a47]"
+                className="px-6 py-2 bg-[#a27d56] text-white manrope hover:bg-[#8b6a47]"
               >
                 Submit
               </button>
