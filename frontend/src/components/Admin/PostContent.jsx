@@ -1,6 +1,26 @@
 import React from "react";
 
 export function PostContent({ isOpen, onClose, post }) {
+    const sampleComments = [
+        {
+          id: 1,
+          user: "John Doe",
+          content: "Great post! Very informative.",
+          timestamp: "2025-04-19 10:00 AM",
+        },
+        {
+          id: 2,
+          user: "Jane Smith",
+          content: "Inappropriate comment here.",
+          timestamp: "2025-04-19 11:30 AM",
+        },
+      ];
+
+      const sampleReactions = {
+        likes: 15,
+        dislikes: 3,
+      };
+
   if (!isOpen) return null;
 
   return (
@@ -39,6 +59,59 @@ export function PostContent({ isOpen, onClose, post }) {
               Content
             </label>
             <p className="text-[#666666] manrope">{post.content}</p>
+          </div>
+          {/* Comments and Reactions Section */}
+          <div>
+            <label className="block text-sm text-[#666666] manrope font-semibold mb-2">
+              Comments and Reactions
+            </label>
+            <div className="space-y-3">
+              <div className="border-t border-[#e5e5e5] pt-3">
+                <p className="text-sm text-[#666666] manrope font-semibold">
+                  Reactions
+                </p>
+                <div className="flex items-center gap-4 mt-1">
+                  <span className="text-[#666666] manrope">
+                    👍 Likes: {sampleReactions.likes}
+                  </span>
+                  <span className="text-[#666666] manrope">
+                    👎 Dislikes: {sampleReactions.dislikes}
+                  </span>
+                </div>
+              </div>
+              <div className="border-t border-[#e5e5e5] pt-3">
+                <p className="text-sm text-[#666666] manrope font-semibold">
+                  Comments
+                </p>
+                {sampleComments.length > 0 ? (
+                  sampleComments.map((comment) => (
+                    <div
+                      key={comment.id}
+                      className="flex items-start justify-between py-2 border-b border-[#e5e5e5]"
+                    >
+                      <div>
+                        <p className="text-[#666666] manrope font-medium">
+                          {comment.user}
+                        </p>
+                        <p className="text-[#666666] manrope">
+                          {comment.content}
+                        </p>
+                        <p className="text-xs text-[#666666] manrope">
+                          {comment.timestamp}
+                        </p>
+                      </div>
+                      <button
+                        className="text-red-600 hover:text-red-800 manrope text-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-[#666666] manrope">No comments yet.</p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
         <div className="mt-6 flex justify-end space-x-4">
