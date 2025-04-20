@@ -2,6 +2,7 @@ import { Component } from "react";
 import MainLayout from "../layouts/MainLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
+import AgentLayout from "../layouts/AgentLayout";
 import Building from "../pages/Building";
 import Home from "../pages/Home";
 import Availability from "../pages/Availability";
@@ -19,6 +20,7 @@ import ProfileLayout from "../layouts/ProfileLayout";
 import Properties from "../pages/Properties";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import ClientCommunicationPage from "../pages/Agent/ClientCommunicationPage";
 
 const routes = [
   { path: "/login", component: Login, layout: AuthLayout},
@@ -37,6 +39,7 @@ const routes = [
   { path: "/Admin/notification", component: AdminNotifcation, layout: AdminLayout },
   { path: "/my-profile", component: Profile, layout: ProfileLayout},
   { path: "/properties", component: Properties, layout: MainLayout},
+  { path: "/agents/clients", component: ClientCommunicationPage, layout: AgentLayout},
 ];
 
 export default routes;
