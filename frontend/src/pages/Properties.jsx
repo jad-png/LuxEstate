@@ -1,15 +1,7 @@
 import React from "react";
-import { PropertyCard } from "../components/favorites/PropertyCard";
+import { PropertyCard } from "../components/Properties/PropertyCard";
 
 export function Properties() {
-  const [filterOptions, setFilterOptions] = React.useState({
-    location: "all",
-    priceRange: "all",
-    propertyType: "all",
-  });
-  const [sortOption, setSortOption] = React.useState("price-asc");
-
-  // Static property data
   const properties = [
     {
       name: "Manhattan Penthouse",

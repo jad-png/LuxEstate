@@ -1,6 +1,7 @@
 import { Component } from "react";
 import MainLayout from "../layouts/MainLayout";
 import AdminLayout from "../layouts/AdminLayout";
+import AuthLayout from "../layouts/AuthLayout";
 import Building from "../pages/Building";
 import Home from "../pages/Home";
 import Availability from "../pages/Availability";
@@ -16,8 +17,12 @@ import Favorites from "../pages/Favorites";
 import Profile from "../pages/Profile"
 import ProfileLayout from "../layouts/ProfileLayout";
 import Properties from "../pages/Properties";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
 
 const routes = [
+  { path: "/login", component: Login, layout: AuthLayout},
+  { path: "/register", component: Register, layout: AuthLayout},
   { path: "/", component: Home, layout: MainLayout },
   { path: "/building", component: Building, layout: MainLayout },
   { path: "/favorites", component: Favorites, layout: MainLayout },
