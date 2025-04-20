@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router";
 
 export function UserDropDown() {
   const user = {
@@ -28,18 +29,26 @@ export function UserDropDown() {
             <p className="text-[#262626] manrope font-semibold">{user.name}</p>
           </div>
           <div className="py-1">
-            <a
-              href="/favorites"
+            <Link
+              to="/favorites"
               className="block px-4 py-2 text-[#666666] manrope hover:bg-[#f8f3e9] hover:text-[#a27d56]"
             >
               Favorites
-            </a>
-            <a
-              href="/profile"
+            </Link>
+            <Link
+              to="/my-profile"
               className="block px-4 py-2 text-[#666666] manrope hover:bg-[#f8f3e9] hover:text-[#a27d56]"
             >
               My Profile
-            </a>
+            </Link>
+          </div>
+          <div className="border-t-1 ">
+            <Link
+              to="#"
+              className="block border-t px-4 py-2 text-[#666666] manrope hover:bg-[#f8f3e9] hover:text-[#a27d56]"
+            >
+              Logout
+            </Link>
           </div>
         </div>
       )}

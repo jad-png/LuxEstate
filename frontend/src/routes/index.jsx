@@ -15,6 +15,7 @@ import AdminNotifcation from '../pages/Admin_notification';
 import Favorites from "../pages/Favorites";
 import Profile from "../pages/Profile"
 import ProfileLayout from "../layouts/ProfileLayout";
+import Properties from "../pages/Properties";
 
 const routes = [
   { path: "/", component: Home, layout: MainLayout },
@@ -29,7 +30,8 @@ const routes = [
   { path: "/Admin/features", component: Admin_features, layout: AdminLayout },
   { path: "/Admin/blog", component: AdminBlog, layout: AdminLayout },
   { path: "/Admin/notification", component: AdminNotifcation, layout: AdminLayout },
-  { path: "/my-profile", component: Profile, layout: ProfileLayout}
+  { path: "/my-profile", component: Profile, layout: ProfileLayout},
+  { path: "/properties", component: Properties, layout: MainLayout},
 ];
 
 export default routes;
