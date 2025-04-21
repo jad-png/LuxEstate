@@ -2,7 +2,6 @@ import React from "react";
 import { InquiryRow } from "../../components/Agent/InquiryRow";
 
 export function ClientCommunicationPage() {
-  // Static data for client inquiries
   const inquiries = [
     {
       clientName: "Alice Smith",
@@ -20,7 +19,6 @@ export function ClientCommunicationPage() {
     },
   ];
 
-  // Static list of clients for the message form
   const clients = [
     { name: "Alice Smith", email: "alice.smith@email.com" },
     { name: "Bob Johnson", email: "bob.johnson@email.com" },
@@ -33,7 +31,6 @@ export function ClientCommunicationPage() {
         Client Communication
       </h1>
 
-      {/* Client Inquiries Section */}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-[#e5e5e5] mb-6">
         <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
           Client Inquiries
@@ -67,7 +64,6 @@ export function ClientCommunicationPage() {
         )}
       </div>
 
-      {/* Send Notification/Message Section */}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-[#e5e5e5]">
         <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
           Send Notification/Message

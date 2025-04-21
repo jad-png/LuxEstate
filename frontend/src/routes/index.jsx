@@ -21,6 +21,8 @@ import Properties from "../pages/Properties";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ClientCommunicationPage from "../pages/Agent/ClientCommunicationPage";
+import { ManageAppointmentsPage } from "../pages/Agent/ManageAppointments";
+
 
 const routes = [
   { path: "/login", component: Login, layout: AuthLayout},
@@ -40,6 +42,7 @@ const routes = [
   { path: "/my-profile", component: Profile, layout: ProfileLayout},
   { path: "/properties", component: Properties, layout: MainLayout},
   { path: "/agents/clients", component: ClientCommunicationPage, layout: AgentLayout},
+  { path: "/agents/appointments", component: ManageAppointmentsPage, layout: AgentLayout},
 ];
 
 export default routes;
