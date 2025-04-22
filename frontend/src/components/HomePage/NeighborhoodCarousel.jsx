@@ -23,11 +23,11 @@ export function NeighborhoodCarousel() {
       {/* Image Carousel */}
       <div className="relative">
         {/* Carousel Images */}
-        <div className="flex overflow-hidden">
+        <div className="flex overflow-hidden gap-2">
           {/* First Image - City Avenue with Trees */}
           <div className="w-1/3 flex-shrink-0">
             <img 
-              src="/api/placeholder/400/250" 
+              src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2024/08/neighborhood-3.jpg" 
               alt="City avenue with tall buildings and trees" 
               className="w-full h-64 object-cover"
             />
@@ -36,7 +36,7 @@ export function NeighborhoodCarousel() {
           {/* Second Image - Historic Corner Building */}
           <div className="w-1/3 flex-shrink-0">
             <img 
-              src="/api/placeholder/400/250" 
+              src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2024/08/neighborhood-1.jpg" 
               alt="Historic corner building in neighborhood" 
               className="w-full h-64 object-cover"
             />
@@ -45,7 +45,7 @@ export function NeighborhoodCarousel() {
           {/* Third Image - Tree-lined Street with Tram */}
           <div className="w-1/3 flex-shrink-0">
             <img 
-              src="/api/placeholder/400/250" 
+              src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2024/08/neighborhood-2.jpg" 
               alt="Tree-lined street with tram in autumn" 
               className="w-full h-64 object-cover"
             />

@@ -27,30 +27,21 @@ export function IntroSection() {
       </div>
       
       {/* Right Images Grid */}
-      <div className="w-full md:w-3/5 grid grid-cols-2 grid-rows-2 gap-2 p-2">
+      <div className="w-[500px] h-[600px] md:w-3/5 grid grid-cols-2 grid-rows-2 gap-2 p-2">
         {/* Top Left Image - Building Exterior */}
         <div className="col-span-1 row-span-2 bg-amber-500">
           <img 
-            src="/api/placeholder/300/600" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_6.jpg" 
             alt="Modern luxury building exterior" 
             className="w-full h-full object-cover"
           />
         </div>
         
         {/* Top Right Image - Building Detail */}
-        <div className="col-span-1 row-span-1 bg-neutral-200">
+        <div className="col-span-1 row-span-2 bg-neutral-200">
           <img 
-            src="/api/placeholder/300/250" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2021/12/h1-banner10.jpg" 
             alt="Building architectural detail" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
-        {/* Bottom Right Image - City View */}
-        <div className="col-span-1 row-span-1 bg-neutral-700">
-          <img 
-            src="/api/placeholder/300/250" 
-            alt="City skyline view from building" 
             className="w-full h-full object-cover"
           />
         </div>

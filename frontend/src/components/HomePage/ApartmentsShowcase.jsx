@@ -45,7 +45,7 @@ export function ApartmentsShowcase() {
               {/* Apartment Image */}
               <div className="h-56 md:h-64 mb-4">
                 <img 
-               
+                  src='https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/apartment-5-820x580.jpg'
                   className="w-full h-full object-cover"
                 />
               </div>

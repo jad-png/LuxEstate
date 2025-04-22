@@ -6,9 +6,9 @@ export function TestimonialCityView() {
       {/* Left Side - City View Image */}
       <div className="w-full md:w-1/2 h-72 md:h-auth">
         <img 
-          src="/api/placeholder/600/500" 
+          src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2021/12/h1-banner8.jpg" 
           alt="Luxury penthouse terrace with city skyline view" 
-          className="w-full h-full object-cover"
+          className="w-full h-[500px] object-cover"
         />
       </div>
       

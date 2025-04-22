@@ -6,7 +6,7 @@ export function ResidenceKitchenSection() {
       {/* Left Image - Living Room */}
       <div className="w-full md:w-3/5 h-96 md:h-auto relative">
         <img 
-          src="/api/placeholder/800/600" 
+          src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/apartment-5.jpg" 
           alt="Luxury condominium living room with panoramic city views" 
           className="w-full h-full object-cover"
         />
@@ -24,7 +24,7 @@ export function ResidenceKitchenSection() {
         </div>
 
         {/* Kitchen Feature Section */}
-        <div className="flex flex-col bg-neutral-400">
+        <div className="flex flex-col bg-amber-400">
           <div className="p-6 md:p-8 bg-neutral-400">
             <div className="uppercase text-xs tracking-wider text-neutral-600 mb-2">
               Perfect & Bright
@@ -38,7 +38,7 @@ export function ResidenceKitchenSection() {
           {/* Kitchen Image */}
           <div className="h-48 md:h-56 relative">
             <img 
-              src="/api/placeholder/500/300" 
+              src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/h4-gallery2.jpg " 
               alt="Modern kitchen with wooden cabinetry and floor-to-ceiling windows" 
               className="w-full h-full object-cover"
             />

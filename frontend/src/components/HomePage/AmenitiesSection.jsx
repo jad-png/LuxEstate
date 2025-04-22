@@ -129,7 +129,7 @@ export function AmenitiesSection() {
         className="w-full md:w-1/2 h-64 md:h-auto"
       >
         <img
-          src="/api/placeholder/600/600"
+          src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/apartment-9.jpg"
           alt="Modern luxury common area with wood paneling, dining table and large windows"
           className="w-full h-full object-cover"
         />
