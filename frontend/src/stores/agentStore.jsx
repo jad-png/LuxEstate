@@ -3,13 +3,15 @@ import api from '../services/api';
 
 const useAgentStore = create((set) => ({
     agents: [],
-    loading: false,
     error: null,
     fetchAgents: async () => {
       set({ error: null });
       try {
         const response = await api.get('/agents');
-        set({ agents: response.data, loading: false });
+        const agentsData = Array.isArray(response.data) ? response.data : [];
+ console.log(agentsData);
+ 
+        set({ agents: agentsData});
       } catch (error) {
         set({
           error: error.response?.data?.message || 'Failed to fetch agents',
