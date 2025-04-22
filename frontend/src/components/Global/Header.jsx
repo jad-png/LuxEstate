@@ -11,6 +11,7 @@ import {
 import { SearchBar } from "./Searchbar";
 import { UserDropDown } from "./UserDropdown";
 import { NotificationsDropdown } from "./NotificationDropdown";
+import useAuthStore from "../../stores/authStore";
 
 export function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);

@@ -4,12 +4,13 @@ import usePropertyStore from "../../stores/PropertyStore";
 
 export function MoveInReadyHomes() {
   const { properties, loading, error, fetchProperties } = usePropertyStore();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     fetchProperties();
   }, [fetchProperties]);
 
+  console.log(properties);
   const displayedProperties = properties.slice(0, 5);
 
   const handleViewPlan = (propertyId) => {
@@ -26,10 +27,7 @@ export function MoveInReadyHomes() {
         <h2 className="text-3xl font-medium">Move-In Ready Homes</h2>
       </div>
 
-      {/* Loading and Error States */}
-      {loading && (
-        <p className="text-center text-gray-600">Loading properties...</p>
-      )}
+      {/* Error States */}
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {/* Table */}
@@ -37,7 +35,7 @@ export function MoveInReadyHomes() {
         <table className="w-full border-collapse">
           {/* Table Header */}
           <thead>
-            <tr className="bg-amber-600 text-white">
+            <tr className="bg-amber-600 text-white w-full">
               <th className="py-3 px-4 text-left font-medium">Title</th>
               <th className="py-3 px-4 text-center font-medium">Location</th>
               <th className="py-3 px-4 text-center font-medium">Area</th>
@@ -58,10 +56,7 @@ export function MoveInReadyHomes() {
                     <td className="py-4 px-4 text-center text-gray-600">{property.bedrooms || 'N/A'}</td>
                     <td className="py-4 px-4 text-center text-gray-600">{property.price || 'N/A'}</td>
                     <td className="py-4 px-4 text-center text-gray-600">
-                      {property.sale_price ? `$${property.sale_price.toLocaleString()}` : 'N/A'}
-                    </td>
-                    <td className="py-4 px-4 text-center text-gray-600">
-                      {property.rent_price ? `$${property.rent_price.toLocaleString()}` : 'N/A'}
+                      {property.sale_price ? `$${property.price.toLocaleString()}` : 'N/A'}
                     </td>
                     <td className="py-4 px-4 text-center">
                       <button

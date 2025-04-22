@@ -9,7 +9,7 @@ const usePropertyStore = create ((set) => ({
         set ({ loading: true, error: null });
         try {
             const response = await api.get('/properties');
-            set ({ properties: response.data, error: null });
+            set ({ properties: response.data.properties, error: null });
         } catch (error) {
             set({
                 error: error.response?.data?.message || 'Failed to fetch properties',

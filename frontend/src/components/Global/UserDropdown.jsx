@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuthStore from "../../stores/authStore";
 
 export function UserDropDown() {
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate(); 
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
   const user = {
     name: "John Doe",
     profilePhoto: "https://via.placeholder.com/40", // Placeholder for profile photo
@@ -43,12 +51,11 @@ export function UserDropDown() {
             </Link>
           </div>
           <div className="border-t-1 ">
-            <Link
-              to="#"
-              className="block border-t px-4 py-2 text-[#666666] manrope hover:bg-[#f8f3e9] hover:text-[#a27d56]"
-            >
-              Logout
-            </Link>
+            <form 
+              onSubmit={handleLogout}
+              className="block border-t px-4 py-2 text-[#666666] manrope hover:bg-[#f8f3e9] hover:text-[#a27d56]">
+              <button type="submit">Logout</button>
+            </form>
           </div>
         </div>
       )}
