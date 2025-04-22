@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
+import usePropertyStore from "../../stores/PropertyStore";
 
 export function MoveInReadyHomes() {
+  const { properties, loading, error, fetchProperties } = usePropertyStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchProperties();
+  }, [fetchProperties]);
+
+  const displayedProperties = properties.slice(0, 5);
+
+  const handleViewPlan = (propertyId) => {
+    // navigate('');
+    console.log("todo: navigate to property related to it");
+  };
   return (
     <div className="max-w-6xl mx-auto p-4 bg-gray-50">
       {/* Header */}
       <div className="text-center mb-8">
-        <p className="text-amber-700 text-sm uppercase tracking-wider mb-1">Availability</p>
+        <p className="text-amber-700 text-sm uppercase tracking-wider mb-1">
+          Availability
+        </p>
         <h2 className="text-3xl font-medium">Move-In Ready Homes</h2>
       </div>
+
+      {/* Loading and Error States */}
+      {loading && (
+        <p className="text-center text-gray-600">Loading properties...</p>
+      )}
+      {error && <p className="text-center text-red-500">{error}</p>}
 
       {/* Table */}
       <div className="overflow-x-auto">
@@ -15,29 +38,48 @@ export function MoveInReadyHomes() {
           {/* Table Header */}
           <thead>
             <tr className="bg-amber-600 text-white">
-              <th className="py-3 px-4 text-left font-medium">RESIDENCE</th>
+              <th className="py-3 px-4 text-left font-medium">Title</th>
+              <th className="py-3 px-4 text-center font-medium">Location</th>
+              <th className="py-3 px-4 text-center font-medium">Area</th>
               <th className="py-3 px-4 text-center font-medium">BED/BATH</th>
-              <th className="py-3 px-4 text-center font-medium">SQ. FT.</th>
               <th className="py-3 px-4 text-center font-medium">SALE PRICE</th>
-              <th className="py-3 px-4 text-center font-medium">RENT PRICE</th>
-              <th className="py-3 px-4 text-center font-medium">FLOOR PLAN</th>
+              <th className="py-3 px-4 text-center font-medium">More Informations</th>
             </tr>
           </thead>
-          
+
           {/* Table Body */}
           <tbody>
-              <tr className="border-b border-gray-200 hover:bg-gray-100">
-                <td className="py-4 px-4 text-gray-800 font-medium">1</td>
-                <td className="py-4 px-4 text-center text-gray-600">1</td>
-                <td className="py-4 px-4 text-center text-gray-600">1</td>
-                <td className="py-4 px-4 text-center text-gray-600">1</td>
-                <td className="py-4 px-4 text-center text-gray-600">1</td>
-                <td className="py-4 px-4 text-center">
-                  <button className="bg-white hover:bg-gray-100 text-gray-800 py-1 px-4 border border-gray-200 rounded uppercase text-xs tracking-wider">
-                    View Now
-                  </button>
-                </td>
-              </tr>
+          {displayedProperties.length > 0 ? (
+                displayedProperties.map((property) => (
+                  <tr key={property.id} className="border-b border-gray-200 hover:bg-gray-100">
+                    <td className="py-4 px-4 text-gray-800 font-medium">{property.title || 'N/A'}</td>
+                    <td className="py-4 px-4 text-center text-gray-600">{property.location || 'N/A'}</td>
+                    <td className="py-4 px-4 text-center text-gray-600">{property.area || 'N/A'}</td>
+                    <td className="py-4 px-4 text-center text-gray-600">{property.bedrooms || 'N/A'}</td>
+                    <td className="py-4 px-4 text-center text-gray-600">{property.price || 'N/A'}</td>
+                    <td className="py-4 px-4 text-center text-gray-600">
+                      {property.sale_price ? `$${property.sale_price.toLocaleString()}` : 'N/A'}
+                    </td>
+                    <td className="py-4 px-4 text-center text-gray-600">
+                      {property.rent_price ? `$${property.rent_price.toLocaleString()}` : 'N/A'}
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <button
+                        onClick={() => handleViewPlan(property.id)}
+                        className="bg-white hover:bg-gray-100 text-gray-800 py-1 px-4 border border-gray-200 rounded uppercase text-xs tracking-wider"
+                      >
+                        View Now
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="py-4 px-4 text-center text-gray-600">
+                    No properties available.
+                  </td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

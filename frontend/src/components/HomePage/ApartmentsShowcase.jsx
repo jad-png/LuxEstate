@@ -26,6 +26,7 @@ export function ApartmentsShowcase() {
 
   return (
     <div className="bg-white py-16 px-4 relative overflow-hidden">
+      
       {/* Background Pattern Elements - Subtle Luxury Icons */}
       <div className="absolute inset-0 z-0 opacity-5">
         <div className="absolute -top-20 -left-20 w-72 h-72 border-8 border-gray-200 rounded-full"></div>
