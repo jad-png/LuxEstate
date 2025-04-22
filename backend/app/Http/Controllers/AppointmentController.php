@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAppointmentRequest;
 use App\Http\Requests\GetAppointmentRequest;
 use App\Models\Appointment;
+use App\Models\User;
 use App\Services\Interfaces\IAppointmentsService;
 use AppointmentsService;
 use Illuminate\Http\JsonResponse;
@@ -59,4 +60,8 @@ class AppointmentController extends Controller
         ]);
    }
 
+   public function getAgents () {
+        $agents = User::where('role_id', 2)->get();
+        return response()->json($agents);
+   }
 }

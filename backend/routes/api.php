@@ -54,7 +54,7 @@ Route::middleware('jwt')->group(function () {
 
 // Appointment routes
 Route::middleware('jwt')->prefix('appointments')->group(function () {
-    Route::post('/', [AppointmentController::class, 'create']);
+    Route::post('/', action: [AppointmentController::class, 'create']);
     Route::get('/mine', [AppointmentController::class, 'getAppointments']);
 });
 
@@ -84,3 +84,5 @@ Route::middleware('jwt')->prefix('notifications')->group(function () {
     Route::get('/', [NotificationController::class, 'index']);
     Route::patch('/{notification_id}/read', [NotificationController::class, 'markAsRead']);
 });
+
+Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgents']);
