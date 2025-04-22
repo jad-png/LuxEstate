@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import useAuthStore from "../../stores/authStore";
+import { useNavigate } from "react-router";
 
 export function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const login = useAuthStore((state) => state.login);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setError(null);
+      await login(email, password);
+      navigate("/");
+    } catch (error) {
+      setError(
+        error.response?.data?.message || "Login failed. Please try again."
+      );
+    }
+  };
   return (
     <div className="min-h-screen bg-[#f8f3e9] flex items-center justify-center px-4">
-      <div className="bg-white p-8 rounded-lg shadow-sm border border-[#e5e5e5] max-w-md w-full">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-sm border border-[#e5e5e5] max-w-md w-full">
         <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-6 text-center">
           Login to Luxtower
         </h2>
@@ -14,6 +34,8 @@ export function Login() {
             </label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
             />
@@ -24,11 +46,13 @@ export function Login() {
             </label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
             />
           </div>
-          <button className="w-full px-4 py-3 bg-[#a27d56] text-white manrope rounded-lg hover:bg-[#8b6a47]">
+          <button type="submit" className="w-full px-4 py-3 bg-[#a27d56] text-white manrope rounded-lg hover:bg-[#8b6a47]">
             Login
           </button>
         </div>
@@ -38,9 +62,9 @@ export function Login() {
             Register here
           </a>
         </p>
-      </div>
+      </form>
     </div>
   );
-};
+}
 
 export default Login;
