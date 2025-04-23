@@ -21,7 +21,7 @@ class PropertyService implements IPropertyService
      */
     public function all(): Collection
     {
-        return Property::with(['images', 'videos', 'features'])->get();
+        return Property::with(['images', 'videos', 'features', 'category'])->get();
     }
 
     /**
@@ -34,7 +34,7 @@ class PropertyService implements IPropertyService
     {
         // dd('hello');
 
-        return Property::with(['images', 'videos', 'features'])->findOrFail($id);
+        return Property::with(['images', 'videos', 'features', 'category'])->findOrFail($id);
     }
 
     /**

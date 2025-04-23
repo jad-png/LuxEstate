@@ -79,7 +79,7 @@ class PropertyController extends Controller
 
         return response()->json([
             'message' => 'Property created successfully',
-            'property' => $property->load(['images', 'videos', 'features']),
+            'property' => $property->load(['images', 'videos', 'features', 'category']),
         ], 201);
     }
 
@@ -165,8 +165,6 @@ class PropertyController extends Controller
      */
     public function attachFeatures(int $id, Request $request): JsonResponse
     {
-        // TODO: create a request class to validate the features
-        // $result = $request->validate([]);
         $features = $this->propertyService->attachFeatures($id, $request->input('features'));
         return response()->json([
             'message' => 'Features attached successfully',

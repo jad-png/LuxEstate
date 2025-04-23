@@ -14,7 +14,8 @@ class Property extends Model
         'bedrooms', 
         'area',
         'status',
-        'admin_id'
+        'admin_id',
+        'category_id'
     ];
 
     public function images()
@@ -36,7 +37,7 @@ class Property extends Model
     public function category() {
         $this->belongsTo(Category::class);
     }
-    
+
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id', 'id');

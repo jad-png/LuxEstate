@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class CreatePropertyRequest extends FormRequest
@@ -12,7 +13,7 @@ class CreatePropertyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()->isAdmin;
     }
 
     /**
@@ -37,6 +38,7 @@ class CreatePropertyRequest extends FormRequest
             "video_path.*" => 'nullable|mimes:mp4,mov,avi,wmv|max:20480',
             "feature_ids" => 'nullable|array',
             "feature_ids.*" => 'nullable|exists:property_features,id',
+            "category_id" => "required|exists:categories,id"
         ];
     }
 
