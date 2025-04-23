@@ -13,7 +13,7 @@ class CreatePropertyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->isAdmin();
+        return true;
     }
 
     /**

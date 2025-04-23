@@ -21,7 +21,7 @@ class PropertyService implements IPropertyService
      */
     public function all(): Collection
     {
-        return Property::with(['images', 'videos', 'features', 'category'])->get();
+        return Property::with(['images', 'videos', 'features'])->get();
     }
 
     /**

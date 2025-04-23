@@ -26,7 +26,10 @@ class AddCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|max:55"
+            "name" => "required|string|max:55",
+            "Bathrooms" => "required|integer",
+            "area" => "required|integer",
+            "bedrooms" => "required|integer"
         ];
     }
 

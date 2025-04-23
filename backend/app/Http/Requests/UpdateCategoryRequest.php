@@ -25,7 +25,10 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|max:55"
+            "name" => "sometimes|string|max:55",
+            "Bathrooms" => "sometimes|integer",
+            "area" => "sometimes|integer",
+            "bedrooms" => "sometimes|integer"
         ];
     }
 
