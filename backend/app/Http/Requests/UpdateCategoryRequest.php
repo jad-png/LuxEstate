@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user()->isAdmin();
     }
 
     /**
@@ -22,7 +25,17 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|string|max:55"
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new ValidationException($validator, $response);
     }
 }
