@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
-            // $table->json('data')->nullable();
+        Schema::table('properties', function (Blueprint $table) {
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('notifications', function (Blueprint $table) {
+        Schema::table('properties', function (Blueprint $table) {
             //
         });
     }
