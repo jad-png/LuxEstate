@@ -33,7 +33,10 @@ class Property extends Model
         return $this->belongsToMany(PropertyFeature::class, 'property_feature_property', 'property_id', 'property_feature_id');
     } 
 
-
+    public function category() {
+        $this->belongsTo(Category::class);
+    }
+    
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id', 'id');
