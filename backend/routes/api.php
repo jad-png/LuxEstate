@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
 
 // auth routes
@@ -83,6 +84,15 @@ Route::middleware('jwt')->prefix('notifications')->group(function () {
     Route::post('/', [NotificationController::class, 'store']);
     Route::get('/', [NotificationController::class, 'index']);
     Route::patch('/{notification_id}/read', [NotificationController::class, 'markAsRead']);
+});
+
+// category routes
+Route::middleware('jwt')->prefix('category')->group(function () {
+    Route::get('', action: [CategoryController::class, 'index']);
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('blog.show');;
+    Route::post('', [CategoryController::class, 'store']);
+    Route::put('/{id}', [CategoryController::class, 'update']);
+    Route::delete('/{id}', [CategoryController::class, 'destroy']);
 });
 
 Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgents']);
