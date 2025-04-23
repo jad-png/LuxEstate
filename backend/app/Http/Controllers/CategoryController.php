@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Services\CategoryService;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -30,19 +31,27 @@ class CategoryController extends Controller
 
     public function store(AddCategoryRequest $request)
     {
-        $category = $this->categoryService->create($request->name);
+        $category = $this->categoryService->create($request->validated());
         return response()->json($category);
     }
 
-    public function update($id, UpdateCategoryRequest $request)
+    public function update(AddCategoryRequest $request, $id)
     {
-        $category = $this->categoryService->find($id, $request);
-        return response()->json($category);
+        try {
+            $category = $this->categoryService->update($id, $request->validated());
+            return response()->json(['data' => $category, 'message' => 'Category updated successfully'], 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 
     public function destroy($id)
     {
-        $category = $this->categoryService->find($id);
-        return response()->json($category);
+        try {
+            $this->categoryService->delete($id);
+            return response()->json(['message' => 'Category deleted successfully'], 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
     }
 }

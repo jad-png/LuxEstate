@@ -34,7 +34,7 @@ class CategoryService implements CrudInterface
      * @return Category
      */
     public function create($request) {
-        return Category::create($request->validated());
+        return Category::create($request);
     }
     
     /**
@@ -44,8 +44,8 @@ class CategoryService implements CrudInterface
      * @return Category
      */
     public function update(int $id, $request) {
-        $category = $this->find($id);
-        $category->update($request->validated());
+        $category = Category::findOrFail($id);
+        $category->update($request);
         return $category;
     }   
 
@@ -55,7 +55,7 @@ class CategoryService implements CrudInterface
      * @return bool
      */
     public function delete(int $id) {
-        $category = $this->find($id);
+        $category = Category::findOrFail($id);
         return $category->delete();
     }
 }
