@@ -44,9 +44,18 @@ class CategoryService implements CrudInterface
      * @return Category
      */
     public function update(int $id, $request) {
-        $category = Category::find($id);
+        $category = $this->find($id);
         $category->update($request->validated());
         return $category;
     }   
 
+    /**
+     * Summary of delete
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id) {
+        $category = $this->find($id);
+        return $category->delete();
+    }
 }
