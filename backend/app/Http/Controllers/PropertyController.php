@@ -79,7 +79,7 @@ class PropertyController extends Controller
 
         return response()->json([
             'message' => 'Property created successfully',
-            'property' => $property->load(['images', 'videos', 'features', 'category']),
+            'property' => $property->load(['images', 'videos', 'features']),
         ], 201);
     }
 
