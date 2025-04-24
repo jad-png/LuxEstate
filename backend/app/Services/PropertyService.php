@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\CreatePropertyRequest;
+use App\Http\Requests\PaginationRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Category;
 use App\Models\Property;
@@ -11,6 +12,7 @@ use App\Models\PropertyImage;
 use App\Models\PropertyVideos;
 use App\Services\Interfaces\IPropertyService;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class PropertyService implements IPropertyService
 {
@@ -158,14 +160,15 @@ class PropertyService implements IPropertyService
         $property->features()->sync($featuresIds);
     }
 
-    public function getWithCategory($categoryId)
+    public function getWithCategory($categoryId, Request $request)
     {
+        $perPage = $request->query('per_page', 6);
         // $test = Category::with("properties.images", "properties.videos")->toSql();
         // dd($test);
         // // return 
         $property = Property::with('images', 'videos', 'features', 'category')
             ->where('category_id', $categoryId)
-            ->get();
+            ->paginate($perPage);
 
         return $property;
     }
