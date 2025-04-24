@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import useCategoryStore from '../../stores/categoryStore';
+import { Link } from 'react-router';
 
 export function ApartmentTypesShowcase() {
   const { categories, error, fetchCategories } = useCategoryStore();
@@ -44,7 +45,7 @@ export function ApartmentTypesShowcase() {
             <p className="text-center col-span-3 text-gray-600">No categories available.</p>
           ) : (
             categories.map((category) => (
-              <div key={category.id} className="flex flex-col">
+              <Link to={`/properties-category/${category.id}`} key={category.id} className="flex flex-col">
                 <div className="mb-4">
                   <img
                     src={category.image_url || '/api/placeholder/600/400'}
@@ -77,7 +78,7 @@ export function ApartmentTypesShowcase() {
                     <span className="text-sm">{category.bedrooms} Bedrooms</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>
