@@ -1,48 +1,54 @@
 import React, { useState, useEffect } from "react";
 import useCategoryStore from "../stores/categoryStore";
 import usePropertyStore from "../stores/PropertyStore";
+import { useNavigate, useParams } from "react-router";
 
 export function CategoryProperties() {
-  const {
-    categories,
-    error: categoryError,
-    fetchCategories,
-  } = useCategoryStore();
-  const {
-    propertiesByCategory,
-    fetchCategorizedProperties,
-    error: propertyError,
-  } = usePropertyStore();
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const { categoryId } = useParams();
+  const navigate = useNavigate();
 
+  const { categories, error: categoryError, fetchCategories } = useCategoryStore();
+
+  const { propertiesByCategory, fetchCategorizedProperties, error: propertyError } = usePropertyStore();
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState(categoryId || '');
+
+  // this fetch for categories on mount 
   useEffect(() => {
     if (categories.length === 0) {
       fetchCategories();
     }
   }, [fetchCategories, categories.length]);
 
+  // and fetch on categories based on the selectedCategoryId
   useEffect(() => {
-    if (
-      selectedCategoryId &&
-      !propertiesByCategory[selectedCategoryId] &&
-      !propertyError
-    ) {
+    if (selectedCategoryId && !propertiesByCategory[selectedCategoryId] && !propertyError) {
       fetchCategorizedProperties(selectedCategoryId);
     }
-  }, [
-    selectedCategoryId,
-    propertiesByCategory,
-    propertyError,
-    fetchCategorizedProperties,
-  ]);
-  console.log(propertiesByCategory);
-  
+  }, [selectedCategoryId, propertiesByCategory, propertyError, fetchCategorizedProperties]);
+
+
+  // while this set a default selectedCategoryId whis is the first record in categories
   useEffect(() => {
     if (categories.length > 0 && !selectedCategoryId) {
-      setSelectedCategoryId(categories[0].id.toString());
+        const firstCategory = categories[0].id.toString();
+        setSelectedCategoryId(firstCategory);
+        navigate(`/properties-category/${firstCategory}`, { replace: true });
     }
-  }, [categories, setSelectedCategoryId, selectedCategoryId]);
-// console.log(selelctedC);
+  }, [categories, selectedCategoryId, navigate]);
+
+  // retrieve the categoryId, from URI
+  useEffect(() => {
+    if (categoryId && categoryId !== selectedCategoryId) {
+        setSelectedCategoryId(categoryId);
+    }
+  }, [categoryId, selectedCategoryId]);
+
+  const handleCategorychange = (e) => {
+        const newCategoryId = e.target.value;
+        setSelectedCategoryId(newCategoryId);
+        navigate(`/properties-category/${newCategoryId}`);
+  };
 
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto">
@@ -58,7 +64,7 @@ export function CategoryProperties() {
           <div className="flex justify-center">
             <select
               value={selectedCategoryId}
-              onChange={(e) => setSelectedCategoryId(e.target.value)}
+              onChange={(e) => setSelectedCategoryId(handleCategorychange)}
               className="border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-600"
             >
               {categories.length === 0 ? (

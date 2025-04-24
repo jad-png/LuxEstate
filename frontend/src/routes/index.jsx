@@ -48,7 +48,7 @@ const routes = [
   { path: "/agents/appointments", component: ManageAppointmentsPage, layout: AgentLayout},
   { path: "/appointments", component: Appointment, layout: MainLayout},
   { path: "/create_post", component: PostForm, layout: MainLayout},
-  { path: "/properties-category", component: CategoryProperties, layout: MainLayout},
+  { path: "/properties-category/:categoryId", component: CategoryProperties, layout: MainLayout},
 ];
 
 export default routes;
