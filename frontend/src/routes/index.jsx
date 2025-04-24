@@ -24,6 +24,7 @@ import ClientCommunicationPage from "../pages/Agent/ClientCommunicationPage";
 import { ManageAppointmentsPage } from "../pages/Agent/ManageAppointments";
 import Appointment from "../pages/Appointment";
 import PostForm from "../pages/BlogpostForm";
+import CategoryProperties from "../pages/CategoryProperties";
 
 
 const routes = [
@@ -47,6 +48,7 @@ const routes = [
   { path: "/agents/appointments", component: ManageAppointmentsPage, layout: AgentLayout},
   { path: "/appointments", component: Appointment, layout: MainLayout},
   { path: "/create_post", component: PostForm, layout: MainLayout},
+  { path: "/properties-category", component: CategoryProperties, layout: MainLayout},
 ];
 
 export default routes;
