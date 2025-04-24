@@ -177,7 +177,7 @@ class PropertyController extends Controller
         // dd($categoryId);
         $categorizedProperties = $this->propertyService->getWithCategory( $categoryId, $request);
         return response()->json([
-            'data' => $categorizedProperties,
+            'properties' => $categorizedProperties,
         ]);
     }
 }
