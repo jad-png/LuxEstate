@@ -24,7 +24,7 @@ Route::middleware('jwt')->prefix('properties')->group(function () {
     Route::post('/', [PropertyController::class, 'store']);
     Route::put('/{id}', [PropertyController::class, 'update']);
     Route::delete('/{id}', [PropertyController::class, 'destroy']);
-
+    Route::get('/category/{categoryId}', [PropertyController::class, '']);
     // Additional Routes for Images, Videos, and Features
     Route::post('/{id}/images', [PropertyController::class, 'addImage']);
     Route::post('/{id}/videos', [PropertyController::class, 'addVideo']);

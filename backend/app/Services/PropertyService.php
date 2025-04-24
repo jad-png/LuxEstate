@@ -34,7 +34,7 @@ class PropertyService implements IPropertyService
     {
         // dd('hello');
 
-        return Property::with(['images', 'videos', 'features', 'category'])->findOrFail($id);
+        return Property::with(['images', 'videos', 'features'])->findOrFail($id);
     }
 
     /**
@@ -155,5 +155,11 @@ class PropertyService implements IPropertyService
         // dd($featuresIds);
         $property = Property::findOrFail($propertyId);
         $property->features()->sync($featuresIds);
+    }
+
+    public function getWithCategory($categoryId) {
+        return Property::with('images', 'videos', 'features', 'category')
+            ->where('category_id', $categoryId)
+            ->get();
     }
 }

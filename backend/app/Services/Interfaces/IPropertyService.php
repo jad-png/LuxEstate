@@ -31,4 +31,6 @@ interface IPropertyService extends CrudInterface
     public function addVideo(int $PropertyId, string $videoPath): PropertyVideos;
 
     public function attachFeatures(int $propertyId, array $featuresIds);
+
+    public function getWithCategory($categoryId);
 }

@@ -7,7 +7,6 @@ const Apartment = () => {
         <div>
             <ApartmentsHeader />
             <ApartmentTypesShowcase />
-            <ApartmentTypesShowcase />
         </div>
     )
 }

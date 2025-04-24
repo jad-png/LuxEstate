@@ -171,4 +171,13 @@ class PropertyController extends Controller
             'features' => $features, // for visualization purpose of the attached features
         ], 200);
     }   
+
+    public function getWithCategory($categoryId) 
+    {
+        $categorisedProperties = $this->propertyService->getWithCategory($categoryId);
+
+        return response()->json([
+            'data' => $categorisedProperties,
+        ]);
+    }
 }
