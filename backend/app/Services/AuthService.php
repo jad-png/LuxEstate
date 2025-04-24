@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Services\Interfaces\IAuthService;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Kyojin\JWT\Facades\JWT;
 
@@ -32,12 +33,10 @@ class AuthService implements IAuthService
 
     public function login (LoginRequest $credentials    ) 
     {
-        $user = User::where("email", $credentials[ "email"])->first();
+        $user = User::where("email", $credentials["email"])->first();
         
         if (!$user || !Hash::check($credentials[ "password"], $user->password)) {
-            return response()->json([
-                "message" => "Invalid credentials"
-            ], 401);
+            throw new Exception("Invalid credentials", 401);
 
         }
 

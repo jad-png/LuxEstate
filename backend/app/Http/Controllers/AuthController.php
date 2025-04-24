@@ -34,6 +34,7 @@ class AuthController extends Controller
     public function Login(LoginRequest $request)
     {
         $user = $this->authService->login($request);
+        // dd('hello');
         
         return response()->json([
             'message' => 'User logged in successfully',

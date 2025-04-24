@@ -36,115 +36,51 @@ export function ApartmentTypesShowcase() {
 
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto">
+      {error && <p className="text-center text-red-500">{error}</p>}
+      {!error && (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Luxury Apartments */}
-        <div className="flex flex-col">
-          <div className="mb-4">
-            <img 
-              src="/api/placeholder/600/400" 
-              alt="Luxury Apartments view" 
-              className="w-full h-64 object-cover"
-            />
-          </div>
-          
-          <h3 className="text-xl font-medium text-center mb-6">Luxury Apartments</h3>
-          
-          <div className="grid grid-cols-3 divide-x border-t border-b">
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <BathIcon />
-              </div>
-              <span className="text-sm">2 Bathrooms</span>
-            </div>
-            
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <SquareFootageIcon />
-              </div>
-              <span className="text-sm">124 m²</span>
-            </div>
-            
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <BedIcon />
-              </div>
-              <span className="text-sm">2 Bedrooms</span>
-            </div>
-          </div>
-        </div>
+          {categories.length === 0 ? (
+            <p className="text-center col-span-3 text-gray-600">No categories available.</p>
+          ) : (
+            categories.map((category) => (
+              <div key={category.id} className="flex flex-col">
+                <div className="mb-4">
+                  <img
+                    src={category.image_url || '/api/placeholder/600/400'}
+                    alt={`${category.name} view`}
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
 
-        {/* Studio Apartments */}
-        <div className="flex flex-col">
-          <div className="mb-4">
-            <img 
-              src="/api/placeholder/600/400" 
-              alt="Studio Apartments view" 
-              className="w-full h-64 object-cover"
-            />
-          </div>
-          
-          <h3 className="text-xl font-medium text-center mb-6">Studio Apartments</h3>
-          
-          <div className="grid grid-cols-3 divide-x border-t border-b">
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <BathIcon />
-              </div>
-              <span className="text-sm">2 Bathrooms</span>
-            </div>
-            
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <SquareFootageIcon />
-              </div>
-              <span className="text-sm">189 m²</span>
-            </div>
-            
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <BedIcon />
-              </div>
-              <span className="text-sm">3 Bedrooms</span>
-            </div>
-          </div>
-        </div>
+                <h3 className="text-xl font-medium text-center mb-6">{category.name}</h3>
 
-        {/* Modern Suite */}
-        <div className="flex flex-col">
-          <div className="mb-4">
-            <img 
-              src="/api/placeholder/600/400" 
-              alt="Modern Suite view" 
-              className="w-full h-64 object-cover"
-            />
-          </div>
-          
-          <h3 className="text-xl font-medium text-center mb-6">Modern Suite</h3>
-          
-          <div className="grid grid-cols-3 divide-x border-t border-b">
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <BathIcon />
+                <div className="grid grid-cols-3 divide-x border-t border-b">
+                  <div className="flex flex-col items-center py-4">
+                    <div className="text-amber-600 mb-2">
+                      <BathIcon />
+                    </div>
+                    <span className="text-sm">{category.bathrooms} Bathrooms</span>
+                  </div>
+
+                  <div className="flex flex-col items-center py-4">
+                    <div className="text-amber-600 mb-2">
+                      <SquareFootageIcon />
+                    </div>
+                    <span className="text-sm">{category.square_footage} m²</span>
+                  </div>
+
+                  <div className="flex flex-col items-center py-4">
+                    <div className="text-amber-600 mb-2">
+                      <BedIcon />
+                    </div>
+                    <span className="text-sm">{category.bedrooms} Bedrooms</span>
+                  </div>
+                </div>
               </div>
-              <span className="text-sm">3 Bathrooms</span>
-            </div>
-            
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <SquareFootageIcon />
-              </div>
-              <span className="text-sm">112 m²</span>
-            </div>
-            
-            <div className="flex flex-col items-center py-4">
-              <div className="text-amber-600 mb-2">
-                <BedIcon />
-              </div>
-              <span className="text-sm">3 Bedrooms</span>
-            </div>
-          </div>
+            ))
+          )}
         </div>
-      </div>
+      )}
     </section>
   );
 }
