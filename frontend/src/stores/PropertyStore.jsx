@@ -3,17 +3,36 @@ import api from "../services/api";
 
 const usePropertyStore = create ((set) => ({
     properties: [],
-    loading: false,
+
     error: null,
     fetchProperties: async () => {
-        set ({ loading: true, error: null });
+        set ({ error: null });
         try {
             const response = await api.get('/properties');
             set ({ properties: response.data.properties, error: null });
         } catch (error) {
             set({
                 error: error.response?.data?.message || 'Failed to fetch properties',
-            loading: false,
+        
+            });
+        }
+    },
+    fetchCategorizedProperties: async (categoryId) => {
+        set({ error: null });
+        try {
+            const response = await api.get(`/properties/category/${categoryId}`);
+            const propertiesData = Array.isArray(response.data) ? response.data : [];
+
+            set ((state) => ({
+                propertiesByCategory: {
+                    ...state.propertiesByCategory,
+                    [categoryId]: propertiesData,
+                },
+            
+            }));
+        } catch (error) {
+            set ({
+                error: error.response?.data?.message || 'Failed to fetch properties',
             });
         }
     }
