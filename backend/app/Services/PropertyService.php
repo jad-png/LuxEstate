@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\CreatePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
+use App\Models\Category;
 use App\Models\Property;
 use App\Models\PropertyFeature;
 use App\Models\PropertyImage;
@@ -21,7 +22,7 @@ class PropertyService implements IPropertyService
      */
     public function all(): Collection
     {
-        return Property::with(['images', 'videos', 'features'])->get();
+        return Property::with(['images', 'videos', 'features', 'category'])->get();
     }
 
     /**
@@ -34,7 +35,7 @@ class PropertyService implements IPropertyService
     {
         // dd('hello');
 
-        return Property::with(['images', 'videos', 'features'])->findOrFail($id);
+        return Property::with(['images', 'videos', 'features', 'category'])->findOrFail($id);
     }
 
     /**
@@ -157,9 +158,15 @@ class PropertyService implements IPropertyService
         $property->features()->sync($featuresIds);
     }
 
-    public function getWithCategory($categoryId) {
-        return Property::with('images', 'videos', 'features', 'category')
+    public function getWithCategory($categoryId)
+    {
+        // $test = Category::with("properties.images", "properties.videos")->toSql();
+        // dd($test);
+        // // return 
+        $property = Property::with('images', 'videos', 'features', 'category')
             ->where('category_id', $categoryId)
             ->get();
+
+        return $property;
     }
 }

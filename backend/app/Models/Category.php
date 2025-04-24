@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'Bathrooms', 'area', 'bedrooms'];
+    protected $fillable = ['name', 'bathrooms', 'square_footage', 'bedrooms'];
 
-    public function property() {
+    public function properties() {
         $this->hasMany(Property::class);
     }
 }
