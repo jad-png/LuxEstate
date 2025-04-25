@@ -7,6 +7,7 @@ use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
@@ -88,7 +89,7 @@ Route::middleware('jwt')->prefix('notifications')->group(function () {
 
 // category routes
 Route::middleware('jwt')->prefix('category')->group(function () {
-    Route::get('', action: [CategoryController::class, 'index']);
+    Route::get('', [CategoryController::class, 'index']);
     Route::get('/{id}', [CategoryController::class, 'show'])->name('blog.show');;
     Route::post('', [CategoryController::class, 'store']);
     Route::put('/{id}', [CategoryController::class, 'update']);
@@ -99,5 +100,9 @@ Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgen
 
 // Blog category routes
 Route::middleware('jwt')->prefix('blog/category')->group(function () {
-    
+    Route::get('', [BlogCategoryController::class, 'index']);
+    Route::get('/{id}', [BlogCategoryController::class, 'show']);
+    Route::post('', [BlogCategoryController::class, 'store']);
+    Route::put('/{id}', [BlogCategoryController::class, 'update']);
+    Route::delete('/{id}', [BlogCategoryController::class, 'destroy']);
 });
