@@ -16,7 +16,7 @@ class BlogCategoryService
     public function find(int $id)
     {
         $category = BlogCategory::find($id);
-        return $category
+        return $category;
     }
 
     /**
@@ -35,7 +35,7 @@ class BlogCategoryService
      * Update a Category
      * @param int $id
      * @param UpdateBlogCategorieRequest $request
-     * @return void
+     * @return BlogCategory
      */
     public function update($id, $request)
     {

@@ -25,10 +25,4 @@ interface IBlogCategoryService extends CrudInterface
      */
     public function update($id, $request);
 
-    /**
-     * Summary of getByCategory
-     * @param int $categoryId
-     * @return Collection
-     */
-    public function getByCategory($categoryId);
 }

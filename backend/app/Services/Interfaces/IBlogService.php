@@ -62,4 +62,12 @@ interface IBlogService extends CrudInterface
      * @return array
      */
     public function sharePost($userId, $request);
+
+
+    /**
+     * Summary of getByCategory
+     * @param int $categoryId
+     * @return Collection
+     */
+    public function getByCategory($categoryId);
 }

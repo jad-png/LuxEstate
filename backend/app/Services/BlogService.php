@@ -192,4 +192,14 @@ class BlogService implements IBlogService
             'post' => $post,
         ];
     }
+
+    /**
+     * Summary of getByCategory
+     * @param int $categoryId
+     * @return Collection
+     */
+    public function getByCategory($categoryId)
+    {
+
+    }
 }
