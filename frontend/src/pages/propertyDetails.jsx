@@ -60,6 +60,50 @@ export function propertyDetails() {
         </p>
       </div>
 
+      {/* Property Images */}
+      {images.length > 0 ? (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Images</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {images.map((image) => (
+              <img
+                key={image.id}
+                src={image.image_path}
+                alt={`${title} image`}
+                className="h-64 w-full object-cover rounded-lg shadow-sm"
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Images</h2>
+          <p className="text-[#666666] manrope">No images available.</p>
+        </div>
+      )}
+
+        {/* Property Videos */}
+        {videos.length > 0 ? (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Videos</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {videos.map((video) => (
+              <video
+                key={video.id}
+                src={video.url}
+                controls
+                className="h-64 w-full object-cover rounded-lg shadow-sm"
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Videos</h2>
+          <p className="text-[#666666] manrope">No videos available.</p>
+        </div>
+      )}
+
        {/* Property Details */}
        <div className="mb-8">
         <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Details</h2>
