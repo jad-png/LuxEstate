@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useCategoryStore from "../stores/categoryStore";
 import usePropertyStore from "../stores/PropertyStore";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 export function CategoryProperties() {
   const { categoryId } = useParams();
@@ -75,6 +75,10 @@ export function CategoryProperties() {
     setCurrentPage(newPage);
     window.scrollTo({ top: 0, behavior: 'smooth'});
   };
+
+  const handleViewPlan = (propertyId) => {
+    navigate(`/property/${propertyId}`);
+  }
 
   const pagination = paginationByCategory[selectedCategoryId] || {};
   const current_page = pagination.current_page || 1;
@@ -156,7 +160,7 @@ export function CategoryProperties() {
                       <div className="mt-2 text-sm text-[#666666] manrope">
                       <p>Date Added: {new Date(property.created_at).toLocaleDateString('fr-FR')}</p>
                       </div>
-                      <button className="mt-4 px-4 py-2 bg-[#a27d56] text-white manrope hover:bg-[#8b6a47]">
+                      <button onClick={() => handleViewPlan(property.id)} className="mt-4 px-4 py-2 bg-[#a27d56] text-white manrope hover:bg-[#8b6a47]">
                         View Details
                       </button>
                     </div>
