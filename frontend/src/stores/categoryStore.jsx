@@ -10,6 +10,7 @@ const useCategoryStore = create((set) => ({
         try {
             const response = await api.get('/category');
             const categoriesData = Array.isArray(response.data) ? response.data : [];
+            console.log(categoriesData);
             
             set({ categories: categoriesData, error: null });
         } catch (error) {

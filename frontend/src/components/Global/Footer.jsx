@@ -84,14 +84,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-
-      {/* Blueprint background image */}
-      <div className="absolute bottom-0 right-0 w-1/3 h-2/3 opacity-10">
-        <div
-          className="w-full h-full bg-contain bg-no-repeat bg-right-bottom"
-          style={{ backgroundImage: "url('/placeholder.svg?height=300&width=400')" }}
-        ></div>
-      </div>
     </footer>
   )
 }

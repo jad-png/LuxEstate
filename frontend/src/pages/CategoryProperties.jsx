@@ -15,13 +15,14 @@ export function CategoryProperties() {
 
   const {
     propertiesByCategory,
+    paginationByCategory,
     fetchCategorizedProperties,
     error: propertyError,
   } = usePropertyStore();
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState(
-    categoryId || ""
-  );
+  const [selectedCategoryId, setSelectedCategoryId] = useState(categoryId || "");
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 6;
 
   // this fetch for categories on mount
   useEffect(() => {
@@ -34,16 +35,16 @@ export function CategoryProperties() {
   useEffect(() => {
     if (
       selectedCategoryId &&
-      !propertiesByCategory[selectedCategoryId] &&
       !propertyError
     ) {
-      fetchCategorizedProperties(selectedCategoryId);
+      fetchCategorizedProperties(selectedCategoryId, currentPage, perPage);
     }
   }, [
     selectedCategoryId,
-    propertiesByCategory,
     propertyError,
     fetchCategorizedProperties,
+    currentPage,
+    perPage
   ]);
 
   // while this set a default selectedCategoryId whis is the first record in categories
@@ -59,14 +60,25 @@ export function CategoryProperties() {
   useEffect(() => {
     if (categoryId && categoryId !== selectedCategoryId) {
       setSelectedCategoryId(categoryId);
+      setCurrentPage(1);
     }
   }, [categoryId, selectedCategoryId]);
 
   const handleCategorychange = (e) => {
     const newCategoryId = e.target.value;
     setSelectedCategoryId(newCategoryId);
+    setCurrentPage(1);
     navigate(`/properties-category/${newCategoryId}`);
   };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth'});
+  };
+
+  const pagination = paginationByCategory[selectedCategoryId] || {};
+  const current_page = pagination.current_page || 1;
+  const last_page = pagination.last_page || 1;
 
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto bg-gradient-to-b from-white to-amber-50">
@@ -81,7 +93,7 @@ export function CategoryProperties() {
           <div className="flex justify-end mb-8">
             <select
               value={selectedCategoryId}
-              onChange={() => setSelectedCategoryId(handleCategorychange)}
+              onChange={handleCategorychange}
               className="w-52 bg-[#dfa075] text-center px-6 py-3 text-white focus:outline-none cursor-pointer transition-all duration-200 shadow-sm"
             >
               {categories.length === 0 ? (
@@ -119,7 +131,7 @@ export function CategoryProperties() {
                         {property.image ? (
                           <img
                             src={property.image}
-                            alt={name}
+                            alt={property.name}
                             className="h-full w-full object-cover"
                           />
                         ) : (
@@ -129,7 +141,7 @@ export function CategoryProperties() {
                       {/* Video Placeholder */}
 
                       {/* Property Details */}
-                      <h3 className="text-xl font-semibold dm-serif text-[#262626]">
+                      <h3 className="text-xl font-semibold dm-serif text-[#262626] mt-4">
                         {property.title}
                       </h3>
                       <p className="text-[#666666] manrope">
@@ -142,7 +154,7 @@ export function CategoryProperties() {
                         {property.description}
                       </p>
                       <div className="mt-2 text-sm text-[#666666] manrope">
-                        <p>Date Added: {property.created_at}</p>
+                      <p>Date Added: {new Date(property.created_at).toLocaleDateString('fr-FR')}</p>
                       </div>
                       <button className="mt-4 px-4 py-2 bg-[#a27d56] text-white manrope hover:bg-[#8b6a47]">
                         View Details
@@ -150,6 +162,7 @@ export function CategoryProperties() {
                     </div>
                   ))}
                 </div>
+                
               )
             ) : (
               !propertyError && (
@@ -160,7 +173,37 @@ export function CategoryProperties() {
             )}
           </div>
         )}
-      </div>
+{paginationByCategory[selectedCategoryId] && (
+    <div className="flex justify-center mt-8 space-x-4">
+      <button
+        onClick={() => handlePageChange(current_page - 1)}
+        disabled={current_page <= 1}
+        className={`px-4 py-2 ${
+          current_page <= 1
+            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            : 'bg-[#dfa075] text-white hover:bg-[#c89060]'
+        } transition-all duration-200`}
+      >
+        Previous
+      </button>
+      <span className="px-4 py-2 text-gray-700">
+        Page {current_page} of {last_page}
+      </span>
+      <button
+        onClick={() => handlePageChange(current_page + 1)}
+        disabled={current_page >= last_page}
+        className={`px-4 py-2 ${
+          current_page >= last_page
+            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            : 'bg-[#dfa075] text-white hover:bg-[#c89060]'
+        } transition-all duration-200`}
+      >
+        Next
+      </button>
+    </div>
+  )}
+
+          </div>
     </section>
   );
 }

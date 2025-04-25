@@ -17,7 +17,6 @@ import AdminNotifcation from '../pages/Admin_notification';
 import Favorites from "../pages/Favorites";
 import Profile from "../pages/Profile"
 import ProfileLayout from "../layouts/ProfileLayout";
-import Properties from "../pages/Properties";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ClientCommunicationPage from "../pages/Agent/ClientCommunicationPage";
@@ -43,7 +42,6 @@ const routes = [
   { path: "/Admin/blog", component: AdminBlog, layout: AdminLayout },
   { path: "/Admin/notification", component: AdminNotifcation, layout: AdminLayout },
   { path: "/my-profile", component: Profile, layout: ProfileLayout},
-  { path: "/properties", component: Properties, layout: MainLayout},
   { path: "/agents/clients", component: ClientCommunicationPage, layout: AgentLayout},
   { path: "/agents/appointments", component: ManageAppointmentsPage, layout: AgentLayout},
   { path: "/appointments", component: Appointment, layout: MainLayout},

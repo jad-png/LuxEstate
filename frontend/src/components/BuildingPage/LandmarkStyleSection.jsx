@@ -17,18 +17,18 @@ export function LandmarkStyleSection() {
         {/* First Row */}
         <div className="relative">
           <img 
-            src="/api/placeholder/600/400" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_5.jpg" 
             alt="Iconic view of city skyline" 
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full h-64 object-cover"
           />
           <p className="text-xs text-gray-500 mt-2">AN ICONIC NEW ADDITION TO THE WORLD'S MOST BEAUTIFUL SKYLINE</p>
         </div>
         
         <div className="relative">
           <img 
-            src="/api/placeholder/600/400" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_6.jpg" 
             alt="Glass panels against the city" 
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full h-64 object-cover"
           />
           <p className="text-xs text-gray-500 mt-2">GLASS PANELS AGAINST THE LIGHT OF THE DAY</p>
         </div>
@@ -36,18 +36,18 @@ export function LandmarkStyleSection() {
         {/* Second Row */}
         <div className="relative">
           <img 
-            src="/api/placeholder/600/400" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_7.jpg" 
             alt="Illuminated storefront at night" 
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full h-64 object-cover"
           />
           <p className="text-xs text-gray-500 mt-2">THE LUXURY LIT UP INTERPLAY OF METAL, STONE, AND GLASS</p>
         </div>
         
         <div className="relative">
           <img 
-            src="/api/placeholder/600/400" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_8.jpg" 
             alt="Modern reception area" 
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full h-64 object-cover"
           />
           <p className="text-xs text-gray-500 mt-2">SOFT LIGHTING CREATES A TRANQUIL WELCOME</p>
         </div>

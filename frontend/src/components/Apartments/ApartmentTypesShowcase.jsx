@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useCategoryStore from '../../stores/categoryStore';
 import { Link } from 'react-router';
 
+
 export function ApartmentTypesShowcase() {
   const { categories, error, fetchCategories } = useCategoryStore();
 
@@ -48,7 +49,7 @@ export function ApartmentTypesShowcase() {
               <Link to={`/properties-category/${category.id}`} key={category.id} className="flex flex-col">
                 <div className="mb-4">
                   <img
-                    src={category.image_url || '/api/placeholder/600/400'}
+                    src={category.image  || '/api/placeholder/600/400'}
                     alt={`${category.name} view`}
                     className="w-full h-64 object-cover"
                   />

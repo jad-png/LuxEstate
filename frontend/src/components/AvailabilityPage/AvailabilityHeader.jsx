@@ -13,7 +13,7 @@ export function AvailabilityHeader() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/api/placeholder/1200/400')",
+          backgroundImage: "url('https://cdn.pixabay.com/photo/2014/07/31/21/41/apartment-406901_1280.jpg')",
         }}
       ></div>
       

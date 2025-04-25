@@ -13,7 +13,7 @@ export function BuildingHeader() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/api/placeholder/1200/400')",
+          backgroundImage: "url('https://cdn.pixabay.com/photo/2018/03/20/17/35/furniture-3243991_1280.jpg')",
         }}
       ></div>
       

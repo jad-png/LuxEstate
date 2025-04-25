@@ -9,7 +9,6 @@ const useAgentStore = create((set) => ({
       try {
         const response = await api.get('/agents');
         const agentsData = Array.isArray(response.data) ? response.data : [];
- console.log(agentsData);
  
         set({ agents: agentsData});
       } catch (error) {

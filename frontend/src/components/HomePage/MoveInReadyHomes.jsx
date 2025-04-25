@@ -4,7 +4,7 @@ import usePropertyStore from "../../stores/PropertyStore";
 
 export function MoveInReadyHomes() {
   const { properties, loading, error, fetchProperties } = usePropertyStore();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProperties();
@@ -15,7 +15,7 @@ export function MoveInReadyHomes() {
 
   const handleViewPlan = (propertyId) => {
     // navigate('');
-    console.log("todo: navigate to property related to it");
+    console.log(`todo: navigate to property related to it: ${propertyId}`);
   };
   return (
     <div className="max-w-6xl mx-auto p-4 bg-gray-50">
@@ -35,7 +35,7 @@ export function MoveInReadyHomes() {
         <table className="w-full border-collapse">
           {/* Table Header */}
           <thead>
-            <tr className="bg-amber-600 text-white w-full">
+            <tr className="bg-[#C78960] text-white w-full">
               <th className="py-3 px-4 text-left font-medium">Title</th>
               <th className="py-3 px-4 text-center font-medium">Location</th>
               <th className="py-3 px-4 text-center font-medium">Area</th>
@@ -55,9 +55,6 @@ export function MoveInReadyHomes() {
                     <td className="py-4 px-4 text-center text-gray-600">{property.area || 'N/A'}</td>
                     <td className="py-4 px-4 text-center text-gray-600">{property.bedrooms || 'N/A'}</td>
                     <td className="py-4 px-4 text-center text-gray-600">{property.price || 'N/A'}</td>
-                    <td className="py-4 px-4 text-center text-gray-600">
-                      {property.sale_price ? `$${property.price.toLocaleString()}` : 'N/A'}
-                    </td>
                     <td className="py-4 px-4 text-center">
                       <button
                         onClick={() => handleViewPlan(property.id)}

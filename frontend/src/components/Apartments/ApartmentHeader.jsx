@@ -13,7 +13,7 @@ export function ApartmentsHeader() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/api/placeholder/1200/400')",
+          backgroundImage: "url('https://cdn.pixabay.com/photo/2022/05/22/17/22/building-7214070_960_720.jpg')",
         }}
       ></div>
       
