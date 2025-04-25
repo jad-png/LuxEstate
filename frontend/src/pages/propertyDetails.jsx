@@ -59,6 +59,51 @@ export function propertyDetails() {
           Status: <span className="font-semibold">{status}</span>
         </p>
       </div>
+
+       {/* Property Details */}
+       <div className="mb-8">
+        <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Details</h2>
+        <div className="bg-white p-6 shadow-sm border border-[#e5e5e5] rounded-lg">
+          <p className="text-[#666666] manrope mb-2">
+            <span className="font-semibold">Description:</span> {description}
+          </p>
+          <p className="text-[#666666] manrope mb-2">
+            <span className="font-semibold">Bedrooms:</span> {bedrooms}
+          </p>
+          <p className="text-[#666666] manrope mb-2">
+            <span className="font-semibold">Area:</span> {area} m²
+          </p>
+        </div>
+      </div>
+
+
+      {/* Category Details */}
+      {category && (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Category Details</h2>
+          <div className="bg-white p-6 shadow-sm border border-[#e5e5e5] rounded-lg flex flex-col md:flex-row gap-6">
+            {category.image_url && (
+              <img
+                src={category.image_url}
+                alt={category.name}
+                className="h-48 w-full md:w-1/3 object-cover rounded-lg shadow-sm"
+              />
+            )}
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold dm-serif text-[#262626]">{category.name}</h3>
+              <p className="text-[#666666] manrope mt-2">
+                <span className="font-semibold">Bedrooms:</span> {category.bedrooms}
+              </p>
+              <p className="text-[#666666] manrope mt-2">
+                <span className="font-semibold">Bathrooms:</span> {category.bathrooms}
+              </p>
+              <p className="text-[#666666] manrope mt-2">
+                <span className="font-semibold">Square Footage:</span> {category.square_footage} m²
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
     ); 
 };
