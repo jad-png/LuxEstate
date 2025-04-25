@@ -96,3 +96,8 @@ Route::middleware('jwt')->prefix('category')->group(function () {
 });
 
 Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgents']);
+
+// Blog category routes
+Route::middleware('jwt')->prefix('blog/category')->group(function () {
+    
+});
