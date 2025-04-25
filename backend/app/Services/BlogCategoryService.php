@@ -2,30 +2,51 @@
 
 namespace App\Services;
 
+use App\Http\Requests\AddBlogCategorieRequest;
+use App\Http\Requests\UpdateBlogCategorieRequest;
+use App\Models\BlogCategory;
+
 class BlogCategoryService 
 {
     public function all() 
     {
-
+        return BlogCategory::all();
     }
 
-    public function find()
+    public function find(int $id)
     {
-
-    }
-    
-    public function create() 
-    {
-
+        $category = BlogCategory::find($id);
+        return $category
     }
 
-    public function update()
+    /**
+     * Creating new Categorie
+     * @param AddBlogCategorieRequest $request
+     * @return BlogCategory
+     */
+    public function create($request) 
     {
+        $category = BlogCategory::create($request);
 
+        return $category;
     }
 
-    public function delete() 
+    /**
+     * Update a Category
+     * @param int $id
+     * @param UpdateBlogCategorieRequest $request
+     * @return void
+     */
+    public function update($id, $request)
     {
+        $category = BlogCategory::find($id);
+        $category->update($request);
+        return $category;
+    }
 
+    public function delete(int $id) 
+    {
+        $category = BlogCategory::find($id);
+        $category->delete();
     }
 }
