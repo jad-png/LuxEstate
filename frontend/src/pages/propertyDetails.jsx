@@ -120,6 +120,25 @@ export function propertyDetails() {
         </div>
       </div>
 
+      {/* Property Features */}
+      {features.length > 0 ? (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Features</h2>
+          <div className="bg-white p-6 shadow-sm border border-[#e5e5e5] rounded-lg">
+            <ul className="list-disc list-inside text-[#666666] manrope">
+              {features.map((feature) => (
+                <li key={feature.id}>{feature.name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-4">Features</h2>
+          <p className="text-[#666666] manrope">No features available.</p>
+        </div>
+      )}
+
 
       {/* Category Details */}
       {category && (
