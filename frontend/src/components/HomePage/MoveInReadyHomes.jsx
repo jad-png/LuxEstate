@@ -14,8 +14,7 @@ export function MoveInReadyHomes() {
   const displayedProperties = properties.slice(0, 5);
 
   const handleViewPlan = (propertyId) => {
-    // navigate('');
-    console.log(`todo: navigate to property related to it: ${propertyId}`);
+    navigate(`/property/${propertyId}`);
   };
   return (
     <div className="max-w-6xl mx-auto p-4 bg-gray-50">
