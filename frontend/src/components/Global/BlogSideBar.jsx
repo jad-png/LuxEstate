@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useBlogCategory from "../../stores/storeBlogCategory";
+import { useNavigate } from "react-router";
 
 export function BlogSideBar() {
+  const { blogCategories, error, loading, fetchCategories } = useBlogCategory();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  const displayedCategories = (blogCategories || []).slice(0, 5);
+
   return (
     <div className="w-full md:w-1/3 mt-8 md:mt-0">
       <div className="bg-white p-6 border-l border-[#e5e5e5]">
         <h3 className="text-xl font-semibold text-[#a27d56] dm-serif border-b border-[#e5e5e5] pb-3">
           Categories
         </h3>
-        <ul className="mt-4 text-[#666666] manrope">
-          <li className="mt-2">• Food (2)</li>
-          <li className="mt-2">• Health (3)</li>
-          <li className="mt-2">• Meditation (1)</li>
-          <li className="mt-2">• Nature (3)</li>
-          <li className="mt-2">• Spirituality (4)</li>
-          <li className="mt-2">• Uncategorized (5)</li>
-        </ul>
+        {loading ? (
+          <p className="py-4 px-4 text-center text-gray-600">Loading...</p>
+        ) : error ? (
+          <p className="py-4 px-4 text-center text-red-600">Error: {error}</p>
+        ) : displayedCategories.length > 0 ? (
+          <ul className="mt-4 text-[#666666] manrope">
+            {displayedCategories.map((category) => (
+              <li
+                key={category.id}
+                className="mt-2 cursor-pointer hover:text-[#a27d56]"
+                onClick={() => navigate(`/category/${category.id}`)}
+              >
+                • {category.name}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="py-4 px-4 text-center text-gray-600">No categories available</p>
+        )}
         <div className="mt-6 relative">
           <input
             type="text"
@@ -23,7 +45,7 @@ export function BlogSideBar() {
           />
         </div>
       </div>
-      <div className="border-b relative top-4 left-2 w-[32.5rem]"></div>
+      <div className="border-b relative top-4 left-2 w-full"></div>
       <div className="mt-8 bg-white p-6 border-l border-[#e5e5e5]">
         <div>
           <img
