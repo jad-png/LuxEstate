@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useBlogCategory from "../../stores/storeBlogCategory";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export function BlogSideBar() {
   const { blogCategories, error, loading, fetchCategories } = useBlogCategory();
@@ -26,7 +26,7 @@ export function BlogSideBar() {
           <ul className="mt-4 text-[#666666] manrope">
             <li
               className="mt-2 cursor-pointer hover:text-[#a27d56]"
-              onClick={() => navigate("/blog")}
+              onClick={() => navigate("/blog")}              
             >
               • All Posts
             </li>{" "}
@@ -34,9 +34,10 @@ export function BlogSideBar() {
               <li
                 key={category.id}
                 className="mt-2 cursor-pointer hover:text-[#a27d56]"
-                onClick={() => navigate(`/category/${category.id}`)}
               >
+                <Link to={`/blog/category/${category.id}`}>
                 • {category.name}
+                </Link>
               </li>
             ))}
           </ul>

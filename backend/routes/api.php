@@ -62,9 +62,9 @@ Route::middleware('jwt')->prefix('appointments')->group(function () {
 
 // Blog post routes
 Route::middleware('jwt')->prefix('blog')->group(function () {
-    // Route::get('/posts', [BlogPostController::class, 'index']);
-    Route::get('/posts', [BlogPostController::class, 'paginatedPosts']);
-
+    Route::get('/posts', [BlogPostController::class, 'index']);
+    Route::get('/posts/category/{categoryId}', [BlogPostController::class, 'byCategory']); 
+    
     Route::get('/posts/{id}', [BlogPostController::class, 'show'])->name('blog.show');
     
     Route::post('/posts', [BlogPostController::class, 'store']);
@@ -104,7 +104,7 @@ Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgen
 // Blog category routes
 Route::middleware('jwt')->prefix('blog/category')->group(function () {
     Route::get('/', [BlogCategoryController::class, 'index']);
-    Route::get('/category/{categoryId}', [BlogCategoryController::class, 'getByCategory']);
+    Route::get('/{categoryId}', [BlogCategoryController::class, 'getByCategory']);
     
     Route::get('/{id}', [BlogCategoryController::class, 'show']);
     Route::post('/', [BlogCategoryController::class, 'store']);

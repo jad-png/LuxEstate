@@ -25,9 +25,8 @@ const useStorePost = create((set) => ({
   fetchPostsByCategory: async (categoryId) => {
     set({ loading: true, erorr: null });
     try {
-      const response = await api.get(`/category/${categoryId}`);
-      const apiResponse = response.data;
-      console.log(apiResponse);
+      const response = await api.get(`blog/posts/category/${categoryId}`);
+      const apiResponse = response.data.data;
       set({ posts: apiResponse, loading: false, error: null });
     } catch (error) {
       set({

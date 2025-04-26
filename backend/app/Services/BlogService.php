@@ -26,9 +26,9 @@ class BlogService implements IBlogService
      * Summary of all
      * @return BlogPost
      */
-    public function all(): Collection
+    public function all()
     {
-        return BlogPost::with('comments', 'reactions', 'category')->get();
+        //
     }
 
     public function paginatedPosts()
@@ -209,7 +209,7 @@ class BlogService implements IBlogService
      */
     public function getByCategory($categoryId)
     {
-        $posts = BlogPost::with('BlogCategory')
+        $posts = BlogPost::with('category')
                 ->where('category_id', $categoryId)
                 ->paginate(5);
         return $posts;

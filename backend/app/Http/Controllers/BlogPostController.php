@@ -23,16 +23,9 @@ class BlogPostController extends Controller
 
     public function index()
     {
-        $posts = $this->blogPostService->all();
+        $posts = $this->blogPostService->paginatedPosts();
 
         return response()->json($posts);
-    }
-
-    public function paginatedPosts() 
-    {
-        $paginatedPosts = $this->blogPostService->paginatedPosts();
-
-        return response()->json($paginatedPosts);
     }
 
     public function show(int $id)
@@ -128,7 +121,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function getByCategorie($categoryId)
+    public function byCategory($categoryId)
     {
         $posts = $this->blogPostService->getByCategory($categoryId);
 
