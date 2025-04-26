@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BlogPost extends Model
 {
     protected $table = 'blog_posts';
-    protected $fillable = ['title', 'content', 'status', 'user_id', 'categorie_id'];
+    protected $fillable = ['title', 'content', 'status', 'user_id', 'category_id'];
 
     public function user()
     {
@@ -24,7 +24,7 @@ class BlogPost extends Model
         return $this->hasMany(BlogReactions::class);
     }
 
-    public function BlogCategory() {
+    public function category() {
         return $this->belongsTo(BlogCategory::class, 'categorie_id');
     }
 }

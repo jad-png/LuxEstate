@@ -23,7 +23,7 @@ class BlogService implements IBlogService
 {
     /**
      * Summary of all
-     * @return BlogPost[]
+     * @return BlogPost
      */
     public function all(): Collection
     {
@@ -37,7 +37,7 @@ class BlogService implements IBlogService
      */
     public function find(int $id)
     {
-        $blogpost = BlogPost::with('comments', 'reactions', 'categorie')->findOrFail($id); 
+        $blogpost = BlogPost::with('comments', 'reactions')->findOrFail($id); 
         return $blogpost;
     }
 
@@ -47,6 +47,7 @@ class BlogService implements IBlogService
      * @return void
      */
     public function create($request){}
+    
     /**
      * Summary of create
      * @param int $userId
@@ -61,8 +62,10 @@ class BlogService implements IBlogService
             'user_id'=> $user->id,
             'title' => $request['title'],
             'content' => $request['content'],
+            'category_id' => $request['category_id']
         ]);
 
+        // dd($request);
         return $blogpost;
     }
 
@@ -107,7 +110,6 @@ class BlogService implements IBlogService
             'user_id' => $user->id,
             'blog_post_id' => $post->id,
             'comment' => $request->comment,
-            'categorie_id' => $request->categorie_id
         ]);
     }
 

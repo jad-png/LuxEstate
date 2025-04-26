@@ -26,6 +26,7 @@ class AddBlogPostRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'category_id' => 'required|integer|exists:blog_categories,id'
             // 'status' => 'required|in:draft,published',
             // 'user_id' => 'required|exists:users,id',
         ];
