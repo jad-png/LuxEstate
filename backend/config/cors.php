@@ -22,7 +22,7 @@ return [
     'allowed_origins' => ['*'],
 
     // 'allowed_origins_patterns' => ['*'],
-    'allowed_origins_patterns' => ['http://127.0.0.1:8000/api/'],
+    'allowed_origins_patterns' => ['http://localhost:5173'],
 
     'allowed_headers' => ['*'],
 

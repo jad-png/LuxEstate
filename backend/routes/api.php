@@ -105,5 +105,5 @@ Route::middleware('jwt')->prefix('blog/category')->group(function () {
     Route::post('', [BlogCategoryController::class, 'store']);
     Route::put('/{id}', [BlogCategoryController::class, 'update']);
     Route::delete('/{id}', [BlogCategoryController::class, 'destroy']);
-    Route::getv('/{categoryId}', [BlogCategoryController::class, 'getByCategory']);
+    Route::get('/category/{categoryId}', [BlogCategoryController::class, 'getByCategory']);
 });

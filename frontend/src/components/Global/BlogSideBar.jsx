@@ -24,6 +24,12 @@ export function BlogSideBar() {
           <p className="py-4 px-4 text-center text-red-600">Error: {error}</p>
         ) : displayedCategories.length > 0 ? (
           <ul className="mt-4 text-[#666666] manrope">
+            <li
+              className="mt-2 cursor-pointer hover:text-[#a27d56]"
+              onClick={() => navigate("/blog")}
+            >
+              • All Posts
+            </li>{" "}
             {displayedCategories.map((category) => (
               <li
                 key={category.id}
@@ -35,7 +41,9 @@ export function BlogSideBar() {
             ))}
           </ul>
         ) : (
-          <p className="py-4 px-4 text-center text-gray-600">No categories available</p>
+          <p className="py-4 px-4 text-center text-gray-600">
+            No categories available
+          </p>
         )}
         <div className="mt-6 relative">
           <input

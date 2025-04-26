@@ -1,20 +1,12 @@
-import React, { useEffect } from "react";
-import useStorePost from "../../stores/storePost";
+import React
+ from "react";
 import { useNavigate } from "react-router";
 
-export function BlogPost() {
-  const { posts, loading, error, fetchAllPosts } = useStorePost();
+export function BlogPost({ post }) {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchAllPosts();
-  }, [fetchAllPosts]);
   return (
     <div className="w-full md:w-full pr-0 md:pr-8 border-b pb-10 px-10">
-      {posts.length === 0 ? (
-        <div>No posts available.</div>
-      ) : (
-        posts.map((post) => (
           <div key={post.id} className="border-b pb-10 mb-10">
             <div className="relative">
               <img
@@ -45,8 +37,6 @@ export function BlogPost() {
               </p>
             </div>
           </div>
-        ))
-      )}
     </div>
   );
 }
