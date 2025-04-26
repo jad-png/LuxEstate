@@ -25,6 +25,7 @@ class AddCommentRequest extends FormRequest
         return [
             'blog_post_id' => 'required|exists:blog_posts,id',
             'comment' => 'required|string|max:1000',
+            'categorie_id' => 'required|string|exists:blog_posts,categorie_id'
         ];
     }
 

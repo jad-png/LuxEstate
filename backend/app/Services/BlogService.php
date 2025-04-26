@@ -27,7 +27,7 @@ class BlogService implements IBlogService
      */
     public function all(): Collection
     {
-        return BlogPost::with('comments', 'reactions')->get();
+        return BlogPost::with('comments', 'reactions', 'category')->get();
     }
 
     /**
@@ -37,7 +37,7 @@ class BlogService implements IBlogService
      */
     public function find(int $id)
     {
-        $blogpost = BlogPost::with('comments', 'reactions')->findOrFail($id); 
+        $blogpost = BlogPost::with('comments', 'reactions', 'categorie')->findOrFail($id); 
         return $blogpost;
     }
 
@@ -106,7 +106,8 @@ class BlogService implements IBlogService
         return BlogComment::create([
             'user_id' => $user->id,
             'blog_post_id' => $post->id,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+            'categorie_id' => $request->categorie_id
         ]);
     }
 

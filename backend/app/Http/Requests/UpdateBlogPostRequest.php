@@ -26,6 +26,8 @@ class UpdateBlogPostRequest extends FormRequest
             'title' => 'sometimes|required|string|max:255',
             'content' => 'sometimes|required|string',
             'status' => 'sometimes|required|in:Draft,Published',
+            'categorie_id' => 'sometimes|string|exists:blog_posts,categorie_id'
+
         ];
     }
 
