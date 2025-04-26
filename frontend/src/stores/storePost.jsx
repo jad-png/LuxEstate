@@ -9,7 +9,7 @@ const useStorePost = create((set) => ({
   fetchAllPosts: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await api.get("/posts");
+      const response = await api.get("blog/posts");
       const apiResponse = response.data;
       console.log(apiResponse);
 

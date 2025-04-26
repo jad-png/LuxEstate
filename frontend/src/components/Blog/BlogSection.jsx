@@ -16,8 +16,7 @@ export function BlogSection() {
     } else {
       fetchAllPosts();
     }
-  }),
-    [fetchPostsByCategory, categoryId, fetchAllPosts];
+  }, [fetchPostsByCategory, categoryId, fetchAllPosts]);
 
   return (
     <div className="flex items-center justify-center flex-col lg:flex-row lg:gap-10 px-4 py-6">

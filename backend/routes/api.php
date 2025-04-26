@@ -62,10 +62,10 @@ Route::middleware('jwt')->prefix('appointments')->group(function () {
 
 // Blog post routes
 Route::middleware('jwt')->prefix('blog')->group(function () {
-    Route::get('posts', [BlogPostController::class, 'index']);
-    Route::get('posts/{id}', [BlogPostController::class, 'show'])->name('blog.show');;
-    Route::post('posts', [BlogPostController::class, 'store']);
-    Route::put('posts/{id}', [BlogPostController::class, 'update']);
+    Route::get('/posts', [BlogPostController::class, 'index']);
+    Route::get('/posts/{id}', [BlogPostController::class, 'show'])->name('blog.show');;
+    Route::post('/posts', [BlogPostController::class, 'store']);
+    Route::put('/posts/{id}', [BlogPostController::class, 'update']);
     
     // Comment routes
     Route::post('posts/comment', [BlogPostController::class, 'comment']);
@@ -100,10 +100,12 @@ Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgen
 
 // Blog category routes
 Route::middleware('jwt')->prefix('blog/category')->group(function () {
-    Route::get('', [BlogCategoryController::class, 'index']);
+    Route::get('/', [BlogCategoryController::class, 'index']);
+    Route::get('/category/{categoryId}', [BlogCategoryController::class, 'getByCategory']);
+    
     Route::get('/{id}', [BlogCategoryController::class, 'show']);
-    Route::post('', [BlogCategoryController::class, 'store']);
+    Route::post('/', [BlogCategoryController::class, 'store']);
     Route::put('/{id}', [BlogCategoryController::class, 'update']);
     Route::delete('/{id}', [BlogCategoryController::class, 'destroy']);
-    Route::get('/category/{categoryId}', [BlogCategoryController::class, 'getByCategory']);
+    
 });
