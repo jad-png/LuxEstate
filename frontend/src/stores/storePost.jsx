@@ -10,7 +10,7 @@ const useStorePost = create((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await api.get(`blog/posts?page=${page}`);
-      const apiResponse = response.data.data;
+      const apiResponse = response.data;
       console.log(response);
 
       set({ posts: apiResponse, loading: false, error: null });
@@ -26,7 +26,7 @@ const useStorePost = create((set) => ({
     set({ loading: true, erorr: null });
     try {
       const response = await api.get(`blog/posts/category/${categoryId}?page=${page}`);
-      const apiResponse = response.data.data;
+      const apiResponse = response.data;
       set({ posts: apiResponse, loading: false, error: null });
     } catch (error) {
       set({
