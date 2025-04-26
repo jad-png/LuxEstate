@@ -24,5 +24,4 @@ interface IBlogCategoryService extends CrudInterface
      * @return BlogCategory
      */
     public function update($id, $request);
-
 }

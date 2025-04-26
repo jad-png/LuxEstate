@@ -21,4 +21,9 @@ class BlogCategory extends Model
     protected $casts = [
         'name' => 'string',
     ];
+
+    public function blogPost() 
+    {
+        return $this->hasMany(BlogPost::class, 'categorie_id');
+    }
 }

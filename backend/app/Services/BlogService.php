@@ -200,6 +200,9 @@ class BlogService implements IBlogService
      */
     public function getByCategory($categoryId)
     {
-
+        $posts = BlogPost::with('BlogCategory')
+                ->where('categorie_id', $categoryId)
+                ->get();
+        return $posts;
     }
 }
