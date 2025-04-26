@@ -46,7 +46,20 @@ export function Pagination() {
           disabled={currentPage === 1}
           className="w-10 h-10 flex items-center justify-center bg-[#a27d56] text-white text-sm manrope hover:bg-[#8b6a47] transition-colors"
         >
-          
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-5 h-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
         </button>
 
         {getPageNumbers().map((page) => (
@@ -66,7 +79,22 @@ export function Pagination() {
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === lastPage}
           className="w-10 h-10 flex items-center justify-center bg-white text-[#666666] text-sm manrope border border-[#e5e5e5] hover:bg-[#f5f5f5] transition-colors"
-        > > </button>
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-5 h-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );

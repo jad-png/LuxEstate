@@ -64,7 +64,6 @@ Route::middleware('jwt')->prefix('appointments')->group(function () {
 Route::middleware('jwt')->prefix('blog')->group(function () {
     Route::get('/posts', [BlogPostController::class, 'index']);
     Route::get('/posts/category/{categoryId}', [BlogPostController::class, 'byCategory']); 
-    
     Route::get('/posts/{id}', [BlogPostController::class, 'show'])->name('blog.show');
     
     Route::post('/posts', [BlogPostController::class, 'store']);

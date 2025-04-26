@@ -3,6 +3,7 @@ import api from "../services/api";
 
 const useStorePost = create((set) => ({
   posts: { data: [], current_page: 1, last_page: 1, total: 0 },
+  post: [],
   error: null,
   loading: false,
 
@@ -35,6 +36,21 @@ const useStorePost = create((set) => ({
       });
     }
   },
+
+  fetchSinglePost: async (postId) => {
+    set({ loading: true, error: null })
+    try {
+      const response = await api.get(`/blog/posts/${postId}`);
+      const apiResponse = response.data;
+
+      set({ post: apiResponse, loading: false, error: null});
+    } catch (error) {
+      set({
+        error: error.response?.data?.message || "Failed to load categories",
+        loading: false,
+      });
+    }
+  }
 }));
 
 export default useStorePost;

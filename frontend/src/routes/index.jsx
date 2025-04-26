@@ -37,7 +37,7 @@ const routes = [
   { path: "/apartment", component: Apartment, layout: MainLayout },
   { path: "/Blog", component: Blog, layout: MainLayout },
   { path: "/blog/category/:categoryId", component: Blog, layout: MainLayout },
-  { path: "/BlogPost", component: Post, layout: MainLayout },
+  { path: "/post/:postId", component: Post, layout: MainLayout },
   { path: "/contact-request", component: ContactRequest, layout: MainLayout },
   { path: "/Admin/properties", component: Admin_property, layout: AdminLayout },
   { path: "/Admin/features", component: Admin_features, layout: AdminLayout },

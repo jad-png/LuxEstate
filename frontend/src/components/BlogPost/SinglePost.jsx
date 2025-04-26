@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BlogSideBar } from "../Global/BlogSideBar";
 import Comments from "../Global/Comments";
+import useStorePost from "../../stores/storePost";
+import { useParams } from "react-router";
 
 export function SinglePost() {
+  const { post, loading, error, fetchSinglePost } = useStorePost();
+  const { postId } = useParams();
+  
+  useEffect(() => {
+    fetchSinglePost(postId);
+  }, [postId, fetchSinglePost]);
   return (
     <div className="flex items-center justify-center flex-col lg:flex-row lg:gap-10 px-4 py-6">
       <div className="flex flex-col items-center gap-6 w-full lg:w-3/4">
