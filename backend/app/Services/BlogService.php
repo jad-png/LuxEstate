@@ -15,6 +15,7 @@ use App\Models\BlogShare;
 use App\Models\User;
 use App\Services\Interfaces\IBlogService;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use InvalidArgumentException;
@@ -28,6 +29,11 @@ class BlogService implements IBlogService
     public function all(): Collection
     {
         return BlogPost::with('comments', 'reactions', 'category')->get();
+    }
+
+    public function paginatedPosts()
+    {
+        return BlogPost::with('comments', 'reactions', 'category')->paginate(5);
     }
 
     /**
@@ -199,13 +205,13 @@ class BlogService implements IBlogService
     /**
      * Summary of getByCategory
      * @param int $categoryId
-     * @return Collection
+     * @return LengthAwarePaginator
      */
     public function getByCategory($categoryId)
     {
         $posts = BlogPost::with('BlogCategory')
-                ->where('categorie_id', $categoryId)
-                ->get();
+                ->where('category_id', $categoryId)
+                ->paginate(5);
         return $posts;
     }
 }

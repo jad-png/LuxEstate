@@ -6,8 +6,8 @@ export function BlogPost({ post }) {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full md:w-full pr-0 md:pr-8 border-b pb-10 px-10">
-          <div key={post.id} className="border-b pb-10 mb-10">
+    <div className="w-full md:w-full pr-0 md:pr-8 border-b px-10">
+          <div key={post.id} className="pb-10 ">
             <div className="relative">
               <img
                 src={

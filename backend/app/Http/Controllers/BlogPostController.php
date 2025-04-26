@@ -28,6 +28,13 @@ class BlogPostController extends Controller
         return response()->json($posts);
     }
 
+    public function paginatedPosts() 
+    {
+        $paginatedPosts = $this->blogPostService->paginatedPosts();
+
+        return response()->json($paginatedPosts);
+    }
+
     public function show(int $id)
     {
         $post = $this->blogPostService->find($id);

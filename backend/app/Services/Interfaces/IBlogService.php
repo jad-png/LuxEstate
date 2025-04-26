@@ -13,9 +13,11 @@ use App\Models\BlogComment;
 use App\Models\BlogComments;
 use App\Models\BlogPost;
 use App\Models\BlogReactions;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface IBlogService extends CrudInterface
 {
+    public function paginatedPosts();
     /**
      * Summary of createBlogPost
      * @param int $userId
@@ -67,7 +69,7 @@ interface IBlogService extends CrudInterface
     /**
      * Summary of getByCategory
      * @param int $categoryId
-     * @return Collection
+     * @return LengthAwarePaginator
      */
     public function getByCategory($categoryId);
 }
