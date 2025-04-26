@@ -6,10 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlogCategory extends Model
 {
-    protected $table = ['blog_categories'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['name'];
 
-    public function blogPosts() {
-        return $this->hasMany(BlogPost::class);
-    }
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'name' => 'string',
+    ];
 }
