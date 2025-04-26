@@ -120,4 +120,11 @@ class BlogPostController extends Controller
             'result' => $result,
         ]);
     }
+
+    public function getByCategorie($categoryId)
+    {
+        $posts = $this->blogPostService->getByCategory($categoryId);
+
+        return response()->json($posts);
+    }
 }
