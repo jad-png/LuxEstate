@@ -7,7 +7,7 @@ export function AmenitiesSection() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Amenities Column */}
         <div className="flex flex-col items-center text-center">
-          <div className="p-4 border border-gray-200 rounded-md mb-4">
+          <div className="p-4 border border-gray-200 mb-4">
             <Square size={24} className="text-gray-700" />
           </div>
           <h3 className="font-medium mb-3">Amenities</h3>
@@ -18,7 +18,7 @@ export function AmenitiesSection() {
 
         {/* Luxury Column */}
         <div className="flex flex-col items-center text-center">
-          <div className="p-4 border border-gray-200 rounded-md mb-4">
+          <div className="p-4 border border-gray-200 mb-4">
             <Diamond size={24} className="text-gray-700" />
           </div>
           <h3 className="font-medium mb-3">Luxury</h3>
@@ -29,7 +29,7 @@ export function AmenitiesSection() {
 
         {/* Energy Column */}
         <div className="flex flex-col items-center text-center">
-          <div className="p-4 border border-gray-200 rounded-md mb-4">
+          <div className="p-4 border border-gray-200 mb-4">
             <Zap size={24} className="text-gray-700" />
           </div>
           <h3 className="font-medium mb-3">Energy</h3>

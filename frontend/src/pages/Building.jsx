@@ -11,7 +11,7 @@ const Building = () => {
             <LandmarkStyleSection />
             <AmenitiesSection />
             <BuildingFeaturesSection />
-            <ResidenceNeighborhoodBanner />
+            {/* <ResidenceNeighborhoodBanner /> */}
         </div>
     );
 }

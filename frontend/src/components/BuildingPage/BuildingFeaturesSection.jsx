@@ -8,7 +8,7 @@ export function BuildingFeaturesSection() {
         {/* Left side - Image */}
         <div className="lg:w-3/5">
           <img 
-            src="/api/placeholder/800/500" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_9.jpg" 
             alt="Rooftop terrace with dining area and city skyline views" 
             className="w-full h-full object-cover"
           />
@@ -31,7 +31,7 @@ export function BuildingFeaturesSection() {
         {/* Right side - Image */}
         <div className="lg:w-3/5">
           <img 
-            src="/api/placeholder/800/500" 
+            src="https://demo2.pavothemes.com/luxtower/wp-content/uploads/2022/01/About_BG_11.jpg" 
             alt="Modern lobby entrance with stylish furniture" 
             className="w-full h-full object-cover"
           />
