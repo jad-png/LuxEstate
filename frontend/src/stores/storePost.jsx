@@ -6,11 +6,12 @@ const useStorePost = create(() => ({
   error: null,
   loading: false,
 
-  fetchPostsByCategory: async (set) => {
+  fetchAllPosts: async (set) => {
     set({ loading: true, error: null });
     try {
-      const response = await api.get("");
+      const response = await api.get('/posts');
       const apiResponse = response.data;
+console.log(apiResponse);
 
       set({ posts: apiResponse, loading: false, error: null });
     } catch (error) {
@@ -21,3 +22,6 @@ const useStorePost = create(() => ({
     }
   },
 }));
+
+
+export default useStorePost;

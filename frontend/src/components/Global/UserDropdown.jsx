@@ -32,7 +32,7 @@ export function UserDropDown() {
 
       {/* Dropdown Menu (Static, always visible for demo) */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#e5e5e5] z-10">
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#e5e5e5] z-50 ">
           <div className="px-4 py-2 border-b border-[#e5e5e5]">
             <p className="text-[#262626] manrope font-semibold">{user.name}</p>
           </div>
