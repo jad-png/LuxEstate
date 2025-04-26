@@ -33,7 +33,7 @@ export function BlogPost({ post }) {
                 {post.title}
               </h2>
               <p className="text-[#666666] mt-3 manrope leading-relaxed">
-                {post.excerpt || post.content.substring(0, 150) + "..."}
+                {post.excerpt || post.content.substring(0, 75) + "..."}
               </p>
             </div>
           </div>
