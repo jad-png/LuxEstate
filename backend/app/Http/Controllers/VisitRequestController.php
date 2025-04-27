@@ -33,7 +33,7 @@ class VisitRequestController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        $visitRequest = $this->visitRequestService->updateStatus($userId, $id, $request->validated());
+        $visitRequest = $this->visitRequestService->updateStatus($userId, $id, $request);
 
         return response()->json($visitRequest);
     }

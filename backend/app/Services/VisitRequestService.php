@@ -46,7 +46,7 @@ class VisitRequestService implements IVisitRequestService
         $visitRequest = VisitRequest::findOrFail($visitRequestId);
 
 
-        $visitRequest->update($request->status);
+        $visitRequest->update($request->validated());
 
         return $visitRequest;
     }

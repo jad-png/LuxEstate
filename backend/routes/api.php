@@ -115,5 +115,5 @@ Route::middleware('jwt')->prefix('blog/category')->group(function () {
 
 Route::middleware('jwt')->prefix('visit-request')->group(function () {
     Route::post('/', [VisitRequestController::class, 'store']);
-    Route::put('/{id}/status', [VisitRequestController::class, 'updateStatus']);
+    Route::put('/{id}/status', [VisitRequestController::class, 'update']);
 });
