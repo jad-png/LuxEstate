@@ -22,9 +22,9 @@ class CreateVisitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'property_id' => 'required|exists:property,id',
-            'date' => 'required|data|after_or_equal:today',
-            'time' => 'required|time_format"H:i',
+            'property_id' => 'required|exists:properties,id',
+            'date' => 'required|date|after_or_equal:today',
+            'time' => 'required|date_format:H:i',
         ];
     }
 

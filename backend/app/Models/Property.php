@@ -34,7 +34,8 @@ class Property extends Model
         return $this->belongsToMany(PropertyFeature::class, 'property_feature_property', 'property_id', 'property_feature_id');
     } 
 
-    public function category() {
+    public function category() 
+    {   
         return $this->belongsTo(Category::class, 'category_id');
     }
 
@@ -52,5 +53,5 @@ class Property extends Model
     public function visitRequests()
     {
         return $this->hasMany(VisitRequest::class, 'property_id');
-    }
+    }   
 }

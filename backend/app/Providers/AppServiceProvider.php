@@ -14,7 +14,7 @@ use App\Services\Interfaces\IPropertyService;
 use App\Services\AppointmentsService;
 use App\Services\BlogCategoryService;
 use App\Services\BlogService;
-use App\Services\Contracts\IVisitRequestService;
+use App\Services\Interfaces\IVisitRequestService;
 use App\Services\Interfaces\IBlogCategoryService;
 use App\Services\Interfaces\IBlogService;
 use App\Services\Interfaces\INotificationService;

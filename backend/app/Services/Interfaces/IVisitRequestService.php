@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Contracts;
+namespace App\Services\Interfaces;
 
 use App\Http\Requests\CreateVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;

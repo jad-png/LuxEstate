@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
-use App\Services\Contracts\IVisitRequestService;
+use App\Services\Interfaces\IVisitRequestService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -23,7 +23,7 @@ class VisitRequestController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        $visitRequest = $this->visitRequestService->createRequest($userId, $request->validated());
+        $visitRequest = $this->visitRequestService->createRequest($userId, request: $request);
 
         return response()->json($visitRequest);
     }

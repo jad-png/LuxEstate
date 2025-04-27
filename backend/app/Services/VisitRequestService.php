@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateVisitRequest;
 use App\Models\Property;
 use App\Models\VisitRequest;
 use App\Models\User;
-use App\Services\Contracts\IVisitRequestService;
+use App\Services\Interfaces\IVisitRequestService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use InvalidArgumentException;

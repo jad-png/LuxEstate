@@ -14,7 +14,7 @@ class VisitRequest extends Model
         'status' => 'string',
     ];
 
-    public function user()
+    public function client()
     {
         return $this->belongsTo(User::class, 'client_id');
     }

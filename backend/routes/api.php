@@ -11,6 +11,7 @@ use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\VisitRequestController;
 
 // auth routes
 Route::prefix('auth')->group(function () {
@@ -110,4 +111,9 @@ Route::middleware('jwt')->prefix('blog/category')->group(function () {
     Route::put('/{id}', [BlogCategoryController::class, 'update']);
     Route::delete('/{id}', [BlogCategoryController::class, 'destroy']);
     
+});
+
+Route::middleware('jwt')->prefix('visit-request')->group(function () {
+    Route::post('/', [VisitRequestController::class, 'store']);
+    Route::put('/{id}/status', [VisitRequestController::class, 'updateStatus']);
 });
