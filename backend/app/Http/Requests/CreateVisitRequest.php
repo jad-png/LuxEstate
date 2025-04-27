@@ -11,7 +11,7 @@ class CreateVisitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class CreateVisitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'property_id' => 'required|exists:property,id',
+            'date' => 'required|data|after_or_equal:today',
+            'time' => 'required|time_format"H:i',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }

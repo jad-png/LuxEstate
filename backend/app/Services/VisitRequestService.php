@@ -20,34 +20,16 @@ class VisitRequestService implements IVisitRequestService
      * @param CreateVisitRequest $request
      * @return VisitRequest
      */
-    public function createRequest(CreateVisitRequest $request): VisitRequest
+    public function createRequest(int $clientId, CreateVisitRequest $request): VisitRequest
     {
-        // Validate client (role ID 3)
-        $client = User::where('id', $clientId)
-            ->whereHas('role', fn($q) => $q->where('id', 3))
-            ->firstOrFail();
-
-        // Validate property exists
-        $property = Property::findOrFail($propertyId);
-
-        // Validate date and time
-        $validator = Validator::make([
-            'date' => $date,
-            'time' => $time,
-        ], [
-            'date' => 'required|date|after_or_equal:today',
-            'time' => 'required|date_format:H:i',
-        ]);
-
-        if ($validator->fails()) {
-            throw new InvalidArgumentException($validator->errors()->first());
-        }
+        $client = User::with(['role'])->where('id', $clientId)->firstOrFail();
+        $property = Property::findOrFail($request->property_id);
 
         return VisitRequest::create([
             'client_id' => $client->id,
             'property_id' => $property->id,
-            'date' => $date,
-            'time' => $time,
+            'date' => $request->date,
+            'time' => $request->time,
             'status' => 'pending',
         ]);
     }
@@ -58,26 +40,13 @@ class VisitRequestService implements IVisitRequestService
      * @param UpdateVisitRequest $request
      * @return VisitRequest
      */
-    public function updateStatus(UpdateVisitRequest $request): VisitRequest
+    public function updateStatus(int $agentId, int $visitRequestId, UpdateVisitRequest $request): VisitRequest
     {
-        // Validate agent (role ID 2)
-        $agent = User::where('id', $agentId)
-            ->whereHas('role', fn($q) => $q->where('id', 2))
-            ->firstOrFail();
-
-        // Validate visit request
+        $agent = User::with(['role'])->where('id', $agentId)->firstOrFail();
         $visitRequest = VisitRequest::findOrFail($visitRequestId);
 
-        // Validate status
-        $validator = Validator::make(['status' => $status], [
-            'status' => ['required', Rule::in(['pending', 'confirmed', 'cancelled'])],
-        ]);
 
-        if ($validator->fails()) {
-            throw new InvalidArgumentException($validator->errors()->first());
-        }
-
-        $visitRequest->update(['status' => $status]);
+        $visitRequest->update($request->status);
 
         return $visitRequest;
     }

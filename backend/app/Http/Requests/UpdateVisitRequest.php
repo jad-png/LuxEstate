@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateVisitRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateVisitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,20 @@ class UpdateVisitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'status' => [
+                'required',
+                Rule::in(['pending', 'confirmed', 'cancelled']),
+            ],
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }

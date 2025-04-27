@@ -14,7 +14,7 @@ interface IVisitRequestService
      * @param CreateVisitRequest $request
      * @return VisitRequest
      */
-    public function createRequest(CreateVisitRequest $request): VisitRequest;
+    public function createRequest(int $agentId, CreateVisitRequest $request): VisitRequest;
 
     /**
      * Update the status of a visit request.
@@ -22,5 +22,5 @@ interface IVisitRequestService
      * @param UpdateVisitRequest $request
      * @return VisitRequest
      */
-    public function updateStatus(UpdateVisitRequest $request): VisitRequest;
+    public function updateStatus(int $agentId, int $visitRequestId, UpdateVisitRequest $request): VisitRequest;
 }
