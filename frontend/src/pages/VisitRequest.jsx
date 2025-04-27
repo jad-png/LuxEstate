@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ContactRequestModal } from "../components/Modals/ContactRequestModal";
+import { VisitRequestModal } from "../components/Modals/VisitRequestModal";
 
-function ContactRequest() {
+function VisitRequest() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     
@@ -103,7 +103,7 @@ function ContactRequest() {
           </div>
         </div>
 
-        <ContactRequestModal
+        <VisitRequestModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
@@ -111,7 +111,7 @@ function ContactRequest() {
     );
 };
 
-export default ContactRequest;
+export default VisitRequest;
 
 // color pallette
 // #c78960

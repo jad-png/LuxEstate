@@ -104,7 +104,7 @@ export function Header() {
             <Link to="/#" className="py-2 md:py-0 text-sm font-medium hover:text-[#e9c496] border-b md:border-b-0 border-gray-100">
               Pages
             </Link>
-            <Link to="/contact-request" className="py-2 md:py-0 text-sm font-medium hover:text-[#e9c496]">
+            <Link to="/contact" className="py-2 md:py-0 text-sm font-medium hover:text-[#e9c496]">
               Contact
             </Link>
             

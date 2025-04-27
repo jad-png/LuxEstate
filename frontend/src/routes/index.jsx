@@ -9,7 +9,7 @@ import Availability from "../pages/Availability";
 import Apartment from "../pages/Apartment";
 import Blog from "../pages/Blog";
 import Post from "../pages/Post";
-import ContactRequest from "../pages/ContactRequest";
+import VisitRequest from "../pages/VisitRequest";
 import Admin_property from "../pages/Admin_property";
 import Admin_features from "../pages/Admin_features";
 import AdminBlog from '../pages/Admin_blog';
@@ -38,7 +38,7 @@ const routes = [
   { path: "/Blog", component: Blog, layout: MainLayout },
   { path: "/blog/category/:categoryId", component: Blog, layout: MainLayout },
   { path: "/post/:postId", component: Post, layout: MainLayout },
-  { path: "/contact-request", component: ContactRequest, layout: MainLayout },
+  { path: "/contact", component: VisitRequest, layout: MainLayout },
   { path: "/Admin/properties", component: Admin_property, layout: AdminLayout },
   { path: "/Admin/features", component: Admin_features, layout: AdminLayout },
   { path: "/Admin/blog", component: AdminBlog, layout: AdminLayout },
