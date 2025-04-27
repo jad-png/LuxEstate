@@ -128,4 +128,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class, 'sender_id');
     }
+
+    public function visitRequests()
+    {
+        return $this->hasMany(VisitRequest::class, 'client_id');
+    }
 }

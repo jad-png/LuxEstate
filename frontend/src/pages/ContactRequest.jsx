@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { ContactRequestModal } from "../components/Modals/ContactRequestModal";
 
 function ContactRequest() {
 
-    const [isModalOpen, setIsModalOpen] = React.useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
     return (
         <div className="container mx-auto px-4 py-12">

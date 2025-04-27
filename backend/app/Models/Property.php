@@ -48,4 +48,9 @@ class Property extends Model
         return $this->belongsToMany( User::class, 'client_favorites', 'property_id', 'user_id')
             ->withTimestamps();
     }
+
+    public function visitRequests()
+    {
+        return $this->hasMany(VisitRequest::class, 'property_id');
+    }
 }

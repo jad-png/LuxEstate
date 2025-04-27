@@ -41,10 +41,11 @@ const useStorePost = create((set) => ({
     set({ loading: true, error: null })
     try {
       const response = await api.get(`/blog/posts/${postId}`);
-      const apiResponse = response.data;
-
+      const apiResponse = response.data.post;
+      console.log("Single Post Response:", response.data); // Debug log
       set({ post: apiResponse, loading: false, error: null});
     } catch (error) {
+      console.error("Single Post Error:", error.response?.data); // Debug log
       set({
         error: error.response?.data?.message || "Failed to load categories",
         loading: false,
