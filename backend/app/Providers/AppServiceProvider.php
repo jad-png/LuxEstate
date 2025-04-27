@@ -14,10 +14,12 @@ use App\Services\Interfaces\IPropertyService;
 use App\Services\AppointmentsService;
 use App\Services\BlogCategoryService;
 use App\Services\BlogService;
+use App\Services\Contracts\IVisitRequestService;
 use App\Services\Interfaces\IBlogCategoryService;
 use App\Services\Interfaces\IBlogService;
 use App\Services\Interfaces\INotificationService;
 use App\Services\NotificationService;
+use App\Services\VisitRequestService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IBlogService::class, BlogService::class);
         $this->app->bind(INotificationService::class, NotificationService::class);
         $this->app->bind(IBlogCategoryService::class, BlogCategoryService::class);
+        $this->app->bind(IVisitRequestService::class, VisitRequestService::class);
     }
 
     /**

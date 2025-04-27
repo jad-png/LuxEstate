@@ -16,7 +16,7 @@ class VisitRequestService implements IVisitRequestService
 {
     /**
      * Create a new visit request.
-     *
+     * @param int $clientId
      * @param CreateVisitRequest $request
      * @return VisitRequest
      */

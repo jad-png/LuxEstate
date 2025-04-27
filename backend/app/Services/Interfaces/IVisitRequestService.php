@@ -10,11 +10,11 @@ interface IVisitRequestService
 {
     /**
      * Create a new visit request.
-     *
+     * @param int $clientId
      * @param CreateVisitRequest $request
      * @return VisitRequest
      */
-    public function createRequest(int $agentId, CreateVisitRequest $request): VisitRequest;
+    public function createRequest(int $clientId, CreateVisitRequest $request): VisitRequest;
 
     /**
      * Update the status of a visit request.
