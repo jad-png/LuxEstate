@@ -56,7 +56,7 @@ Route::middleware('jwt')->group(function () {
     Route::prefix('appointments')->group(function () {
         Route::get('/', [AppointmentController::class, 'index']);
         Route::post('/', [AppointmentController::class, 'create']);
-        Route::put('/{appointmentId}/resolve', [AppointmentController::class, 'resolve']);
+        Route::patch('/{appointmentId}/resolve', [AppointmentController::class, 'resolve']);
         Route::get('/mine', [AppointmentController::class, 'getAppointments']);
     });
 

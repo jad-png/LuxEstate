@@ -24,7 +24,6 @@ export function ClientCommunicationPage() {
 
         const inquiriesResponse = await api.get("/visit-request");
         setInquiries(inquiriesResponse.data);
-        console.log(inquiriesResponse.data);
         
       } catch (error) {
         setError("failed to load clients");

@@ -11,23 +11,27 @@ export function PendingAppointmentRequests() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      setLoading(true);
-      setError(null);
-      setSuccess(null);
-      try {
-        const response = await api.get("/appointments");
-        const apiResponse = response.data;
-        setAppointments(apiResponse);
-        console.log(apiResponse);
-        
-        setLoading(false);
-      } catch (error) {
-        setError("Failed to load appointments");
-        setLoading(false);
-      }
+  
+  const fetchAppointments = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      const response = await api.get("/appointments");
+      const apiResponse = response.data;
+      const pendingAppointments = apiResponse.filter(
+        (appointment) => appointment.status === "Scheduled"
+      );
+      setAppointments(apiResponse);
+
+      setLoading(false);
+    } catch (error) {
+      setError("Failed to load appointments");
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
     fetchAppointments();
   });
 
@@ -48,11 +52,35 @@ export function PendingAppointmentRequests() {
       setSuccess("Appointment status updated successfully");
       setFormData({ status: "" });
     } catch (error) {
-      setError(error.response?.data?.message || "Failed to update appointment.");
+      setError(
+        error.response?.data?.message || "Failed to update appointment."
+      );
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  const handleResolve = async (appointmentId, status) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      await api.patch(`appointments/${appointmentId}/resolve`, {
+        status: status,
+      });
+
+      setSuccess("Appointment status updated successfully");
+      await fetchAppointments();
+    
+    } catch (error) {
+      setError(
+        error.response?.data?.message || "Failed to resolve appointment"
+      );
+      console.error("Resolve error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-[#e5e5e5] mb-6">
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
@@ -72,11 +100,11 @@ export function PendingAppointmentRequests() {
           <tbody>
             {appointments.map((appointment) => (
               <AppointmentRequestRow
-              key={appointment.id}
-              clientName={appointment.client.name}
-              requestedDate={appointment.date}
-              requestedTime={appointment.time}
-              purpose={appointment.status}
+                key={appointment.id}
+                clientName={appointment.client.name}
+                requestedDate={appointment.date}
+                requestedTime={appointment.time}
+                purpose={appointment.status}
               />
             ))}
           </tbody>

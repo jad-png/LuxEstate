@@ -1,6 +1,37 @@
 import React from "react";
 
 export function RequestAppointmentForm() {
+  // const [formData, setFormData] = useState({
+  //   status: "",
+  // });
+
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [success, setSuccess] = useState(null);
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setError(null);
+  //   setSuccess(null);
+  //   try {
+  //     await api.post("/appointments", {
+  //       status: formData.status,
+  //     });
+  //     setSuccess("Appointment status updated successfully");
+  //     setFormData({ status: "" });
+  //   } catch (error) {
+  //     setError(
+  //       error.response?.data?.message || "Failed to update appointment."
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-[#e5e5e5]">
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
