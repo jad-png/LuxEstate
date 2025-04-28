@@ -52,7 +52,8 @@ export function ConfirmedAppointments() {
 
       setLoading(false);
       setError(null);
-      fetchConfirmedAppointments();
+      setSuccess("Appointment cancelled successfully");
+      await fetchConfirmedAppointments();
     } catch (error) {
       setError("Failed to update appointment");
       setLoading(false);
@@ -64,6 +65,15 @@ export function ConfirmedAppointments() {
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
         Confirmed Appointments
       </h2>
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>
+      )}
+
+      {success && (
+        <div className="bg-green-100 text-green-700 p-3 rounded mb-4">
+          {success}
+        </div>
+      )}
       {confirmedAppointments.length > 0 ? (
         <table className="w-full text-left manrope">
           <thead>

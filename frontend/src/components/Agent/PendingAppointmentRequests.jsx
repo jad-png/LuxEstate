@@ -11,7 +11,7 @@ export function PendingAppointmentRequests() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  
+
   const fetchAppointments = async () => {
     setLoading(true);
     setError(null);
@@ -71,7 +71,6 @@ export function PendingAppointmentRequests() {
 
       setSuccess("Appointment status updated successfully");
       await fetchAppointments();
-    
     } catch (error) {
       setError(
         error.response?.data?.message || "Failed to resolve appointment"
@@ -86,6 +85,15 @@ export function PendingAppointmentRequests() {
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
         Pending Appointment Requests
       </h2>
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>
+      )}
+
+      {success && (
+        <div className="bg-green-100 text-green-700 p-3 rounded mb-4">
+          {success}
+        </div>
+      )}
       {appointments.length > 0 ? (
         <table className="w-full text-left manrope">
           <thead>
