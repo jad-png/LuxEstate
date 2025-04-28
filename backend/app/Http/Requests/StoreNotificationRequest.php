@@ -14,7 +14,7 @@ class StoreNotificationRequest extends FormRequest
     public function authorize(): bool
     {
         // return true;
-        return Auth::user()->isAdmin() || Auth::user()->isAgent();
+        return Auth::check();
     }
 
     /**

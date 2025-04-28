@@ -12,6 +12,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\VisitRequestController;
+use App\Services\VisitRequestService;
 
 // auth routes
 Route::prefix('auth')->group(function () {
@@ -83,8 +84,8 @@ Route::middleware('jwt')->prefix('blog')->group(function () {
     Route::post('posts/share', [BlogPostController::class, 'sharePost']);
 });
 
-
-Route::middleware('jwt')->prefix('notifications')->group(function () {
+// notification routes
+Route::middleware('jwt')->prefix( prefix: '')->group(function () {
     Route::post('/', [NotificationController::class, 'store']);
     Route::get('/', [NotificationController::class, 'index']);
     Route::patch('/{notification_id}/read', [NotificationController::class, 'markAsRead']);
@@ -100,6 +101,7 @@ Route::middleware('jwt')->prefix('category')->group(function () {
 });
 
 Route::middleware('jwt')->get('/agents', [AppointmentController::class, 'getAgents']);
+Route::middleware('jwt')->get('/clients', [NotificationController::class, 'getClients']);
 
 // Blog category routes
 Route::middleware('jwt')->prefix('blog/category')->group(function () {
@@ -110,10 +112,10 @@ Route::middleware('jwt')->prefix('blog/category')->group(function () {
     Route::post('/', [BlogCategoryController::class, 'store']);
     Route::put('/{id}', [BlogCategoryController::class, 'update']);
     Route::delete('/{id}', [BlogCategoryController::class, 'destroy']);
-    
 });
 
 Route::middleware('jwt')->prefix('visit-request')->group(function () {
-    Route::post('/', [VisitRequestController::class, 'store']);
+    Route::get('', [VisitRequestController::class, 'index']);
+    Route::post('', [VisitRequestController::class, 'store']);
     Route::put('/{id}/status', [VisitRequestController::class, 'update']);
 });

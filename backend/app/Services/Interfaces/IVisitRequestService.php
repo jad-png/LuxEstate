@@ -8,6 +8,7 @@ use App\Models\VisitRequest;
 
 interface IVisitRequestService
 {
+    public function all();
     /**
      * Create a new visit request.
      * @param int $clientId

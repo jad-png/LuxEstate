@@ -55,4 +55,11 @@ class NotificationController extends Controller
             'notification' => $notification,
         ], 200);
     }
+
+    public function getClients()
+    {
+        $clients = $this->notificationService->getUsers();
+
+        return response()->json($clients);
+    }
 }

@@ -129,4 +129,9 @@ class NotificationService implements INotificationService
             default => throw new InvalidArgumentException("Unsupported notification type: $type"),
         };
     }
+
+    public function getUsers()
+    {
+        return User::where('role_id', 3)->get();
+    }
 }

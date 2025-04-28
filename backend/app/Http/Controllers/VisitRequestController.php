@@ -18,6 +18,12 @@ class VisitRequestController extends Controller
         $this->visitRequestService = $iVisitRequestService;
     }
 
+    public function index()
+    {
+        $visits = $this->visitRequestService->all();
+
+        return response()->json($visits);
+    }
     public function store(CreateVisitRequest $request)
     {
         $user = Auth::user();

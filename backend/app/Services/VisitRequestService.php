@@ -50,4 +50,11 @@ class VisitRequestService implements IVisitRequestService
 
         return $visitRequest;
     }
+
+    public function all() 
+    {
+        $visits = VisitRequest::with('client')->get();
+
+        return $visits;
+    }
 }
