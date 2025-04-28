@@ -12,12 +12,12 @@ export function SimulatedAppointments() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const fetchAppointments = async () => {
+  const fetchSimulatedAppointments = async () => {
     setLoading(true);
     setError(null);
     setSuccess(null);
     try {
-      const response = await api.get("/appointments");
+      const response = await api.get("/appointments/simulated");
       const apiResponse = response.data;
       const simulatedAppointments = apiResponse.filter(
         (appointment) => appointment.status === "Scheduled"
@@ -32,7 +32,7 @@ export function SimulatedAppointments() {
   };
 
   useEffect(() => {
-    fetchAppointments();
+    fetchSimulatedAppointments();
   }, []);
 
   const handleChange = (e) => {
@@ -70,7 +70,7 @@ export function SimulatedAppointments() {
       });
 
       setSuccess("Appointment status updated successfully");
-      await fetchAppointments();
+      await fetchSimulatedAppointments();
     } catch (error) {
       setError(
         error.response?.data?.message || "Failed to resolve appointment"
