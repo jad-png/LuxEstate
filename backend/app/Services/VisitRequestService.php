@@ -53,7 +53,7 @@ class VisitRequestService implements IVisitRequestService
 
     public function all() 
     {
-        $visits = VisitRequest::with('client')->get();
+        $visits = VisitRequest::with('client', 'property')->get();
 
         return $visits;
     }

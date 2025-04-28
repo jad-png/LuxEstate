@@ -88,12 +88,12 @@ export function ClientCommunicationPage() {
             <tbody>
               {inquiries.map((inquiry) => (
                 <InquiryRow
-                  key={inquiry.id}
-                  clientName={inquiry.client?.name || "Unknown"}
-                  property={inquiry.property?.name || "Unknown"}
-                  date={inquiry.date}
-                  time={inquiry.time}
-                  status={inquiry.status}
+                key={inquiry.id}
+                clientName={inquiry.client?.name || "Unknown"}
+                property={inquiry.property?.title || "Unknown"}
+                date={inquiry.date}
+                time={inquiry.time}
+                status={inquiry.status}
                 />
               ))}
             </tbody>
