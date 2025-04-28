@@ -101,10 +101,12 @@ export function PendingAppointmentRequests() {
             {appointments.map((appointment) => (
               <AppointmentRequestRow
                 key={appointment.id}
-                clientName={appointment.client.name}
-                requestedDate={appointment.date}
-                requestedTime={appointment.time}
-                purpose={appointment.status}
+                appointmentId={appointment.id}
+                clientName={appointment.client?.name || "Unknown"}
+                requestedDate={appointment.date || "Unknown"}
+                requestedTime={appointment.time || "Unknown"}
+                status={appointment.status || "Unknown"}
+                resolveAppointment={handleResolve}
               />
             ))}
           </tbody>

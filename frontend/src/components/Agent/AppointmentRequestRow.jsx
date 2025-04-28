@@ -1,3 +1,5 @@
+import React from "react";
+
 export function AppointmentRequestRow({
   appointmentId,
   clientName,
@@ -7,11 +9,11 @@ export function AppointmentRequestRow({
   resolveAppointment,
 }) {
   const handleApprove = () => {
-    resolveAppointment(appointmentId, "Confirmed");
+    resolveAppointment(appointmentId, "Completed");
   };
 
   const handleDecline = () => {
-    resolveAppointment(appointmentId, "Canceled");
+    resolveAppointment(appointmentId, "Cancelled");
   };
 
   return (

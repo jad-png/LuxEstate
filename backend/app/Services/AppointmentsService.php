@@ -14,9 +14,8 @@ class AppointmentsService implements IAppointmentsService
 {
     private const VALID_STATUSES = [
         'Scheduled',
-        'Confirmed',
         'Completed',
-        'Canceled',
+        'Cancelled'
     ];
     protected $notificationService;
     public function __construct(NotificationService $notificationService)
@@ -35,26 +34,26 @@ class AppointmentsService implements IAppointmentsService
     {
         $client = User::with('role')->where('id', $clientId)->firstOrFail();
         $agent = User::with('role')->where('id', $agentId)->firstOrFail();
-        
-        $conflict = Appointment::where('agent_id', $agentId)
-        ->where('date', $date)
-        ->where('time', $time)
-        ->exists();
-        
-        // dd($conflict);
-            if ($conflict) {
-                throw new Exception('Agent is not available at this time.'); 
-            };
 
-            return DB::transaction(function () use ($client, $agent, $date, $time) {
-                return Appointment::create([
-                    'client_id' => $client->id,
-                    'agent_id' => $agent->id,
-                    'date' => $date,
-                    'time' => $time,
-                    'statuts' => 'Scheduled'
-                ]);
-            });
+        $conflict = Appointment::where('agent_id', $agentId)
+            ->where('date', $date)
+            ->where('time', $time)
+            ->exists();
+
+        // dd($conflict);
+        if ($conflict) {
+            throw new Exception('Agent is not available at this time.');
+        };
+
+        return DB::transaction(function () use ($client, $agent, $date, $time) {
+            return Appointment::create([
+                'client_id' => $client->id,
+                'agent_id' => $agent->id,
+                'date' => $date,
+                'time' => $time,
+                'statuts' => 'Scheduled'
+            ]);
+        });
     }
 
     public function resolveAppointment($userId, $appointmentId, $status)
