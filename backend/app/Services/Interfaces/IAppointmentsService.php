@@ -26,4 +26,6 @@ interface IAppointmentsService
      * @return Collection
      */
     public function getClientAppointments($clientId);
+
+    public function simulateAppointment($name, $date, $time);
 }

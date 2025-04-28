@@ -97,4 +97,10 @@ class AppointmentController extends Controller
           $agents = User::where('role_id', 2)->get();
           return response()->json($agents);
      }
+
+     public function simulatedAppointments()
+     {
+          $simulatedAppointments = $this->appointmentService->simulatedAppointment();
+          return response()->json($simulatedAppointments);
+     }
 }
