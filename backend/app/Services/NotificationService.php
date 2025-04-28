@@ -58,7 +58,7 @@ class NotificationService implements INotificationService
             throw new InvalidArgumentException('Only clients can view notifications');
         }
 
-        return $user->notifications()->latest()->get();
+        return $user->notification()->latest()->get();
     }
 
     
@@ -132,6 +132,6 @@ class NotificationService implements INotificationService
 
     public function getUsers()
     {
-        return User::where('role_id', 3)->get();
+        return User::where('role_id', 3)->get   ();
     }
 }

@@ -119,7 +119,7 @@ class User extends Authenticatable
         return $this->hasMany(BlogReactions::class);
     }
     
-    public function notifications()
+    public function notification()
     {
         return $this->hasMany(Notification::class, 'user_id');
     }

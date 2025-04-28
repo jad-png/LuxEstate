@@ -153,17 +153,7 @@ export function ClientCommunicationPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm text-[#8b8570] manrope mb-1">
-              Message *
-            </label>
-            <textarea
-              name="message"
-              value={formData.data.message}
-              onChange={handleChange}
-              required
-              placeholder="Write your message here"
-              className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#8b8570] manrope focus:outline-none focus:border-[#c78960] h-32 resize-none"
-            />
+            
           </div>
           <button
             type="submit"
