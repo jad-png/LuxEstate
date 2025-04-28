@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AppointmentRequestRow } from "./AppointmentRequestRow";
 import api from "../../services/api";
 
-export function PendingAppointmentRequests() {
+export function SimulatedAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [formData, setFormData] = useState({
     status: "",
@@ -19,7 +19,7 @@ export function PendingAppointmentRequests() {
     try {
       const response = await api.get("/appointments");
       const apiResponse = response.data;
-      const pendingAppointments = apiResponse.filter(
+      const simulatedAppointments = apiResponse.filter(
         (appointment) => appointment.status === "Scheduled"
       );
       setAppointments(apiResponse);

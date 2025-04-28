@@ -28,4 +28,6 @@ interface IAppointmentsService
     public function getClientAppointments($clientId);
 
     public function simulateAppointment($name, $date, $time, $agentId);
+
+    public function getSimulatedAppointments($agentId); 
 }

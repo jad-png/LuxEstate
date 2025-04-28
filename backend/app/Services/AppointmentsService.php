@@ -113,7 +113,6 @@ class AppointmentsService implements IAppointmentsService
     public function simulateAppointment($name, $date, $time, $agentId)
     {
         $agent = User::with('role')->where('id', $agentId)->firstOrFail();
-// d    d($agent);
         $appointment = SimulatedAppointment::create([
             'name' => $name,
             'date' => $date,
@@ -124,5 +123,13 @@ class AppointmentsService implements IAppointmentsService
         $appointment->save();
 
         return $appointment;
+    }
+
+    public function getSimulatedAppointments($agentId)
+    {
+        return SimulatedAppointment::where('agent_id', $agentId)
+            ->orderBy('date', 'asc')
+            ->orderBy('time', 'asc')
+            ->get();
     }
 }
