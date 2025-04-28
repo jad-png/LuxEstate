@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\StoreNotificationRequest;
 use App\Models\Appointment;
+use App\Models\SimulatedAppointment;
 use App\Models\User;
 use App\Services\Interfaces\IAppointmentsService;
 use Exception;
@@ -17,6 +18,7 @@ class AppointmentsService implements IAppointmentsService
         'Completed',
         'Cancelled'
     ];
+
     protected $notificationService;
     public function __construct(NotificationService $notificationService)
     {
@@ -45,15 +47,13 @@ class AppointmentsService implements IAppointmentsService
             throw new Exception('Agent is not available at this time.');
         };
 
-        return DB::transaction(function () use ($client, $agent, $date, $time) {
-            return Appointment::create([
-                'client_id' => $client->id,
-                'agent_id' => $agent->id,
-                'date' => $date,
-                'time' => $time,
-                'statuts' => 'Scheduled'
-            ]);
-        });
+        return Appointment::create([
+            'client_id' => $client->id,
+            'agent_id' => $agent->id,
+            'date' => $date,
+            'time' => $time,
+            'statuts' => 'Scheduled'
+        ]);
     }
 
     public function resolveAppointment($userId, $appointmentId, $status)
@@ -108,5 +108,18 @@ class AppointmentsService implements IAppointmentsService
             ->orderBy('date', 'asc')
             ->orderBy('time', 'asc')
             ->get();
+    }
+
+    public function simulateAppointment($name, $date, $time)
+    {
+        $appointment = SimulatedAppointment::create([
+            'name' => $name,
+            'date' => $date,
+            'time' => $time,
+            'status' => 'Scheduled'
+        ]);
+        $appointment->save();
+
+        return $appointment;
     }
 }

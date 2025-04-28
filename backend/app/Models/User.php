@@ -103,6 +103,10 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class, 'agent_id');
     }
 
+    public function simulatedAppointmentsAsAgent()
+    {
+        return $this->hasMany(SimulatedAppointment::class, 'agent_id');
+    }
 
     public function BlogPosts()
     {
