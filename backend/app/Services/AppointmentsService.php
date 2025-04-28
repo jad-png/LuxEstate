@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreNotificationRequest;
 use App\Models\Appointment;
 use App\Models\User;
 use App\Services\Interfaces\IAppointmentsService;
@@ -11,6 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class AppointmentsService implements IAppointmentsService
 {
+    private const VALID_STATUSES = [
+        'Scheduled',
+        'Confirmed',
+        'Completed',
+        'Canceled',
+    ];
+    protected $notificationService;
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
     /**
      * Summary of createAppointment
      * @param int $clientId
@@ -43,6 +55,46 @@ class AppointmentsService implements IAppointmentsService
                     'statuts' => 'Scheduled'
                 ]);
             });
+    }
+
+    public function resolveAppointment($userId, $appointmentId, $status)
+    {
+        if (!in_array($status, self::VALID_STATUSES)) {
+            throw new Exception('Invalid status: ' . $status);
+        }
+
+        $user = User::findOrFail($userId);
+        $appointment = Appointment::with(['client'])
+            ->where('id', $appointmentId)
+            ->firstOrFail();
+
+
+        return DB::transaction(function () use ($appointment, $status, $user) {
+            $appointment->update(['status' => $status]);
+
+            $this->notificationService->createNotification(
+                $user->id,
+                new StoreNotificationRequest([
+                    'user_id' => $appointment->client_id,
+                    'type' => 'AppointmentScheduled',
+                    'data' => [
+                        'appointment_id' => $appointment->id,
+                        'status' => $status,
+                        'date' => $appointment->date,
+                        'time' => $appointment->time,
+                    ],
+                ])
+            );
+
+            return $appointment->refresh();
+        });
+    }
+
+    public function all()
+    {
+        $appointments = Appointment::with('client')->get();
+
+        return $appointments;
     }
 
     /**

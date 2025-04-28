@@ -1,28 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppointmentRequestRow } from "./AppointmentRequestRow";
+import api from "../../services/api";
 
 export function PendingAppointmentRequests() {
-  const appointmentRequests = [
-    {
-      clientName: "Alice Smith",
-      requestedDate: "2025-04-22",
-      requestedTime: "14:00",
-      purpose: "Discuss property needs for a penthouse",
-    },
-    {
-      clientName: "Bob Johnson",
-      requestedDate: "2025-04-23",
-      requestedTime: "10:00",
-      purpose: "Inquire about villa pricing",
-    },
-  ];
+  const [appointments, setAppointments] = useState([]);
+  const [formData, setFormData] = useState({
+    status: "",
+  });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      setLoading(true);
+      setError(null);
+      setSuccess(null);
+      try {
+        const response = await api.get("/appointments");
+        const apiResponse = response.data;
+        setAppointments(apiResponse);
+        console.log(apiResponse);
+        
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to load appointments");
+        setLoading(false);
+      }
+    }
+    fetchAppointments();
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      await api.post("/appointments", {
+        status: formData.status,
+      });
+      setSuccess("Appointment status updated successfully");
+      setFormData({ status: "" });
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to update appointment.");
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-[#e5e5e5] mb-6">
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
         Pending Appointment Requests
       </h2>
-      {appointmentRequests.length > 0 ? (
+      {appointments.length > 0 ? (
         <table className="w-full text-left manrope">
           <thead>
             <tr className="border-b border-[#e5e5e5] text-[#666666]">
@@ -34,13 +70,13 @@ export function PendingAppointmentRequests() {
             </tr>
           </thead>
           <tbody>
-            {appointmentRequests.map((request, index) => (
+            {appointments.map((appointment) => (
               <AppointmentRequestRow
-                key={index}
-                clientName={request.clientName}
-                requestedDate={request.requestedDate}
-                requestedTime={request.requestedTime}
-                purpose={request.purpose}
+              key={appointment.id}
+              clientName={appointment.client.name}
+              requestedDate={appointment.date}
+              requestedTime={appointment.time}
+              purpose={appointment.status}
               />
             ))}
           </tbody>

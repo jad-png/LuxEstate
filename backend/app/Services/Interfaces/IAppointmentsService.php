@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface IAppointmentsService
 {
+    public function all();
     /**
      * Summary of createAppointment
      * @param int $clientId
@@ -17,6 +18,8 @@ interface IAppointmentsService
      */
     public function createAppointment($clientId, $agentId, $date, $time);
 
+    public function resolveAppointment($userId, $appointmentId, $status);
+    
     /**
      * Summary of getClientAppointments
      * @param int $clientId

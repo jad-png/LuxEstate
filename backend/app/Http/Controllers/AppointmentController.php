@@ -14,54 +14,87 @@ use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
-   protected $appointmentService;
+     protected $appointmentService;
 
-   public function __construct(IAppointmentsService $appointmentService)
-   {
-        $this->appointmentService = $appointmentService;
-   }
+     public function __construct(IAppointmentsService $appointmentService)
+     {
+          $this->appointmentService = $appointmentService;
+     }
 
-   /**
-    * Summary of create
-    * @param CreateAppointmentRequest $request
-    * @return JsonResponse
-    */
-   public function create(CreateAppointmentRequest $request)
-   {
-        $client = Auth::user();
+     public function index()
+     {
+          $appointments = $this->appointmentService->all();
+          return response()->json($appointments);
+     }
 
-        $appointment = $this->appointmentService->createAppointment(
-            $client->id,
-            $request->agent_id,
-            $request->date,
-            $request->time
-        );
+     public function resolve(int $id, Request $request): JsonResponse
+     {
+          $user = Auth::user();
+          $userId = $user->id;
+          $request->validate([
+               'status' => 'required|string|in:Completed,Cancelled',
+          ]);
 
-        return response()->json([
-            'message' => 'Appointment scheduled successfully',
-            'appointment' => $appointment
-        ]);
-   }
+          try {
+               $appointment = $this->appointmentService->resolveAppointment(
+                    $userId,
+                    $id,
+                    $request->status
+               );
+               return response()->json([
+                    'message' => 'Appointment resolved successfully',
+                    'data' => $appointment,
+               ], 200);
+          } catch (\Exception $e) {
+               return response()->json([
+                    'message' => 'Failed to resolve appointment',
+                    'error' => $e->getMessage(),
+               ], 400);
+          }
+     }
 
-   /**
-    * Summary of getAppointments
-    * @param GetAppointmentRequest $request
-    * @return JsonResponse
-    */
-   public function getAppointments(GetAppointmentRequest $request)
-   {
-        $client = Auth::user();
+     /**
+      * Summary of create
+      * @param CreateAppointmentRequest $request
+      * @return JsonResponse
+      */
+     public function create(CreateAppointmentRequest $request)
+     {
+          $client = Auth::user();
 
-        $appointments = $this->appointmentService->getClientAppointments($client->id);
+          $appointment = $this->appointmentService->createAppointment(
+               $client->id,
+               $request->agent_id,
+               $request->date,
+               $request->time
+          );
 
-        return response()->json([
-            'message' => 'all appointments',
-            'appointments' => $appointments
-        ]);
-   }
+          return response()->json([
+               'message' => 'Appointment scheduled successfully',
+               'appointment' => $appointment
+          ]);
+     }
 
-   public function getAgents () {
-        $agents = User::where('role_id', 2)->get();
-        return response()->json($agents);
-   }
+     /**
+      * Summary of getAppointments
+      * @param GetAppointmentRequest $request
+      * @return JsonResponse
+      */
+     public function getAppointments(GetAppointmentRequest $request)
+     {
+          $client = Auth::user();
+
+          $appointments = $this->appointmentService->getClientAppointments($client->id);
+
+          return response()->json([
+               'message' => 'all appointments',
+               'appointments' => $appointments
+          ]);
+     }
+
+     public function getAgents()
+     {
+          $agents = User::where('role_id', 2)->get();
+          return response()->json($agents);
+     }
 }
