@@ -11,7 +11,7 @@ class CreateSimulatedRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,19 @@ class CreateSimulatedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'agent_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
             'date' => 'required|date|after_or_equal:today',
             'time' => 'required|date_format:H:i'
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }

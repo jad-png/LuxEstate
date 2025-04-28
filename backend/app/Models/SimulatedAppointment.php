@@ -12,7 +12,8 @@ class SimulatedAppointment extends Model
         'name',
         'date',
         'time',
-        'status'
+        'status',
+        'agent_id'
     ];
 
     public $timestamps = true;

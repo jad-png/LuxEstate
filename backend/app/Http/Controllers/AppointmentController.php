@@ -101,11 +101,12 @@ class AppointmentController extends Controller
 
      public function simulatedAppointments(CreateSimulatedRequest $request)
      {
+          $agentId = Auth::user()->id;
+     //  dd($agentId);
           $date = $request->date;
           $time = $request->time;
           $name = $request->name;
-          $agentId = $request->agent_id;
-          $simulatedAppointments = $this->appointmentService->simulateAppointment($date, $time, $name, $agentId);
+          $simulatedAppointments = $this->appointmentService->simulateAppointment($name, $date, $time, $agentId);
           return response()->json($simulatedAppointments);
      }
 }
