@@ -57,8 +57,9 @@ Route::middleware('jwt')->group(function () {
         Route::get('/', [AppointmentController::class, 'index']);
         Route::get('/simulated', [AppointmentController::class, 'getSimulatedAppointments']);
         Route::post('/', [AppointmentController::class, 'create']);
-        Route::post('/simulated', [AppointmentController::class, 'simulatedAppointments']);
-        Route::patch('/{appointmentId}/resolve', [AppointmentController::class, 'resolve']);
+        Route::patch('/simulated', [AppointmentController::class, 'simulatedAppointments']);
+        Route::patch('/{appointmentId}/resolve', action: [AppointmentController::class, 'resolve']);
+        Route::patch('simulated/{appointmentId}/resolve', action: [AppointmentController::class, 'resolveSimulatedAppointment']);
         Route::get('/mine', [AppointmentController::class, 'getAppointments']);
     });
 

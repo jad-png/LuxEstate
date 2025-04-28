@@ -46,10 +46,10 @@ const routes = [
   { path: "/contact", component: VisitRequest, layout: MainLayout },
   { path: "/agents/clients", component: ClientCommunicationPage, layout: AgentLayout},
   { path: "/agents/appointments", component: ManageAppointmentsPage, layout: AgentLayout},
-  { path: "/Admin/properties", component: Admin_property, layout: AdminLayout },
-  { path: "/Admin/features", component: Admin_features, layout: AdminLayout },
-  { path: "/Admin/blog", component: AdminBlog, layout: AdminLayout },
-  { path: "/Admin/notification", component: AdminNotifcation, layout: AdminLayout },
+  { path: "/admin/properties", component: Admin_property, layout: AdminLayout },
+  { path: "/admin/features", component: Admin_features, layout: AdminLayout },
+  { path: "/admin/blog", component: AdminBlog, layout: AdminLayout },
+  { path: "/admin/notification", component: AdminNotifcation, layout: AdminLayout },
 ];
 
 export default routes;

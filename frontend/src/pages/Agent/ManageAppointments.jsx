@@ -2,6 +2,7 @@ import React from "react";
 import { PendingAppointmentRequests } from "../../components/Agent/PendingAppointmentRequests";
 import { ConfirmedAppointments } from "../../components/Agent/ConfirmedAppointments";
 import { RequestAppointmentForm } from "../../components/Agent/RequestAppointmentForm";
+import { SimulatedAppointments } from "../../components/Agent/SimulatedAppointments";
 
 export function ManageAppointmentsPage() {
   return (
@@ -12,6 +13,7 @@ export function ManageAppointmentsPage() {
 
       <PendingAppointmentRequests />
       <ConfirmedAppointments />
+      <SimulatedAppointments />
       <RequestAppointmentForm />
     </div>
   );

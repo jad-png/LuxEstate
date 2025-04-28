@@ -102,7 +102,7 @@ class AppointmentController extends Controller
      public function simulatedAppointments(CreateSimulatedRequest $request)
      {
           $agentId = Auth::user()->id;
-     //  dd($agentId);
+          //  dd($agentId);
           $date = $request->date;
           $time = $request->time;
           $name = $request->name;
@@ -115,5 +115,28 @@ class AppointmentController extends Controller
           $agentId = Auth::user()->id;
           $simulatedAppointments = $this->appointmentService->getSimulatedAppointments($agentId);
           return response()->json($simulatedAppointments);
+     }
+
+     public function resolveSimulatedAppointment(int $appointmentId, Request $request)
+     {
+          $request->validate([
+               'status' => 'required|string|in:Completed,Cancelled',
+          ]);
+
+          try {
+               $appointment = $this->appointmentService->resolveSimulatedAppointment(
+                    $appointmentId,
+                    $request->status
+               );
+               return response()->json([
+                    'message' => 'Appointment resolved successfully',
+                    'data' => $appointment,
+               ], 200);
+          } catch (\Exception $e) {
+               return response()->json([
+                    'message' => 'Failed to resolve appointment',
+                    'error' => $e->getMessage(),
+               ], 400);
+          }
      }
 }

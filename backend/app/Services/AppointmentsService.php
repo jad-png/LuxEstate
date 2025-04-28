@@ -24,6 +24,14 @@ class AppointmentsService implements IAppointmentsService
     {
         $this->notificationService = $notificationService;
     }
+
+    public function all()
+    {
+        $appointments = Appointment::with('client')->get();
+
+        return $appointments;
+    }
+
     /**
      * Summary of createAppointment
      * @param int $clientId
@@ -89,13 +97,6 @@ class AppointmentsService implements IAppointmentsService
         });
     }
 
-    public function all()
-    {
-        $appointments = Appointment::with('client')->get();
-
-        return $appointments;
-    }
-
     /**
      * Summary of getClientAppointments
      * @param int $clientId
@@ -105,6 +106,14 @@ class AppointmentsService implements IAppointmentsService
     {
         return Appointment::where('client_id', $clientId)
             ->with('agent')
+            ->orderBy('date', 'asc')
+            ->orderBy('time', 'asc')
+            ->get();
+    }
+
+    public function getSimulatedAppointments($agentId)
+    {
+        return SimulatedAppointment::where('agent_id', $agentId)
             ->orderBy('date', 'asc')
             ->orderBy('time', 'asc')
             ->get();
@@ -125,11 +134,15 @@ class AppointmentsService implements IAppointmentsService
         return $appointment;
     }
 
-    public function getSimulatedAppointments($agentId)
+    public function resolveSimulatedAppointment(int $appointmentId, string $status)
     {
-        return SimulatedAppointment::where('agent_id', $agentId)
-            ->orderBy('date', 'asc')
-            ->orderBy('time', 'asc')
-            ->get();
+        if (!in_array($status, self::VALID_STATUSES)) {
+            throw new Exception('Invalid status: ' . $status);
+        }
+
+        $appointment = SimulatedAppointment::where('id', $appointmentId)
+            ->firstOrFail();
+
+        return $appointment->update(['status' => $status]);
     }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AppointmentRequestRow } from "./AppointmentRequestRow";
 import api from "../../services/api";
+import { SimulatedAppointmentRequestRow } from "./SimulatedAppointmentRequestRow";
 
 export function SimulatedAppointments() {
   const [appointments, setAppointments] = useState([]);
@@ -40,32 +41,32 @@ export function SimulatedAppointments() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
-    try {
-      await api.post("/appointments", {
-        status: formData.status,
-      });
-      setSuccess("Appointment status updated successfully");
-      setFormData({ status: "" });
-    } catch (error) {
-      setError(
-        error.response?.data?.message || "Failed to update appointment."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     setError(null);
+//     setSuccess(null);
+//     try {
+//       await api.post("/appointments", {
+//         status: formData.status,
+//       });
+//       setSuccess("Appointment status updated successfully");
+//       setFormData({ status: "" });
+//     } catch (error) {
+//       setError(
+//         error.response?.data?.message || "Failed to update appointment."
+//       );
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
   const handleResolve = async (appointmentId, status) => {
     setLoading(true);
     setError(null);
     setSuccess(null);
     try {
-      await api.patch(`appointments/${appointmentId}/resolve`, {
+      await api.patch(`appointments/simulated/${appointmentId}/resolve`, {
         status: status,
       });
 
@@ -107,10 +108,10 @@ export function SimulatedAppointments() {
           </thead>
           <tbody>
             {appointments.map((appointment) => (
-              <AppointmentRequestRow
+              <SimulatedAppointmentRequestRow
                 key={appointment.id}
                 appointmentId={appointment.id}
-                clientName={appointment.client?.name || "Unknown"}
+                clientName={appointment.name || "Unknown"}
                 requestedDate={appointment.date || "Unknown"}
                 requestedTime={appointment.time || "Unknown"}
                 status={appointment.status || "Unknown"}
