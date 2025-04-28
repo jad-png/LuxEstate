@@ -110,11 +110,14 @@ class AppointmentsService implements IAppointmentsService
             ->get();
     }
 
-    public function simulateAppointment($name, $date, $time)
+    public function simulateAppointment($name, $date, $time, $agentId)
     {
+        $agent = User::with('role')->where('id', $agentId)->firstOrFail();
+
         $appointment = SimulatedAppointment::create([
             'name' => $name,
             'date' => $date,
+            'agent_id' => $agent->id,
             'time' => $time,
             'status' => 'Scheduled'
         ]);

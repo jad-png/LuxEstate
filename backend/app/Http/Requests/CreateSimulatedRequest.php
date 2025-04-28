@@ -23,6 +23,7 @@ class CreateSimulatedRequest extends FormRequest
     {
         return [
             'agent_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
             'date' => 'required|date|after_or_equal:today',
             'time' => 'required|date_format:H:i'
         ];

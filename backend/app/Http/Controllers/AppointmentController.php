@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAppointmentRequest;
+use App\Http\Requests\CreateSimulatedRequest;
 use App\Http\Requests\GetAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\User;
@@ -98,9 +99,13 @@ class AppointmentController extends Controller
           return response()->json($agents);
      }
 
-     public function simulatedAppointments()
+     public function simulatedAppointments(CreateSimulatedRequest $request)
      {
-          $simulatedAppointments = $this->appointmentService->simulatedAppointment();
+          $date = $request->date;
+          $time = $request->time;
+          $name = $request->name;
+          $agentId = $request->agent_id;
+          $simulatedAppointments = $this->appointmentService->simulateAppointment($date, $time, $name, $agentId);
           return response()->json($simulatedAppointments);
      }
 }
