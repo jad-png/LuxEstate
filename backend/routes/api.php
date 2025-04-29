@@ -88,6 +88,7 @@ Route::middleware('jwt')->group(function () {
     Route::prefix('notifications')->group(function () {
         Route::post('/', [NotificationController::class, 'store']);
         Route::get('/', [NotificationController::class, 'index']);
+        Route::get('/all', [NotificationController::class, 'all']);
         Route::patch('/{notification_id}/read', [NotificationController::class, 'markAsRead']);
     });
 
