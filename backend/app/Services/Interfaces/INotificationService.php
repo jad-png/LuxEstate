@@ -41,4 +41,6 @@ interface INotificationService
     public function sendBulkPropertyNotification($senderId, $request);
 
     public function getUsers();
+
+    public function all();
 }

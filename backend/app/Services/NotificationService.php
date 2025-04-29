@@ -13,6 +13,10 @@ use InvalidArgumentException;
 
 class NotificationService implements INotificationService
 {
+    public function all()
+    {
+        return Notification::with('user', 'sender')->get();
+    }
     /**
      * Summary of createNotification
      * @param int $senderId

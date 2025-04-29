@@ -112,20 +112,6 @@ export function NotificationForm() {
             </option>
           </select>
         </div>
-        {/* <div>
-          <label className="block text-sm text-[#8b8570] manrope mb-1">
-            Message *
-          </label>
-          <textarea
-            name="message"
-            value={formData.data.message}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-[#e5e5e5] text-[#8b8570] manrope focus:outline-none focus:border-[#c78960]"
-            rows="4"
-            placeholder="Enter notification message"
-          ></textarea>
-        </div> */}
         <button
           type="submit"
           disabled={loading}

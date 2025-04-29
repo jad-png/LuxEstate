@@ -17,6 +17,12 @@ class NotificationController extends Controller
         $this->notificationService = $notificationService;
     }
 
+
+    public function all()
+    {
+        $notifications = $this->notificationService->all();
+        return response()->json($notifications);
+    }
     public function store(StoreNotificationRequest $request)
     {
         // dd('hello');
@@ -43,6 +49,7 @@ class NotificationController extends Controller
         ], 200);
     }
 
+    
     public function markAsRead(MarkAsReadRequest $request)
     {
         $user = Auth::user();

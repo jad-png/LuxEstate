@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { NotificationItem } from "./NotificationItem";
+import api from "../../services/api";
 
 export function NotificationsList() {
-  const notifications = [
-    {
-      id: 1,
-      recipient: "All Users",
-      title: "System Update",
-      message: "The system will undergo maintenance on April 20th.",
-      timestamp: "2025-04-19 10:00 AM",
-    },
-    {
-      id: 2,
-      recipient: "John Doe",
-      title: "Visit Reminder",
-      message: "Your property visit is scheduled for tomorrow.",
-      timestamp: "2025-04-18 02:30 PM",
-    },
-  ];
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const fetchNotifications = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      const response = await api.get("");
+    }
+  }
   return (
     <div className="bg-white p-6 shadow-sm border border-[#e5e5e5]">
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
