@@ -8,8 +8,8 @@ const Admin_notification = () => {
           <h1 className="text-3xl font-semibold dm-serif text-[#262626] mb-6">
             Notification Management
           </h1>
-          <NotificationForm />
           <NotificationsList />
+          <NotificationForm />
         </div>
     );
 }
