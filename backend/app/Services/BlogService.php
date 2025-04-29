@@ -33,7 +33,7 @@ class BlogService implements IBlogService
 
     public function paginatedPosts()
     {
-        return BlogPost::with('comments', 'reactions', 'category')->paginate(5);
+        return BlogPost::with('comments', 'reactions', 'category', 'user')->paginate(5);
     }
 
     /**

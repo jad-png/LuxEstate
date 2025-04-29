@@ -1,41 +1,18 @@
 import React from "react";
 
 export function PostContent({ isOpen, onClose, post }) {
-    const sampleComments = [
-        {
-          id: 1,
-          user: "John Doe",
-          content: "Great post! Very informative.",
-          timestamp: "2025-04-19 10:00 AM",
-        },
-        {
-          id: 2,
-          user: "Jane Smith",
-          content: "Inappropriate comment here.",
-          timestamp: "2025-04-19 11:30 AM",
-        },
-      ];
-
-      const sampleReactions = {
-        likes: 15,
-        dislikes: 3,
-      };
-
   if (!isOpen) return null;
 
+  const sampleComments = post.comments;
+  console.log(sampleComments);
+  
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-10 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
         <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-6">
           Post Details
         </h2>
         <div className="space-y-4">
-          <div>
-            <label className="block text-sm text-[#666666] manrope font-semibold">
-              ID
-            </label>
-            <p className="text-[#666666] manrope">{post.id}</p>
-          </div>
           <div>
             <label className="block text-sm text-[#666666] manrope font-semibold">
               Title
@@ -46,7 +23,7 @@ export function PostContent({ isOpen, onClose, post }) {
             <label className="block text-sm text-[#666666] manrope font-semibold">
               Publisher
             </label>
-            <p className="text-[#666666] manrope">{post.publisher}</p>
+            <p className="text-[#666666] manrope">{post.user?.name}</p>
           </div>
           <div>
             <label className="block text-sm text-[#666666] manrope font-semibold">
@@ -72,10 +49,10 @@ export function PostContent({ isOpen, onClose, post }) {
                 </p>
                 <div className="flex items-center gap-4 mt-1">
                   <span className="text-[#666666] manrope">
-                    👍 Likes: {sampleReactions.likes}
+                    👍 Likes: {post.reactions}
                   </span>
                   <span className="text-[#666666] manrope">
-                    👎 Dislikes: {sampleReactions.dislikes}
+                    {/* 👎 Dislikes: {.dislikes} */}
                   </span>
                 </div>
               </div>
@@ -91,7 +68,7 @@ export function PostContent({ isOpen, onClose, post }) {
                     >
                       <div>
                         <p className="text-[#666666] manrope font-medium">
-                          {comment.user}
+                          {comment.user?.name}
                         </p>
                         <p className="text-[#666666] manrope">
                           {comment.content}
