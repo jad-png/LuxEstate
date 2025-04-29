@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../../services/api";
 
 export function AddFeatureModal({ isOpen, onClose }) {
+  const [formData, setFormData] = useState({
+    name: "",
+  });
+
+  const [error, setError] = useState(null);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    setError(null);
+    try {
+      await api.post("/features", {
+        name: formData.name,
+      });
+    } catch (error) {
+      console.error("Error adding feature:", error);
+    }
+  };
   if (!isOpen) return null;
 
   return (
@@ -15,6 +39,8 @@ export function AddFeatureModal({ isOpen, onClose }) {
               Feature Name *
             </label>
             <input
+              name="name"
+              value={formData.name}
               type="text"
               placeholder="e.g., Swimming Pool"
               className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
@@ -29,6 +55,7 @@ export function AddFeatureModal({ isOpen, onClose }) {
             Cancel
           </button>
           <button
+            onSubmit={handleSubmit}
             onClick={onClose}
             className="px-4 py-2 bg-[#a27d56] text-white manrope rounded-lg hover:bg-[#8b6a47]"
           >
