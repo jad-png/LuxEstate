@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FeatureItem } from "./FeatureItem";
 import { AddFeatureModal } from "./AddFeatureModal";
+import api from "../../services/api";
 
 export function FeatureList() {
   const [features, setFeatures] = useState([]);
@@ -53,24 +54,30 @@ export function FeatureList() {
       </div>
       <table className="w-full text-left manrope">
         <thead>
-          {features.length === 0 && (
-            <tr>
-              <td colSpan="4" className="text-center py-4 text-[#666666]">
-                No features available
-              </td>
-            </tr>
-          )}
           <tr className="border-b border-[#e5e5e5] text-[#666666]">
             <th className="py-2 px-4">ID</th>
             <th className="py-2 px-4">Name</th>
             <th className="py-2 px-4">Actions</th>
           </tr>
         </thead>
-        {features.map((feature) => {
-          <tbody>
-            <FeatureItem key={feature.id} id={feature.id} name={feature.name} />
-          </tbody>;
-        })}
+        <tbody>
+          {features.length > 0 ? (
+            features.map((feature) => (
+              <FeatureItem
+                key={feature.id}
+                id={feature.id}
+                name={feature.name}
+                feature={feature}
+              />
+            ))
+          ) : (
+            <tr>
+              <td colSpan="3" className="text-center py-4 text-[#666666]">
+                No features available
+              </td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );

@@ -41,6 +41,7 @@ export function AddFeatureModal({ isOpen, onClose }) {
             <input
               name="name"
               value={formData.name}
+              onChange={handleChange}
               type="text"
               placeholder="e.g., Swimming Pool"
               className="w-full p-3 border border-[#e5e5e5] rounded-lg text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"

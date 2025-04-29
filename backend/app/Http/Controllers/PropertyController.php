@@ -167,7 +167,7 @@ class PropertyController extends Controller
      */
     public function attachFeatures(int $id, Request $request): JsonResponse
     {
-        $features = $this->propertyService->attachFeatures($id, $request->input('features'));
+        $features = $this->propertyService->attachFeatures($id, $request->input('feature_ids', []));
         return response()->json([
             'message' => 'Features attached successfully',
             'features' => $features, // for visualization purpose of the attached features
