@@ -21,6 +21,12 @@ class BlogPostController extends Controller
         $this->blogPostService = $blogPostService;
     }
 
+    public function all()
+    {
+        $posts = $this->blogPostService->all();
+
+        return response()->json($posts);
+    }
     public function index()
     {
         $posts = $this->blogPostService->paginatedPosts();

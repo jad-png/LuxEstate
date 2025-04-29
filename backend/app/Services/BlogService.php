@@ -22,13 +22,9 @@ use InvalidArgumentException;
 
 class BlogService implements IBlogService
 {
-    /**
-     * Summary of all
-     * @return BlogPost
-     */
     public function all()
     {
-        //
+        return BlogPost::with('comments', 'reactions', 'category', 'user')->get();
     }
 
     public function paginatedPosts()

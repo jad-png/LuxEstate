@@ -64,6 +64,11 @@ export function PostModal() {
         <h2 className="text-2xl font-semibold dm-serif text-[#262626] mb-6">
           Create New Blog Post
         </h2>
+        {success && (
+          <div className="mb-4 p-4 bg-green-100 text-green-800 border border-green-300 rounded">
+            {success}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm text-[#666666] manrope mb-1">
@@ -119,7 +124,11 @@ export function PostModal() {
             >
               <option value="">Select Category</option>
               {categories.map((category) => (
-                <option key={category.id} name="category_id" value={category.id}>
+                <option
+                  key={category.id}
+                  name="category_id"
+                  value={category.id}
+                >
                   {category.name}
                 </option>
               ))}
