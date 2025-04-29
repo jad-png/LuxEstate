@@ -31,6 +31,15 @@ export function FeatureList() {
     fetchFeatures();
   }, []);
 
+  const handleDeleteFeature = async (id) => {
+    try {
+      await api.delete(`/features/${id}`);
+      setFeatures((prev) => prev.filter((feature) => feature.id !== id));
+    } catch (error) {
+      setError("Failed to delete feature");
+      console.error("Error deleting feature:", error);
+    }
+  }
   return (
     <div className="bg-white p-6 shadow-sm border border-[#e5e5e5]">
       <div className="flex justify-between items-center mb-4">
@@ -68,6 +77,7 @@ export function FeatureList() {
                 id={feature.id}
                 name={feature.name}
                 feature={feature}
+                onDelete={handleDeleteFeature}
               />
             ))
           ) : (

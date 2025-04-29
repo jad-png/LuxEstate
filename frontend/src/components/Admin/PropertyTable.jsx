@@ -7,20 +7,20 @@ export function PropertyTable() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const fetchProperties = async () => {
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
-    try {
-      const response = await api.get("/properties");
-      const apiResponse = response.data.properties;
-      setProperties(apiResponse);
-      setLoading(false);
-    } catch (error) {
-      setError("Failed to load properties");
-      setLoading(false);
-    }
-  }
+      const fetchProperties = async () => {
+        setLoading(true);
+        setError(null);
+        setSuccess(null);
+        try {
+          const response = await api.get("/properties");
+          const apiResponse = response.data.properties;
+          setProperties(apiResponse);
+          setLoading(false);
+        } catch (error) {
+          setError("Failed to load properties");
+          setLoading(false);
+        }
+      }
   useEffect(() => {
     fetchProperties();
   }, []);
