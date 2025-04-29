@@ -1,6 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../../services/api";
 
 export function PostModal() {
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    status: "",
+    category_id: null,
+  });
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = async () => {
+      setError(null);
+      try {
+        await api.post("/blog/posts", {
+          title: formData.title,
+          content: formData.content,
+          status: formData.status,
+          category_id: formData.category_id
+        });
+        setFormData({
+          title: "",
+          content: "",
+          status: "",
+          category_id: null,
+        });
+        setSuccess("Post created successfully!");
+      } catch (error) {
+        setError("Failed to create post");
+        console.error("Error creating post:", error);
+      }
+    }
   return (
     <div className="">
       <div className="bg-white p-8 shadow-md w-full mt-4">
