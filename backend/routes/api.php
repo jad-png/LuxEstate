@@ -13,14 +13,15 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\VisitRequestController;
 use Illuminate\Support\Facades\Route;
 
-// Public routes (no JWT middleware)
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-// Protected routes (JWT middleware)
 Route::middleware('jwt')->group(function () {
+
+    
+    
     // Property routes
     Route::prefix('properties')->group(function () {
         Route::get('/', [PropertyController::class, 'index']);
@@ -33,6 +34,8 @@ Route::middleware('jwt')->group(function () {
         Route::post('/{id}/videos', [PropertyController::class, 'addVideo']);
         Route::post('/{id}/features', [PropertyController::class, 'attachFeatures']);
     });
+
+    
 
     // Feature routes
     Route::prefix('features')->group(function () {
@@ -47,11 +50,13 @@ Route::middleware('jwt')->group(function () {
     Route::delete('/favorites', [ClientFavoriteController::class, 'removeFavorite']);
     Route::get('/favorites', [ClientFavoriteController::class, 'getFavorites']);
 
+    
     // Contact Request routes
     Route::post('/contact-requests', [ContactRequestController::class, 'create']);
     Route::put('/contact-requests/resolve', [ContactRequestController::class, 'resolve']);
     Route::get('/contact-requests', [ContactRequestController::class, 'getMyRequests']);
 
+    
     // Appointment routes
     Route::prefix('appointments')->group(function () {
         Route::get('/', [AppointmentController::class, 'index']);
@@ -77,6 +82,7 @@ Route::middleware('jwt')->group(function () {
         Route::post('/posts/share', [BlogPostController::class, 'sharePost']);
     });
 
+    
     // Notification routes
     Route::prefix('notifications')->group(function () {
         Route::post('/', [NotificationController::class, 'store']);
@@ -85,9 +91,9 @@ Route::middleware('jwt')->group(function () {
     });
 
     // Category routes
-    Route::prefix('category')->group(function () {
+    Route::prefix( 'category')->group(function () {
         Route::get('/', [CategoryController::class, 'index']);
-        Route::get('/{id}', [CategoryController::class, 'show'])->name('blog.show');
+        Route::get('/{id}', [CategoryController::class, 'show'])->name(name: 'category.show');
         Route::post('/', [CategoryController::class, 'store']);
         Route::put('/{id}', [CategoryController::class, 'update']);
         Route::delete('/{id}', [CategoryController::class, 'destroy']);
@@ -113,4 +119,8 @@ Route::middleware('jwt')->group(function () {
     // Miscellaneous routes
     Route::get('/agents', [AppointmentController::class, 'getAgents']);
     Route::get('/clients', [NotificationController::class, 'getClients']);
+});
+
+Route::get('/test', function () {
+    return response()->json(['message' => 'Test route is working!']);
 });
