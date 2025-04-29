@@ -11,6 +11,7 @@ use App\Services\Interfaces\IPropertyService;
 use App\Services\PropertyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -59,6 +60,7 @@ class PropertyController extends Controller
     {
         $property = $this->propertyService->create($request);
 
+        
         if ($request->hasFile('image_path')) {
             foreach ($request->file('image_path') as $image) {
                 $imagePath = $image->store('property_images', 'public');

@@ -35,6 +35,7 @@ export function PropertyModel() {
       
       const apiResponse = response.data;
       setCategories(apiResponse);
+      setLoading(false);
     } catch (error) {
       setError("Failed to load categories");
       setLoading(false);
@@ -50,6 +51,7 @@ export function PropertyModel() {
       const apiResponse = response.data.features;
 
       setFeatures(apiResponse);
+      setLoading(false);
     } catch (error) {
       setError("Failed to load features");
       setLoading(false);
@@ -174,9 +176,9 @@ export function PropertyModel() {
               className="w-full p-3 border border-[#e5e5e5] text-[#666666] rounded-md focus:outline-none focus:border-[#a27d56] transition-colors"
             >
               <option value="">Select Status</option>
-              <option value="Available">Available</option>
-              <option value="Occupied">Occupied</option>
-              <option value="Under Maintenance">Under Maintenance</option>
+              <option value="available">Available</option>
+              <option value="sold">Sold</option>
+              <option value="pending">Under Maintenance</option>
             </select>
           </div>
 

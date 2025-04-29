@@ -9,6 +9,17 @@ use Illuminate\Validation\ValidationException;
 class CreatePropertyRequest extends FormRequest
 {
     /**
+     * Get the user ID from the authenticated user.
+     */
+    protected function prepareForValidation()
+    {
+        if (Auth::check()) {
+            $this->merge([
+                'admin_id' => Auth::id(),
+            ]);
+        }
+    }
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
