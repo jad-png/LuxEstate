@@ -96,13 +96,7 @@ export function PostContent({ isOpen, onClose, post }) {
             onClick={onClose}
             className="px-4 py-2 text-red-600 manrope rounded-lg border border-[#e5e5e5] hover:bg-[#f5f5f5]"
           >
-            Deny
-          </button>
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-[#a27d56] text-white manrope rounded-lg hover:bg-[#8b6a47]"
-          >
-            Accept
+            Close
           </button>
         </div>
       </div>

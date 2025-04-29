@@ -38,6 +38,18 @@ export function PostTable() {
     setIsModalOpen(true);
   };
 
+  const handleStatusUpdate = async (postId, status) => {
+    setError(null);
+    setSuccess(null);
+    try {
+      await api.put(`/blog/posts/${postId}`, { status });
+      setSuccess("Post published successfully!");
+      fetchPosts();
+    } catch (error) {
+      setError("Failed to publish post");
+      console.error("Error publishing post:", error);
+    }
+  }
   return (
     <div className="">
       <div className="bg-white p-6 shadow-sm border border-[#e5e5e5]">
@@ -88,10 +100,14 @@ export function PostTable() {
                         >
                           View Details
                         </button>
-                        <button className="px-2 py-1 text-green-600 hover:text-green-800 manrope">
+                        <button
+                          onClick={() => handleStatusUpdate(post.id, "Published")}
+                          className="px-2 py-1 text-green-600 hover:text-green-800 manrope">
                           Publish
                         </button>
-                        <button className="px-2 py-1 text-yellow-600 hover:text-yellow-800 manrope">
+                        <button 
+                          onClick={() => handleStatusUpdate(post.id, "Draft")}
+                          className="px-2 py-1 text-yellow-600 hover:text-yellow-800 manrope">
                           Draft
                         </button>
                       </div>
