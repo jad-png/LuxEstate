@@ -32,7 +32,6 @@ export function PropertyModel() {
     setSuccess(null);
     try {
       const response = await api.get("/category");
-      console.log(response);
       
       const apiResponse = response.data;
       setCategories(apiResponse);
@@ -47,17 +46,16 @@ export function PropertyModel() {
     setError(null);
     setSuccess(null);
     try {
-      const response = await api.get("/features");
-      console.log(response);
-      
-      const apiResponse = response.data;
+      const response = await api.get("/features");      
+      const apiResponse = response.data.features;
+
       setFeatures(apiResponse);
     } catch (error) {
       setError("Failed to load features");
       setLoading(false);
     }
   }; 
-   
+
   useEffect(() => {
     fethcCategories();
     fetchFeatures();
@@ -286,6 +284,15 @@ export function PropertyModel() {
             <label className="block text-sm text-[#666666] mb-1">
               Feature IDs (comma-separated)
             </label>
+            {features.length > 0 && (
+              <div className="mb-2 text-sm text-[#666666]">
+                {features.map((feature) => (
+                  <p key={feature.id}>
+                    {feature.id}: {feature.name}
+                  </p>
+                ))}
+              </div>
+            )}
             <input
               type="text"
               name="feature_ids"
