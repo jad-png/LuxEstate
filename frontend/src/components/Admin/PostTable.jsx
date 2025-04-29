@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PostContent } from "./PostContent";
+import api from "../../services/api";
 
 export function PostTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const samplePosts = [
-    {
-      id: 1,
-      title: "Introducing ShelfBrackets",
-      publisher: "Admin",
-      status: "Draft",
-      content:
-        "Kevin had a lot going on in his life and was trying to find the right educational environment to fit into his needs and schedule.",
-    },
-  ];
+  const [posts, setPosts] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      const response = await api.get("/posts");
+      const apiResponse = response.data;
+      setPosts(apiResponse);
+    } catch (error) {
+      setError("Failed to load posts");
+      console.error("Error fetching posts:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  });
   return (
     <div className="">
       <div className="bg-white p-6 shadow-sm border border-[#e5e5e5]">
@@ -52,10 +67,14 @@ export function PostTable() {
                 <td className="py-2">
                   <div className="flex items-center justify-center gap-2">
                     <div>
-                      <button onClick={() => {setIsModalOpen(true)}} className="px-2 py-1 text-[#a27d56] hover:text-[#8b6a47] manrope">
+                      <button
+                        onClick={() => {
+                          setIsModalOpen(true);
+                        }}
+                        className="px-2 py-1 text-[#a27d56] hover:text-[#8b6a47] manrope"
+                      >
                         View Details
                       </button>
-                      
                     </div>
                     <button className="px-2 py-1 text-green-600 hover:text-green-800 manrope">
                       Publish
@@ -71,12 +90,12 @@ export function PostTable() {
         </table>
       </div>
       <PostContent
-                        isOpen={isModalOpen}
-                        onClose={() => {
-                          setIsModalOpen(false);
-                        }}
-                        post={samplePosts[0]}
-                      />
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        post={samplePosts[0]}
+      />
     </div>
   );
 }
