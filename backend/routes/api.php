@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientFavoriteController;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\VisitRequestController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,10 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware('jwt')->group(function () {
 
+    Route::prefix('profile')->group(function () {
+        Route::put('/', [ProfileController::class, 'update']);
+        Route::get('/history', [ProfileController::class, 'history']);
+    });
     
     
     // Property routes

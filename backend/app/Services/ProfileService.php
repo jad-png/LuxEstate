@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\User;
 use App\Models\VisitRequest;
@@ -9,7 +10,7 @@ use App\Services\Interfaces\IProfileService;
 
 class ProfileService implements IProfileService
 {
-    public function updateProfile($userId, UpdatePropertyRequest $request)
+    public function updateProfile($userId, UpdateProfileRequest $request)
     {
         $user = User::find($userId);
         if ($user) {
