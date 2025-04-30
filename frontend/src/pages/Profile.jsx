@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProfileInfo } from "../components/Profile/ProfileInfo";
 import { OrderTable } from "../components/Profile/OrderTable";
+import useAuthStore from "../stores/authStore";
+import api from "../services/api";
 
 export function Profile() {
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+44 123 456 7890",
-    address: "465 Zack Prairie Suite 337, NY",
-  };
-  const orderHistory = [
-    {
-      id: 1,
-      date: "2025-04-15",
-      total: 1200,
-      status: "Delivered",
-    },
-    {
-      id: 2,
-      date: "2025-04-10",
-      total: 850,
-      status: "In Preparation",
-    },
-  ];
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    // address: "",
+  });
 
+  const [error, setError] = useState(null);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev, [name]: value,
+    }));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      await api.put("", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        // address: formData.address,
+      });
+
+    } catch (error) {
+      setError("Failed to update profile");
+      console.error("Error updating profile:", error);
+    }
+  }
+  const user = useAuthStore((state) => state.user);
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-3xl font-semibold dm-serif text-[#262626] mb-6">
@@ -32,7 +44,7 @@ export function Profile() {
 
       <ProfileInfo user={user} />
 
-      <OrderTable orderHistory={orderHistory} />
+      {/* <OrderTable orderHistory={orderHistory} /> */}
     </div>
   );
 }

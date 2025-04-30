@@ -10,10 +10,9 @@ export function UserDropDown() {
     await logout();
     navigate("/login");
   };
-  const user = {
-    name: "John Doe",
-    profilePhoto: "https://via.placeholder.com/40", // Placeholder for profile photo
-  };
+  const user = useAuthStore((state) => state.user);
+  console.log(user);
+  
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -21,16 +20,14 @@ export function UserDropDown() {
   };
   return (
     <div className="relative">
-      {/* Profile Photo Button */}
       <button onClick={toggleDropdown} className="flex items-center space-x-2">
         <img
-          src={user.profilePhoto}
+          // src={user.profilePhoto}
           alt="Profile"
           className="h-10 w-10 rounded-full border border-[#e5e5e5]"
         />
       </button>
 
-      {/* Dropdown Menu (Static, always visible for demo) */}
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#e5e5e5] z-50 ">
           <div className="px-4 py-2 border-b border-[#e5e5e5]">

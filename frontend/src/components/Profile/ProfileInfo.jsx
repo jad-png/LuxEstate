@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ProfileInfo({ user }) {
+export function ProfileInfo({ user, handleChange, handleSubmit }) {
   return (
     <div className="bg-white p-6 shadow-sm border border-[#e5e5e5] mb-6">
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
@@ -46,7 +46,7 @@ export function ProfileInfo({ user }) {
           </label>
           <textarea
             value={user.address}
-            rows="3"
+            rows="1"
             className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56] resize-none"
             readOnly
           />
