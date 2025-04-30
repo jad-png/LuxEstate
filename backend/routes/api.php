@@ -41,7 +41,6 @@ Route::middleware('jwt')->group(function () {
     });
 
     
-
     // Feature routes
     Route::prefix('features')->group(function () {
         Route::get('/', [FeatureController::class, 'index']);
