@@ -21,7 +21,7 @@ export function NotificationsList() {
       setError("Failed to fetch notifications");
       console.error("Error fetching notifications:", error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchNotifications();
@@ -31,27 +31,29 @@ export function NotificationsList() {
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
         Sent Notifications
       </h2>
-      <table className="w-full text-left manrope">
-        <thead>
-          <tr className="border-b border-[#e5e5e5] text-[#666666]">
-            <th className="py-2 px-4">ID</th>
-            <th className="py-2 px-4">Sender</th>
-            <th className="py-2 px-4">Recipient</th>
-            <th className="py-2 px-4">Title</th>
-            <th className="py-2 px-4">Message</th>
-            <th className="py-2 px-4">Timestamp</th>
-          </tr>
-        </thead>
-        <tbody>
-          {notifications.map((notification) => (
-            <NotificationItem
-              key={notification.id}
-              id={notification.id}
-              notification={notification}
-            />
-          ))}
-        </tbody>
-      </table>
+      <div className="max-h-[400px] overflow-y-auto">
+        <table className="w-full text-left manrope">
+          <thead>
+            <tr className="border-b border-[#e5e5e5] text-[#666666]">
+              <th className="py-2 px-4">ID</th>
+              <th className="py-2 px-4">Sender</th>
+              <th className="py-2 px-4">Recipient</th>
+              <th className="py-2 px-4">Title</th>
+              <th className="py-2 px-4">Message</th>
+              <th className="py-2 px-4">Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            {notifications.map((notification) => (
+              <NotificationItem
+                key={notification.id}
+                id={notification.id}
+                notification={notification}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
