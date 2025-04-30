@@ -18,7 +18,6 @@ export function PostTable() {
     try {
       const response = await api.get("/blog/all/posts");
       const apiResponse = response.data;
-      console.log(apiResponse);
 
       setPosts(apiResponse);
       setLoading(false);

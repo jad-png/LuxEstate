@@ -1,7 +1,22 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router";
 
 export function Sidebar() {
+  const location = useLocation();
+  const [activeRoute, setActiveRoute] = useState("");
+
+
+  useEffect(() => {
+    setActiveRoute(location.pathname);
+  }, [location]);
+
+  const menuItems = [
+    { path: "/Admin/properties", label: "Properties" },
+    { path: "/Admin/features", label: "Features" },
+    { path: "/Admin/blog", label: "Blog Posts" },
+    { path: "/Admin/notification", label: "Send Notifications" },
+  ];
+
   return (
     <aside className="w-64 bg-white h-screen fixed top-0 left-0 border-r border-[#e5e5e5] pt-6">
       <div className="flex items-center mb-8">
@@ -11,46 +26,21 @@ export function Sidebar() {
       </div>
       <nav>
         <ul className="space-y-2">
-          <li>
-            <Link
-              to="/Admin/properties"
-              className="flex items-center py-2 px-4 bg-[#a27d56] text-white"
-            >
-              Properties
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/Admin/features"
-              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9]"
-            >
-              Features
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/Admin/blog"
-              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9]"
-            >
-              Blog Posts
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/Admin/notification"
-              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9]"
-            >
-              Send Notifications
-            </Link>
-          </li>
-          {/* <li>
-            <Link
-              href="#"
-              className="flex items-center py-2 px-4 text-[#666666] hover:bg-[#f8f3e9"
-            >
-            Users
-            </Link>
-          </li> */}
+          {menuItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className={`flex items-center py-2 px-4 transition-colors duration-200 ${
+                  activeRoute === item.path
+                    ? "bg-[#a27d56] text-white"
+                    : "text-[#666666] hover:bg-[#f8f3e9]"
+                }`}
+                onClick={() => setActiveRoute(item.path)}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </aside>

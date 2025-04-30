@@ -15,7 +15,6 @@ export function NotificationsList() {
     try {
       const response = await api.get("/notifications/all");
       const apiResponse = response.data;
-      console.log(apiResponse);
       setNotifications(apiResponse);
     } catch (error) {
       setError("Failed to fetch notifications");
