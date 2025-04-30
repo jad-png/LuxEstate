@@ -2,25 +2,17 @@
 
 namespace App\Services;
 
+use App\Models\User;
+
 class ProfileService implements Interfaces\IProfileService
 {
-    public function getProfile($userId)
+    public function updateProfile($userId, $request)
     {
-
-    }
-
-    public function updateProfile($userId, $data)
-    {
-
-    }
-
-    public function changePassword($userId, $oldPassword, $newPassword)
-    {
-
-    }
-
-    public function deleteAccount($userId)
-    {
-
+        $user = User::find($userId);
+        if ($user) {
+            $user->update($request);
+            return $user;
+        }
+        return null;
     }
 }
