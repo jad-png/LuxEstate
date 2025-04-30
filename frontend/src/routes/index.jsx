@@ -30,7 +30,7 @@ import propertyDetails from "../pages/propertyDetails";
 const routes = [
   { path: "/login", component: Login, layout: AuthLayout},
   { path: "/register", component: Register, layout: AuthLayout},
-  { path: "/my-profile", component: Profile, layout: ProfileLayout},
+  { path: "/my-profile", component: Profile, layout: ProfileLayout, roles: [3]},
   { path: "/", component: Home, layout: MainLayout },
   { path: "/building", component: Building, layout: MainLayout },
   { path: "/properties-category/:categoryId", component: CategoryProperties, layout: MainLayout},

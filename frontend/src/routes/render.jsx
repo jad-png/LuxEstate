@@ -29,7 +29,7 @@ render.PropTypes = {
             path: PropTypes.string.isRequired,
             component: PropTypes.elementType.isRequired,
             layout: PropTypes.elementType,
-            roles: PropTypes.arrayOf(PropTypes.string),
+            roles: PropTypes.arrayOf(PropTypes.number),
         }).isRequired
     )
 };

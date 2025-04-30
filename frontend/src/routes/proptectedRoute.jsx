@@ -3,9 +3,9 @@ import useAuthStore from "../stores/authStore";
 import { useNavigate } from "react-router";
 
 const roleRedirectMap = {
-  admin: "Admin/properties",
-  agent: "agent/",
-  client: "/",
+  1: "/admin/properties",
+  2: "/agent/",
+  3: "/",
 };
 
 const ProptectedRoute = ({ children, allowedRoles = [] }) => {
@@ -22,7 +22,7 @@ const ProptectedRoute = ({ children, allowedRoles = [] }) => {
     }
 }, [isAuthenticated, userRole, navigate, allowedRoles]);
 
-if (!isAuthenticated (allowedRoles.length > 0 && !allowedRoles.includes(userRole))) {
+if (!isAuthenticated || (allowedRoles.length > 0 && !allowedRoles.includes(userRole))) {
     return null;
 }
 
