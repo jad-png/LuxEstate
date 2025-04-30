@@ -28,3 +28,6 @@ if (!isAuthenticated (allowedRoles.length > 0 && !allowedRoles.includes(userRole
 
   return children;
 };
+
+
+export default ProptectedRoute;
