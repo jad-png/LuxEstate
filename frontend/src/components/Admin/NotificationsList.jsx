@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NotificationItem } from "./NotificationItem";
 import api from "../../services/api";
 
@@ -13,9 +13,19 @@ export function NotificationsList() {
     setError(null);
     setSuccess(null);
     try {
-      const response = await api.get("");
+      const response = await api.get("/notifications/all");
+      const apiResponse = response.data;
+      console.log(apiResponse);
+      setNotifications(apiResponse);
+    } catch (error) {
+      setError("Failed to fetch notifications");
+      console.error("Error fetching notifications:", error);
     }
   }
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
   return (
     <div className="bg-white p-6 shadow-sm border border-[#e5e5e5]">
       <h2 className="text-xl font-semibold dm-serif text-[#262626] mb-4">
@@ -25,6 +35,7 @@ export function NotificationsList() {
         <thead>
           <tr className="border-b border-[#e5e5e5] text-[#666666]">
             <th className="py-2 px-4">ID</th>
+            <th className="py-2 px-4">Sender</th>
             <th className="py-2 px-4">Recipient</th>
             <th className="py-2 px-4">Title</th>
             <th className="py-2 px-4">Message</th>
@@ -36,10 +47,7 @@ export function NotificationsList() {
             <NotificationItem
               key={notification.id}
               id={notification.id}
-              recipient={notification.recipient}
-              title={notification.title}
-              message={notification.message}
-              timestamp={notification.timestamp}
+              notification={notification}
             />
           ))}
         </tbody>
