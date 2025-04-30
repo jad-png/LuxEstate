@@ -20,7 +20,11 @@ const ProptectedRoute = ({ children, allowedRoles = [] }) => {
         const redirectPath = roleRedirectMap[userRole] || "/";
         navigate(redirectPath, { replace: true });
     }
-  }, [isAuthenticated, userRole, navigate, allowedRoles]);
+}, [isAuthenticated, userRole, navigate, allowedRoles]);
+
+if (!isAuthenticated (allowedRoles.length > 0 && !allowedRoles.includes(userRole))) {
+    return null;
+}
 
   return children;
 };
