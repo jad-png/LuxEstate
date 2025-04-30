@@ -21,7 +21,7 @@ class ProfileController extends Controller
         try {
             $userId = Auth::user()->id;
 
-            $user = $this->profileService->updateProfile($userId, $request->validated());
+            $user = $this->profileService->updateProfile($userId, $request);
             
             if (!$user) {
                 return response()->json([
