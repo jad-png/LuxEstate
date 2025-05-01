@@ -28,7 +28,6 @@ class UpdateProfileRequest extends FormRequest
             'email' => ['sometimes', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
             'address' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:20'],
-            'profile_picture' => ['nullable', 'string', 'max:255'],
         ];
     }
 

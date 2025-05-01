@@ -11,7 +11,6 @@ export function UserDropDown() {
     navigate("/login");
   };
   const user = useAuthStore((state) => state.user);
-  console.log(user);
   
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +21,7 @@ export function UserDropDown() {
     <div className="relative">
       <button onClick={toggleDropdown} className="flex items-center space-x-2">
         <img
-          // src={user.profilePhoto}
+          // src={user.profile_picture}
           alt="Profile"
           className="h-10 w-10 rounded-full border border-[#e5e5e5]"
         />

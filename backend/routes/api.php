@@ -22,7 +22,8 @@ Route::prefix('auth')->group(function () {
 Route::middleware('jwt')->group(function () {
 
     Route::prefix('profile')->group(function () {
-        Route::put('/', [ProfileController::class, 'update']);
+        Route::post('/', [ProfileController::class, 'update']);
+        Route::post('/picture', [ProfileController::class, 'updateProfilePicture']);
         Route::get('/history', [ProfileController::class, 'history']);
     });
     

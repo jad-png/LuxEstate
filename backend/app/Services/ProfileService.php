@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -24,17 +24,29 @@ class ProfileService implements IProfileService
                 'profile_picture' => $request->profile_picture ?? $user->profile_picture,
             ]);
 
-            if (isset($request->profile_picture) && $request->profile_picture instanceof UploadedFile) {
-                $path = $request->profile_picture->store('profile_pictures', 'public');
-                $updateData['profile_picture'] = $path;
+            if ($request->hasFile('profile_picture')) {
+                $image = $request->file('profile_picture');
+                $imagePath = $image->store('profile_pictures', 'public');
+                $updateData['profile_picture'] = $imagePath;
             }
+
 
             $user->update($updateData);
             return $user;
         }
         return null;
     }
-
+    public function updateProfilePicture($userId, UploadedFile $file)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            $imagePath = $file->store('profile_pictures', 'public');
+            $user->profile_picture = $imagePath;
+            $user->save();
+            return $user;
+        }
+        return null;
+    }
     public function getVisitHistory($userId)
     {
         return VisitRequest::where('user_id', $userId)
