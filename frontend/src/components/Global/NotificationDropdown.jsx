@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 
 export function NotificationsDropdown() {
@@ -14,13 +14,19 @@ export function NotificationsDropdown() {
     setSuccess(null);
     try {
       const response = await api.get("/notifications");
-      const apiResponse = response.data;
+      const apiResponse = response.data.notifications;
       setNotifications(apiResponse);
+      console.log(apiResponse);
+      
     } catch (error) {
       setError("Failed to load notifications");
       setIsLoading(false);
     }
   }
+
+  useEffect(() => {
+    fetchNotifications();
+  },[]);
 
   return (
     <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-[#e5e5e5] z-50 max-h-96 overflow-y-auto">
