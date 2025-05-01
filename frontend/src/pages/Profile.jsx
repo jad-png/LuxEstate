@@ -94,11 +94,17 @@ export function Profile() {
 
     try {
       const response = await api.post("/profile/picture", {
-        
+        profile_picture: formData.profile_picture,
         headers: {
           _method: "PUT",
         }
+
       });
+      setSuccess("Profile picture updated successfully!");
+      useAuthStore.setState({ user: response.data.data });
+      setPreviewImage(response.data.data.profile_picture || previewImage);
+      setFormData({ ...formData, profile_picture: null });
+      e.target.reset();
     }
   }
   if (!user) {
