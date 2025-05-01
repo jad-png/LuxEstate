@@ -13,7 +13,7 @@ class MarkAsReadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->isClient();
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class MarkAsReadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'notification_id' => 'required|integer|exists:notifications,id'
+            'notification_id' => 'required|integer|exists:notification,id'
         ];
     }
 

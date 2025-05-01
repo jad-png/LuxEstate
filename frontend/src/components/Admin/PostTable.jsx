@@ -37,7 +37,8 @@ export function PostTable() {
     setIsModalOpen(true);
   };
 
-  const handleStatusUpdate = async (postId, status) => {
+  const  
+  handleStatusUpdate = async (postId, status) => {
     setError(null);
     setSuccess(null);
     try {
