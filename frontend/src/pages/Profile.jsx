@@ -41,11 +41,12 @@ export function Profile() {
   };
 
   const handleFileChange = (e) => {
-    const { files } = e.target;
+    const { name, files } = e.target;
     if (name === "profile_picture" && files[0]) {
       const file = files[0];
-      setFormData = ({ ...formData, profile_picture: file});
+      setFormData({ ...formData, profile_picture: file});
       setPreviewImage(URL.createObjectURL(file));
+      console.log(1);
     }
   }
 
@@ -93,18 +94,30 @@ export function Profile() {
     setIsLoading(true);
 
     try {
-      const response = await api.post("/profile/picture", {
-        profile_picture: formData.profile_picture,
+      const data = new FormData();
+      data.append('profile_picture', formData.profile_picture);
+
+      const response = await api.post("/profile/picture", data, {
         headers: {
-          _method: "PUT",
+          "Content-Type": "multipart/form-data",
         }
 
       });
+
+      console.log(response);
+
+      console.log({ profile_picture: formData.profile_picture});
       setSuccess("Profile picture updated successfully!");
       useAuthStore.setState({ user: response.data.data });
       setPreviewImage(response.data.data.profile_picture || previewImage);
       setFormData({ ...formData, profile_picture: null });
       e.target.reset();
+    } catch (error) {
+      setError("Failed to update profile picture");
+      console.error("Error updating profile picture:", error);
+    }
+    finally {
+      setIsLoading(false);
     }
   }
   if (!user) {
@@ -114,7 +127,6 @@ export function Profile() {
       </div>
     );
   }
-  console.log(1);
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-3xl font-semibold dm-serif text-[#262626] mb-6">
@@ -129,17 +141,17 @@ export function Profile() {
             Update Profile Picture
           </h2>
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleFileSubmit}
             className="space-y-4 border-2 p-6"
           >
             <div className="w-full relative left-7">
-              <div className="relative bg-[#C78960] hover:bg-[#d99b70] transition-all duration-300 w-40 h-40 rounded-full flex items-center justify-center" >
+              <div className="relative bg-[#C78960] hover:bg-[#d99b70] transition-all duration-300 w-40 h-40 rounded-full flex items-center justify-center">
                 <input
                   type="file"
                   id="profile_picture"
                   name="profile_picture"
                   accept="image/jpeg,image/png,image/jpg"
-                  onChange={handleChange}
+                  onChange={handleFileChange}
                   disabled={isLoading}
                   className="w-32 h-32 z-50 bg-white rounded-full border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56] cursor-pointer"
                 />

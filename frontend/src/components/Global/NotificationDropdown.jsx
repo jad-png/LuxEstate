@@ -1,26 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../../services/api";
 
 export function NotificationsDropdown() {
-  const notifications = [
-    {
-      id: "1",
-      message: "New property matching your saved search: Manhattan Penthouse",
-      date: "2025-04-20",
-      type: "New Property",
-    },
-    {
-      id: "2",
-      message: "Your visit to Upper East Side Condo has been confirmed",
-      date: "2025-04-19",
-      type: "Visit Confirmed",
-    },
-    {
-      id: "3",
-      message: "Someone commented on your blog post: 'Luxury Living Trends'",
-      date: "2025-04-18",
-      type: "Blog Interaction",
-    },
-  ];
+  const [notifications, setNotifications] = useState([]);
+
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchNotifications = async () => {
+    setIsLoading(true);
+    setError(null);
+    setSuccess(null);
+    try {
+      const response = await api.get("/notifications");
+      const apiResponse = response.data;
+      setNotifications(apiResponse);
+    } catch (error) {
+      setError("Failed to load notifications");
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-[#e5e5e5] z-50 max-h-96 overflow-y-auto">
