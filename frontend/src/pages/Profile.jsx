@@ -11,7 +11,7 @@ export function Profile() {
     email: "",
     phone: "",
     address: "",
-    profile_picture: "",
+    profile_picture: null,
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -26,9 +26,9 @@ export function Profile() {
         email: user.email || "",
         phone: user.phone || "",
         address: user.address || "",
-        profile_picture: user.profile_picture || "",
+        profile_picture: user.profile_picture || null,
       });
-      setPreviewImage(user.profile_picture || "");
+      setPreviewImage(user.profile_picture || null);
     }
   }, [user]);
 
@@ -39,6 +39,15 @@ export function Profile() {
       [name]: value,
     }));
   };
+
+  const handleFileChange = (e) => {
+    const { files } = e.target;
+    if (name === "profile_picture" && files[0]) {
+      const file = files[0];
+      setFormData = ({ ...formData, profile_picture: file});
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +80,27 @@ export function Profile() {
       setIsLoading(false);
     }
   };
+
+  const handleFileSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.profile_picture) {
+      setError("Please select a file to upload.");
+      return;
+    }
+
+    setError(null);
+    setSuccess(null);
+    setIsLoading(true);
+
+    try {
+      const response = await api.post("/profile/picture", {
+        
+        headers: {
+          _method: "PUT",
+        }
+      });
+    }
+  }
   if (!user) {
     return (
       <div className="container mx-auto px-4 py-12">
