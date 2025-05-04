@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import debounce from 'lodash/debounce';
 import api from "../../services/api";
@@ -36,7 +36,32 @@ export function SearchBar() {
     fetchSuggestions(value);
   };
 
-  
+  const handleSuggestionClick = (url) => {
+    setQuery('');
+    setSuggestions([]);
+    setIsDropdownOpen(false);
+    navigate(url);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (query) {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+      setQuery('');
+      setIsDropdownOpen(false);
+    }
+  }
+
   return (
     <div className="flex items-center space-x-2 w-2/3">
       <input
