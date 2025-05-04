@@ -7,6 +7,10 @@ export function SearchBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  const fetchSuggestions = debounce(async (query) => {
+
+  }, 300);
   return (
     <div className="flex items-center space-x-2 w-2/3">
       <input
