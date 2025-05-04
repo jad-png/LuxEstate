@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
+import debounce from 'lodash/debounce';
+import api from "../../services/api";
 
 export function SearchBar() {
   const [query, setQuery] = useState("");
@@ -8,9 +10,33 @@ export function SearchBar() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+  const [error, setError] = useState(null);
+  
   const fetchSuggestions = debounce(async (query) => {
+    if (!query) {
+      setSuggestions([]);
+      setIsDropdownOpen(false);
+      return;
+    }
 
+    try {
+      const response = await api.get(`/search/suggest?query=${encodeURIComponent(query)}`);
+      setSuggestions(response.data);
+      setIsDropdownOpen(response.data.length > 0);
+    } catch (error) {
+      setError("Failed to load suggestions");
+      setSuggestions([]);
+      setIsDropdownOpen(false);
+    }
   }, 300);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    fetchSuggestions(value);
+  };
+
+  
   return (
     <div className="flex items-center space-x-2 w-2/3">
       <input
