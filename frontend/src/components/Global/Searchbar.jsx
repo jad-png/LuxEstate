@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import debounce from 'lodash/debounce';
+import { debounce } from "lodash";
 import api from "../../services/api";
 
 export function SearchBar() {
@@ -63,15 +63,39 @@ export function SearchBar() {
   }
 
   return (
-    <div className="flex items-center space-x-2 w-2/3">
-      <input
-        type="text"
-        placeholder="Search for anything..."
-        className="w-full max-w-md p-2 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
-      />
-      <button className="px-4 py-2 bg-[#a27d56] text-white manrope hover:bg-[#8b6a47]">
-        Search
-      </button>
+    <div className="relative w-full max-w-md mx-auto" ref={dropdownRef}>
+      <form onSubmit={handleSubmit} className="flex items-center">
+        <input
+          type="text"
+          value={query}
+          onChange={handleChange}
+          placeholder="Search properties, blog posts, categories..."
+          className="w-full p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          type="submit"
+          className="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
+        >
+          Search
+        </button>
+      </form>
+
+      {isDropdownOpen && (
+        <ul className="absolute z-10 w-full bg-white border rounded-md shadow-lg mt-1 max-h-60 overflow-y-auto">
+          {suggestions.map((suggestion, index) => (
+            <li
+              key={`${suggestion.type}-${index}`}
+              className="p-2 hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleSuggestionClick(suggestion.url)}
+            >
+              <span className="font-semibold">{suggestion.title}</span>
+              <span className="text-sm text-gray-500 ml-2">
+                ({suggestion.type.replace('_', ' ')})
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
