@@ -19,7 +19,7 @@ class SearchService implements ISearchService
         if ($query) {
             $properties = Property::where('title', 'like', '%' . $query . '%')
                 ->orWhere('description', 'like', '%' . $query . '%')
-                ->orWhere('address', 'like', '%' . $query . '%')
+                ->orWhere(column: 'price', 'like', '%' . $query . '%')
                 ->take(5)
                 ->get()
                 ->map(function ($property) {

@@ -127,5 +127,5 @@ Route::middleware('jwt')->group(function () {
     // Miscellaneous routes
     Route::get('/agents', [AppointmentController::class, 'getAgents']);
     Route::get('/clients', [NotificationController::class, 'getClients']);
-    Route::get('/search/suggest', [SearchController::class, 'suggest']);
+    Route::get('/search/suggest', [SearchController::class, 'search']);
 });

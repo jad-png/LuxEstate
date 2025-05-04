@@ -18,7 +18,9 @@ use App\Services\Interfaces\IVisitRequestService;
 use App\Services\Interfaces\IBlogCategoryService;
 use App\Services\Interfaces\IBlogService;
 use App\Services\Interfaces\INotificationService;
+use App\Services\Interfaces\ISearchService;
 use App\Services\NotificationService;
+use App\Services\SearchService;
 use App\Services\VisitRequestService;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(INotificationService::class, NotificationService::class);
         $this->app->bind(IBlogCategoryService::class, BlogCategoryService::class);
         $this->app->bind(IVisitRequestService::class, VisitRequestService::class);
+        $this->app->bind(ISearchService::class, SearchService::class);
     }
 
     /**
