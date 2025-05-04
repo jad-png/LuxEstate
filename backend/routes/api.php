@@ -31,7 +31,7 @@ Route::middleware('jwt')->group(function () {
     // Property routes
     Route::prefix('properties')->group(function () {
         Route::get('/', [PropertyController::class, 'index']);
-        Route::get('/{id}', [PropertyController::class, 'show']);
+        Route::get('/{id}', [PropertyController::class, 'show'])->name('properties.show');
         Route::post('/', [PropertyController::class, 'store']);
         Route::put('/{id}', [PropertyController::class, 'update']);
         Route::delete('/{id}', [PropertyController::class, 'destroy']);
