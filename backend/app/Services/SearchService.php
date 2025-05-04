@@ -17,9 +17,9 @@ class SearchService implements ISearchService
         $results = [];
 
         if ($query) {
-            $properties = Property::where('title', 'like', '%' . $query . '%')
-                ->orWhere('description', 'like', '%' . $query . '%')
-                ->orWhere('price', 'like', '%' . $query . '%')
+            $properties = Property::where('title', 'ilike', '%' . $query . '%')
+                ->orWhere('description', 'ilike', '%' . $query . '%')
+                ->orWhere('price', 'ilike', '%' . $query . '%')
                 ->take(5)
                 ->get()
                 ->map(function ($property) {
@@ -31,8 +31,8 @@ class SearchService implements ISearchService
                 });
 
             
-            $blogPosts = BlogPost::where('title', 'like', '%' . $query . '%')
-                ->orWhere('content', 'like', '%' . $query . '%')
+            $blogPosts = BlogPost::where('title', 'ilike', '%' . $query . '%')
+                ->orWhere('content', 'ilike', '%' . $query . '%')
                 ->take(5)
                 ->get()
                 ->map(function ($post) {
@@ -43,7 +43,7 @@ class SearchService implements ISearchService
                     ];
                 });
 
-            $blogPostCategories = BlogCategory::where('name', 'like', '%' . $query . '%')
+            $blogPostCategories = BlogCategory::where('name', 'ilike', '%' . $query . '%')
                 ->take(5)
                 ->get()
                 ->map(function ($category) {
@@ -54,7 +54,7 @@ class SearchService implements ISearchService
                     ];
                 });
 
-            $propertyCategories = Category::where('name', 'like', '%' . $query . '%')
+            $propertyCategories = Category::where('name', 'ilike', '%' . $query . '%')
                 ->take(5)
                 ->get()
                 ->map(function ($category) {
