@@ -69,7 +69,7 @@ export function SearchBar() {
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto" ref={dropdownRef}>
+    <div className="relative w-full max-w-md mx-auto z-50" ref={dropdownRef}>
       <form onSubmit={handleSubmit} className="flex items-center">
         <input
           type="text"

@@ -19,14 +19,14 @@ class SearchService implements ISearchService
         if ($query) {
             $properties = Property::where('title', 'like', '%' . $query . '%')
                 ->orWhere('description', 'like', '%' . $query . '%')
-                ->orWhere(column: 'price', 'like', '%' . $query . '%')
+                ->orWhere('price', 'like', '%' . $query . '%')
                 ->take(5)
                 ->get()
                 ->map(function ($property) {
                     return [
                         'type' => 'property',
                         'title' => $property->title,
-                        'url' => route('properties.show', $property->id),
+                        'url' => "/property/{$property->id}",
                     ];
                 });
 
@@ -39,7 +39,7 @@ class SearchService implements ISearchService
                     return [
                         'type' => 'blog_post',
                         'title' => $post->title,
-                        'url' => route('blog.show', $post->id),
+                        'url' =>  "/post/{$post->id}",
                     ];
                 });
 
@@ -50,7 +50,7 @@ class SearchService implements ISearchService
                     return [
                         'type' => 'blog_post_category',
                         'title' => $category->name,
-                        'url' => route('blog_post_categories.show', $category->id),
+                        'url' => "/blog/category/{$category->id}",
                     ];
                 });
 
@@ -61,7 +61,7 @@ class SearchService implements ISearchService
                     return [
                         'type' => 'property_category',
                         'title' => $category->name,
-                        'url' => route('property_categories.show', $category->id),
+                        'url' => "/properties-category/{$category->id}",
                     ];
                 });
 
