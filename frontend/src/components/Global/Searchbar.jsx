@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { debounce } from "lodash";
 import api from "../../services/api";
+import useDebounce from "../../stores/useDebounce";
 
 export function SearchBar() {
   const [query, setQuery] = useState("");
@@ -9,10 +9,11 @@ export function SearchBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const debouncedQuery = useDebounce(query, 300);
 
   const [error, setError] = useState(null);
   
-  const fetchSuggestions = debounce(async (query) => {
+  const fetchSuggestions = useCallback(async (query) => {
     if (!query) {
       setSuggestions([]);
       setIsDropdownOpen(false);
@@ -28,9 +29,14 @@ export function SearchBar() {
       setSuggestions([]);
       setIsDropdownOpen(false);
     }
-  }, 300);
+  }, []);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    fetchSuggestions(debouncedQuery);
+  }, [debouncedQuery, fetchSuggestions]);
+
+
+  const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
     fetchSuggestions(value);
@@ -68,7 +74,7 @@ export function SearchBar() {
         <input
           type="text"
           value={query}
-          onChange={handleChange}
+          onChange={handleInputChange}
           placeholder="Search properties, blog posts, categories..."
           className="w-full p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
