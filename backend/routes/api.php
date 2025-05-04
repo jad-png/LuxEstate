@@ -11,6 +11,7 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VisitRequestController;
 use Illuminate\Support\Facades\Route;
 
@@ -126,8 +127,5 @@ Route::middleware('jwt')->group(function () {
     // Miscellaneous routes
     Route::get('/agents', [AppointmentController::class, 'getAgents']);
     Route::get('/clients', [NotificationController::class, 'getClients']);
-});
-
-Route::get('/test', function () {
-    return response()->json(['message' => 'Test route is working!']);
+    Route::get('/search/suggest', [SearchController::class, 'suggest']);
 });
