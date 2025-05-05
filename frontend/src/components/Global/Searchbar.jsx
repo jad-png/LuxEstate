@@ -69,25 +69,25 @@ export function SearchBar() {
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto z-50" ref={dropdownRef}>
+    <div className="relative w-full max-w-lg mx-auto z-40" ref={dropdownRef}>
       <form onSubmit={handleSubmit} className="flex items-center">
         <input
           type="text"
           value={query}
           onChange={handleInputChange}
           placeholder="Search properties, blog posts, categories..."
-          className="w-full p-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border focus:outline-none focus:ring-2 focus:ring-[#d99b70]"
         />
         <button
           type="submit"
-          className="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
+          className="p-2 bg-[#C78960] text-white hover:bg-[#d99b70]"
         >
           Search
         </button>
       </form>
 
       {isDropdownOpen && (
-        <ul className="absolute z-10 w-full bg-white border rounded-md shadow-lg mt-1 max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 w-full bg-white border  shadow-lg mt-1 max-h-60 overflow-y-auto">
           {suggestions.map((suggestion, index) => (
             <li
               key={`${suggestion.type}-${index}`}

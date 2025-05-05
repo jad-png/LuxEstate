@@ -60,7 +60,6 @@ export function Header() {
         {/* Logo */}
         <div className="flex items-center">
           <div className="h-8 w-8 sm:h-12 sm:w-12 relative mr-2">
-            {/* Logo image or whatever u choose */}
           </div>
           <span className="text-lg sm:text-xl font-bold tracking-wider">LUXTOWER</span>
         </div>
@@ -74,11 +73,10 @@ export function Header() {
           {isMenuOpen ? (
             <X className="h-6 w-6" />
           ) : (
-            <Menu className="h-6 w-6" />
+            <Menu className="h-6 w-6 z-50" />
           )}
         </button>
 
-        {/* Navigation Links - Hidden on mobile, shown in dropdown */}
         <nav className={`
           absolute left-0 right-0 top-full z-50 bg-white shadow-lg md:shadow-none
           md:relative md:flex md:items-center md:space-x-6 md:bg-transparent
@@ -101,26 +99,14 @@ export function Header() {
             <Link to="/Blog" className="py-2 md:py-0 text-sm font-medium hover:text-[#e9c496] border-b md:border-b-0 border-gray-100">
               Blog
             </Link>
-            <Link to="/#" className="py-2 md:py-0 text-sm font-medium hover:text-[#e9c496] border-b md:border-b-0 border-gray-100">
-              Pages
-            </Link>
             <Link to="/contact" className="py-2 md:py-0 text-sm font-medium hover:text-[#e9c496]">
               Contact
             </Link>
-            
-            {/* CTA Button - shown in mobile menu but hidden in normal layout */}
-            <button className="md:hidden mt-4 mb-2 bg-[#C78960] hover:bg-[#d99b70] text-white px-4 py-2 text-sm font-medium transition-colors w-full">
-              SCHEDULE A VISIT
-            </button>
           </div>
         </nav>
 
         {/* Right side controls */}
-        <div className="hidden md:flex items-center gap-2 sm:gap-6">
-          {/* CTA Button - Hidden on mobile (shown in menu) */}
-          <button className="hidden md:block bg-[#C78960] hover:bg-[#d99b70] text-white px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors">
-            SCHEDULE A VISIT
-          </button>
+        <div className="md:flex items-center gap-2 sm:gap-6">
           
           {/* Notification */}
           <div className="relative">
