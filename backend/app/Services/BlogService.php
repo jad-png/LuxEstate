@@ -39,7 +39,7 @@ class BlogService implements IBlogService
      */
     public function find(int $id)
     {
-        $blogpost = BlogPost::with('comments', 'reactions')->findOrFail($id); 
+        $blogpost = BlogPost::with('comments', 'reactions')->findOrFail($id);
         return $blogpost;
     }
 
@@ -48,8 +48,8 @@ class BlogService implements IBlogService
      * @param mixed $request
      * @return void
      */
-    public function create($request){}
-    
+    public function create($request) {}
+
     /**
      * Summary of create
      * @param int $userId
@@ -61,7 +61,7 @@ class BlogService implements IBlogService
         $user = User::findOrFail($userId);
 
         $blogpost = BlogPost::create([
-            'user_id'=> $user->id,
+            'user_id' => $user->id,
             'title' => $request['title'],
             'content' => $request['content'],
             'category_id' => $request['category_id']
@@ -106,8 +106,9 @@ class BlogService implements IBlogService
     public function addComment($userId, $request)
     {
         $user = User::findOrFail($userId);
-        $post = BlogPost::where('status', 'Published')->findOrFail($request->blog_post_id);
-
+        $post = BlogPost::where('id', $request->blog_post_id)
+            ->where('status', 'Published')
+            ->first();
         return BlogComment::create([
             'user_id' => $user->id,
             'blog_post_id' => $post->id,
@@ -133,7 +134,7 @@ class BlogService implements IBlogService
         if ($user->id !== $comment->user_id && !$user->hasRole('admin')) {
             throw new AuthorizationException('You are not authorized to delete this comment.');
         }
-        
+
         return $comment->delete();
     }
 
@@ -146,13 +147,13 @@ class BlogService implements IBlogService
     public function reactToPost($userId, $request)
     {
         $post = BlogPost::where('status', 'Published')
-        ->findOrFail($request->blog_post_id);
+            ->findOrFail($request->blog_post_id);
         // dd('hello');
 
         // delete existing reaction if it exists
         BlogReactions::where('user_id', $userId)
-        ->where('blog_post_id', $request->blog_post_id)
-        ->delete();
+            ->where('blog_post_id', $request->blog_post_id)
+            ->delete();
         return BlogReactions::create([
             'user_id' => $userId,
             'blog_post_id' => $post->id,
@@ -178,7 +179,7 @@ class BlogService implements IBlogService
             'twitter' => "https://twitter.com/intent/tweet?url=" . urlencode($postUrl) . "&text=" . urlencode($title),
             'facebook' => "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($postUrl),
             'linkedin' => "https://www.linkedin.com/sharing/share-offsite/?url=" . urlencode($postUrl),
-            'whatsapp' => "https://web.whatsapp.com/send?text=" . urlencode($title . ' ' . $postUrl), 
+            'whatsapp' => "https://web.whatsapp.com/send?text=" . urlencode($title . ' ' . $postUrl),
             'instagram' => urlencode($postUrl)
         ];
 
@@ -206,8 +207,8 @@ class BlogService implements IBlogService
     public function getByCategory($categoryId)
     {
         $posts = BlogPost::with('category')
-                ->where('category_id', $categoryId)
-                ->paginate(5);
+            ->where('category_id', $categoryId)
+            ->paginate(5);
         return $posts;
     }
 }
