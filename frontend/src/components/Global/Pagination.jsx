@@ -63,7 +63,7 @@ export function Pagination() {
         </button>
 
         {getPageNumbers().map((page) => (
-          <button
+          <button key={page}
             onClick={() => handlePageChange(page)}
             className={`px-4 py-2 border ${
               page === currentPage

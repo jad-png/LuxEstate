@@ -58,7 +58,7 @@ export function SinglePost() {
                   </p>
                 </div>
               </div>
-              <Comments postId={postId} />
+              <Comments post={post} />
             </>
           ) : (
             <div className="text-center py-10 text-gray-600">Post not found.</div>

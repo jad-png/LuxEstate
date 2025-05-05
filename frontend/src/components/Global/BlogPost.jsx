@@ -23,8 +23,8 @@ export function BlogPost({ post }) {
             </div>
             <div className="mt-6">
               <p className="text-sm text-[#666666] manrope">
-                {new Date(post.created_at).toLocaleDateString()} • By{" "}
-                {post.user || "Admin"}
+                {/* {new Date(post.created_at).toLocaleDateString()} • By{" "} */}
+                {post.user.name || "Admin"}
               </p>
               <h2
                 className="text-3xl font-semibold mt-2 dm-serif text-[#262626] hover:text-[#a27d56] transition-colors cursor-pointer"

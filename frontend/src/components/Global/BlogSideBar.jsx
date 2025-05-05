@@ -46,13 +46,13 @@ export function BlogSideBar() {
             No categories available
           </p>
         )}
-        <div className="mt-6 relative">
+        {/* <div className="mt-6 relative">
           <input
             type="text"
             placeholder="Search..."
             className="w-full p-3 border border-[#e5e5e5] text-[#666666] manrope focus:outline-none focus:border-[#a27d56]"
           />
-        </div>
+        </div> */}
       </div>
       <div className="border-b relative top-4 left-2 w-full"></div>
       <div className="mt-8 bg-white p-6 border-l border-[#e5e5e5]">
