@@ -39,7 +39,7 @@ class BlogService implements IBlogService
      */
     public function find(int $id)
     {
-        $blogpost = BlogPost::with('comments', 'reactions')->findOrFail($id);
+        $blogpost = BlogPost::with('comments', 'reactions', 'category')->findOrFail($id);
         return $blogpost;
     }
 

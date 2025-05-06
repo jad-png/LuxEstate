@@ -49,13 +49,13 @@ const useAuthStore = create(
       }
     }),
     {
-      name: 'auth-storage', // Key used in localStorage
-      storage: createJSONStorage(() => localStorage), // Use localStorage as the storage mechanism
+      name: 'auth-storage',
+      storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         user: state.user,
         token: state.token,
         isAuthenticated: state.isAuthenticated,
-      }), // Only persist user and isAuthenticated
+      }),
     }
   )
 );

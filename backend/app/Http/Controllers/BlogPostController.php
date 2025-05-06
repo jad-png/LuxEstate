@@ -107,7 +107,7 @@ class BlogPostController extends Controller
     {
         $user = Auth::user();
         $reaction = $this->blogPostService->reactToPost($user->id, $request);
-        
+
         return response()->json([
             'message' => 'Reaction added successfully',
             'reaction' => $reaction,
@@ -123,7 +123,8 @@ class BlogPostController extends Controller
 
         return response()->json([
             'message' => 'Post shared successfully',
-            'result' => $result,
+            'share_url' => $result['share_url'],
+            'post' => $result['post'],
         ]);
     }
 

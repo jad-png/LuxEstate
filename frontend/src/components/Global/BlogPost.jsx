@@ -1,10 +1,33 @@
 import React
- from "react";
+, { useState } from "react";
 import { useNavigate } from "react-router";
+import api from "../../services/api";
 
 export function BlogPost({ post }) {
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [sharing, setSharing] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [shareUrl, setShareUrl] = useState(null);
   const navigate = useNavigate();
 
+  // const handleShare = async (platform) => {
+  //     setSharing(true);
+  //     setError(null);
+  //     try {
+  //       const response = await api.post("/blog/posts/share", {
+  //         blog_post_id: post.id,
+  //         platform,
+  //       });
+  //       const { share_url } = response.data;
+  //       setShareUrl(share_url);
+  //       window.open(share_url, "_blank", "noopener,noreferrer");
+  //     } catch (err) {
+  //       setError(err.response?.data?.message || "Failed to share post");
+  //     } finally {
+  //       setSharing(false);
+  //       setIsModalOpen(false); // Close modal after sharing
+  //     }
+  //   }
   return (
     <div className="w-full md:w-full pr-0 md:pr-8 border-b px-10">
           <div key={post.id} className="pb-10 ">
@@ -23,7 +46,7 @@ export function BlogPost({ post }) {
             </div>
             <div className="mt-6">
               <p className="text-sm text-[#666666] manrope">
-                {/* {new Date(post.created_at).toLocaleDateString()} • By{" "} */}
+                {new Date(post.created_at).toLocaleDateString()} • By{" "}
                 {post.user.name || "Admin"}
               </p>
               <h2

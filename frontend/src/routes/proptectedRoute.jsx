@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 const roleRedirectMap = {
   1: "/admin/properties",
-  2: "/agent/",
+  2: "/agents/clients",
   3: "/",
 };
 
